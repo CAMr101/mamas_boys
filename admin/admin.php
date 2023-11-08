@@ -4,9 +4,8 @@ include("../handlers/processProducts.php");
 
 ?>
 
+<!-- Linking the static Header Components to Page -->
 <?php include '../components/admin-header.php'; ?>
-
-
 
 <!-- Top nav -->
 <!-- <nav class="top-nav">
@@ -24,15 +23,54 @@ include("../handlers/processProducts.php");
 <main class="main-content">
     <div class="header">
         <div class="left">
-            <h1>Orders</h1>
+            <h1>Dashboard</h1>
+            <!-- <ul class="breadcrumb">
+                    <li><a href="#">
+                            Analytics
+                        </a></li>
+                    /
+                    <li><a href="#" class="active">Shop</a></li>
+                </ul> -->
         </div>
     </div>
+
+    <ul class="insights">
+        <li><i class='bx bx-dollar-circle'>
+                <span class="material-symbols-outlined">
+                    payments
+                </span>
+            </i>
+            <span class="info">
+                <h3> R
+                    <?php
+                    $total = getTotal();
+                    echo $total;
+                    ?>
+
+                </h3>
+                <p>Total Sales</p>
+            </span>
+        </li>`
+
+        <li><i class='bx bx-dollar-circle'>
+                <span class="material-symbols-outlined">
+                    description
+                </span>
+            </i>
+            <span class="info">
+                <h3>
+                    Generate
+                </h3>
+                <p>Order Report</p>
+            </span>
+        </li>
+    </ul>
 
     <div class="bottom-data">
         <div class="orders">
             <div class="header">
                 <i class='bx bx-receipt'></i>
-                <h3>Products</h3>
+                <h3>Recent Orders</h3>
             </div>
             <table>
                 <thead>
@@ -155,7 +193,6 @@ include("../handlers/processProducts.php");
         </div>
 
     </div>
-
 </main>
 
 

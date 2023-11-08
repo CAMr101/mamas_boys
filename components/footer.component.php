@@ -17,7 +17,7 @@ function createFooter()
           <a href="cart.php"> <i class="fas fa-angle-right"></i> Cart</a>
           <a href="Login.php"> <i class="fas fa-angle-right"></i> Login</a>
           <a href="Register.php"> <i class="fas fa-angle-right"></i> Create Account</a>
-          <a href="admin.php"> <i class="fas fa-angle-right"></i> Admin Dashboard</a>
+          <a href="admin.login.php"> <i class="fas fa-angle-right"></i> Admin Dashboard</a>
        </div>
 
        <div class="box">

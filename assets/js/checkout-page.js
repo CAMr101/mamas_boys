@@ -258,7 +258,7 @@ function completeOrder(){
             paymentMethod: paymentMethod,
         }
 
-        fetch(`${localHostUrl}/handlers/processOrder.php`,{
+        fetch(`${localHostUrl}/handlers/processNewOrder.php`,{
             "method": "POST",
             "headers": {
                 "Content-type": "application/json; charset=utf-8"
@@ -272,7 +272,7 @@ function completeOrder(){
 
             localStorage.setItem("orderComplete", data);
 
-            // window.location = "success-page.php"
+            window.location = "success-page.php"
         })
         
     }
