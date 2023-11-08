@@ -34,7 +34,7 @@ function getOrders()
 
 }
 
-function getProducts()
+function getProduct($id)
 {
     try {
         $dsn = "mysql:host=localhost;dbname=mamas_boys";
@@ -48,7 +48,9 @@ function getProducts()
             echo "Connection failed: " . $e->getMessage();
         }
 
-        $query = "SELECT * FROM `shop_order`;";
+        $query = "SELECT *
+        FROM product
+        WHERE id = $id;";
 
         $stmt = $pdo->prepare($query);
 

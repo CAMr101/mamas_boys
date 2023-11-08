@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="../assets/css/admin.new.css">
 </head>
+
 <body>
 
     <!-- Side Nav -->
@@ -15,13 +17,13 @@
         </a>
         <ul class="side-menu">
             <li class="side-menu-item">
-                <a href="../admin.html">Dashboard</a>
+                <a href="../admin.php">Dashboard</a>
             </li>
             <li class="side-menu-item">
-                <a href="orders.html">Orders</a>
+                <a href="orders.php">Orders</a>
             </li>
             <li class="side-menu-item">
-                <a href="shop.html">Shop</a>
+                <a href="shop.php">Shop</a>
             </li>
             <!-- <li class="side-menu-item">
                 <a href="/admin/staff.html">Staff</a>
@@ -65,12 +67,12 @@
         <div class="bottom-data">
             <div class="orders">
 
-                <form action="" >
-                    
+                <form action="">
+
                 </form>
 
                 <table>
-                    
+
                     <tbody>
                         <tr>
                             <td>
@@ -87,6 +89,15 @@
                             </td>
                             <td>
                                 <input type="text">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="">Price</label>
+                            </td>
+                            <td>
+                                <input type="number">
                             </td>
                         </tr>
 
@@ -115,4 +126,5 @@
 
 
 </body>
+
 </html>

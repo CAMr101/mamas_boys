@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="../assets/css/admin.new.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
+
 <body>
 
     <!-- Side Nav -->
@@ -16,13 +19,13 @@
         </a>
         <ul class="side-menu">
             <li class="side-menu-item">
-                <a href="../admin.html">Dashboard</a>
+                <a href="../admin.php">Dashboard</a>
             </li>
             <li class="side-menu-item">
-                <a href="orders.html">Orders</a>
+                <a href="orders.php">Orders</a>
             </li>
             <li class="side-menu-item">
-                <a href="shop.html">Shop</a>
+                <a href="shop.php">Shop</a>
             </li>
             <!-- <li class="side-menu-item">
                 <a href="/admin/staff.html">Staff</a>
@@ -80,10 +83,10 @@
             </li>
             <a href="new-category.html">
                 <li><i class='bx bx-dollar-circle'>
-                    <span class="material-symbols-outlined">
-                        add
+                        <span class="material-symbols-outlined">
+                            add
                         </span>
-                </i>
+                    </i>
                     <span class="info">
                         <h3>
                             New
@@ -91,7 +94,7 @@
                         <p>Category</p>
                     </span>
                 </li>
-            </a>        
+            </a>
         </ul>
 
         <div class="header">
@@ -143,4 +146,5 @@
 
 
 </body>
+
 </html>

@@ -170,15 +170,23 @@ include("./handlers/getOrders.php");
 
                                         echo $order_items[0]['id']; ?>
                                         <br>
-                                        Mustang
+                                        <?php
+                                        $order_items = json_decode($order['order_items'], true);
+
+                                        echo $order_items[1]['id']; ?>
                                     </td>
                                     <td colspan="1">
                                         <?php
                                         $order_items = json_decode($order['order_items'], true);
+                                        $item = $order_items[0]['quantity'];
 
                                         echo $order_items[0]['quantity']; ?>
                                         <br>
-                                        1
+                                        <?php
+                                        $order_items = json_decode($order['order_items'], true);
+                                        $item = $order_items[0]['quantity'];
+
+                                        echo $order_items[1]['quantity']; ?>
                                     </td>
                                     <td>R
                                         <?php echo $order['order_total']; ?>

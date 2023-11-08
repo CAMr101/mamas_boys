@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="../assets/css/admin.new.css">
 </head>
+
 <body>
 
     <!-- Side Nav -->
@@ -15,13 +17,13 @@
         </a>
         <ul class="side-menu">
             <li class="side-menu-item">
-                <a href="../admin.html">Dashboard</a>
+                <a href="../admin.php">Dashboard</a>
             </li>
             <li class="side-menu-item">
-                <a href="orders.html">Orders</a>
+                <a href="orders.php">Orders</a>
             </li>
             <li class="side-menu-item">
-                <a href="shop.html">Shop</a>
+                <a href="shop.php">Shop</a>
             </li>
             <!-- <li class="side-menu-item">
                 <a href="/admin/staff.html">Staff</a>
@@ -76,25 +78,25 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td >001</td>
-                            <td >Cameron</td>
-                            <td >john@email.com</td>
-                            <td >0671234567</td>
+                            <td>001</td>
+                            <td>Cameron</td>
+                            <td>john@email.com</td>
+                            <td>0671234567</td>
                             <td colspan="1">
-                                Porche 
+                                Porche
                                 <br>
-                                Mustang 
+                                Mustang
                             </td>
                             <td colspan="1">
                                 2
                                 <br>
                                 1
                             </td>
-                            <td >R 120</td>
-                            <td >14-08-2023</td>
-                            <td ><span class="status completed">Completed</span></td>
+                            <td>R 120</td>
+                            <td>14-08-2023</td>
+                            <td><span class="status completed">Completed</span></td>
                         </tr>
-                        
+
                         <!-- <tr>
                             <td>
                                 <img src="images/profile-1.jpg">
@@ -123,4 +125,5 @@
 
 
 </body>
+
 </html>
