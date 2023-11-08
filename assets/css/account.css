@@ -1,0 +1,202 @@
+    .accounts__container {
+        grid-template-columns: 4fr 8fr;
+    }
+
+ 
+
+ 
+
+    .account__tabs {
+        border: 1px solid cadetblue;
+        border-radius: 0.25rem;
+    }
+
+ 
+
+ 
+
+    .account__tab {
+        padding: 1rem 2rem;
+        color: var(--title-color);
+        font-size: var(--small-font-size);
+        display: flex;
+        align-items: center;
+        column-gap: 0.625rem;
+        cursor: pointer;
+    }
+
+ 
+
+ 
+
+        .account__tab.active-tab {
+            background-color: #f2f2f2;
+            color: cadetblue;
+        }
+
+ 
+
+ 
+
+        .account__tab:not(:last-child) {
+            border-bottom: 1px solid cadetblue;
+        }
+
+ 
+
+ 
+
+    .tab__content:not(.active-tab) {
+        display: none;
+    }
+
+ 
+
+ 
+
+    .tab__content {
+        border: cadetblue;
+    }
+
+ 
+
+ 
+
+    .tab__header {
+        background-color: #f2f2f2;
+        border-bottom: 1px solid cadetblue;
+        padding: 1rem;
+        font-size: var(--small-font-size);
+    }
+
+ 
+
+ 
+
+    .tab__body {
+        padding: 1rem;
+    }
+
+ 
+
+ 
+
+ 
+
+    .placed__order-table tr th {
+        color: var(--title-color);
+        text-align: left;
+    }
+
+ 
+
+ 
+
+    .placed__order-table tr th,
+    .placed__order-table tr td {
+        border: 1px solid cadetblue;
+        padding: 0.5rem;
+        font-size: var(--small-font-size);
+    }
+
+ 
+
+ 
+
+    .view__order,
+    .edit {
+        color: var(blue);
+    }
+
+ 
+
+ 
+
+    .address {
+        font-style: normal;
+        font-size: var(--small-font-size);
+        line-height: 1.5rem;
+    }
+
+ 
+
+ 
+
+    .city {
+        margin-bottom: 0.25rem;
+    }
+
+ 
+
+ 
+
+    .edit {
+        font-size: var(--body-font);
+    }
+
+ 
+
+ 
+
+    .tab__content:not(.active-tab) {
+        display: none;
+    }
+
+ 
+
+ 
+
+    header {
+        background-color: #fbc02d;
+        color: #fff;
+        text-align: center;
+        padding: 20px 0;
+    }
+
+ 
+
+        header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+ 
+
+        header a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+ 
+
+    .images {
+        max-width: 100%;
+        height: auto;
+    }
+
+ 
+
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #fbc02d;
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        font-size: 18px;
+        margin: 10px 0;
+    }
+
+ 
+
+    /* Style the footer */
+    footer {
+        background-color: #fbc02d;
+        color: #fff;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 16px;
+    }

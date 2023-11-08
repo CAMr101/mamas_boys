@@ -1,0 +1,262 @@
+@import url('components.css');
+@import url("root.css");
+/****************************************************************** Home Section ********************************************************************************/
+p{
+    font-size: var(--size-5);
+}
+.header .flex .new a{
+   font-size: medium;
+   padding: 2.5rem;
+}
+
+:root{
+    --transition: 0.01s;
+}
+
+.main-div{
+    margin: 5rem 10rem;
+    position: relative;
+}
+
+.main-div #back-to-shop{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 18%;
+    color: var(--gray-shade-1);
+}
+
+.main-div #back-to-shop p{
+    color: var(--gray-shade-1) !important;
+}
+
+.main-div #back-to-shop span svg{
+    color: var(--gray-shade-1);
+}
+
+.main-div #back-to-shop #back-shop-txt{
+    font-size: var(--size-7);
+    font-weight: var(--light-font);
+    
+}
+
+.order{
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    width: 90%;
+    justify-content: space-between;
+    padding: 2rem 3rem;
+}
+
+.order .summary{
+    background-color: #D9D9D9;
+    width: 35%;
+    /* margin-left: 7.5rem; */
+}
+
+.summry{
+    padding: 1.75rem;
+}
+
+.summary p.heading{
+    font-size: var(--size-6);
+    font-weight: var(--bold-font);
+    margin: 1.75rem;
+}
+
+.summary hr{
+    margin: 1rem 1.75rem;
+    background-color:  black;
+}
+
+.summary .items .item{
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+}
+
+.items .item img{
+    width: 85px;
+    height: 75px;
+}
+
+.items .item .prod-info p{
+    font-size: var(--size-5);
+    font-weight: var(--normal-font);
+}
+
+.summary .discount{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 1.75rem;
+}
+
+.summary .total{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 5rem;
+    align-items: center;
+    background-color: var(--gray-shade-4);
+    color: #fff;
+    padding: 1.75rem;
+}
+
+.summary .total p,
+.summary .total p span{
+    color: #fff !important;
+}
+
+.contact-info{
+    background-color: rgb(217, 217, 217);
+    /* padding: 1.75rem; */
+    /* width: 25%; */
+}
+
+.contact-info h6{
+    font-size: var(--size-5);
+    font-weight: var(--normal-font);
+    padding: 1.75rem 1.75rem 0 1.75rem;
+}
+
+.contact-info .info{
+    padding: 1.75rem;
+}
+
+.contact-info .name,
+.contact-info .email,
+.contact-info .telephone{
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-info .name,
+.contact-info .email{
+    margin-bottom: 1rem;
+}
+
+.contact-info .name label,
+.contact-info .email label,
+.contact-info .telephone label{
+    font-size: var(--size-3);
+    font-weight: var(--light-font);
+}
+
+.contact-info .name input,
+.contact-info .email input,
+.contact-info .telephone input{
+    height: 2rem;
+    border-radius: 3px;
+    margin-top: 0.25rem;
+    padding: 1.25rem;
+    font-size: var(--size-2);
+}
+
+.contact-info .save-button:hover{
+    cursor: pointer;
+}
+
+.contact-info .save-button button{
+    background-color: var(--gray-shade-4);
+    width: 100%;
+    color: #fff;
+    padding: 1rem;
+}
+
+.complete .methods{
+    background-color: #D9D9D9;
+    width: 110%;
+    padding: 1.75rem;
+}
+
+.complete .methods>p{
+    margin-bottom: 1.75rem;
+}
+
+.methods .method{
+    height: 3rem;
+    padding: 0.75rem;
+    border: 1px solid rgba(0,0,0,0.25);
+    display: flex;
+    flex: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.payment-details{
+    background-color: var(--gray-shade-1);
+}
+
+.payment-inactive{
+    display: none;
+}
+
+.payment-details .payment-form{
+    padding: 1.75rem;
+    font-weight: var(--light-font);
+    font-size: var(--size-2);
+}
+
+.payment-form h6{
+    font-size: var(--size-4);
+    font-weight: var(--normal-font);
+    margin-bottom: 0.5rem;
+}
+
+td input{
+    height: 1.75rem;
+    margin-bottom: 1rem;
+    margin-top: 0.25rem;
+    padding: 1.25rem;
+    border-radius: 3px;
+}
+
+input#nameOnCard{
+    width: 100%;
+}
+
+.methods .method:hover{
+    cursor: pointer;
+}
+
+.methods .active{
+    background-color: var(--gray-shade-2);
+    color: #fff;
+}
+
+.methods .method div{
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    align-items: center;
+}
+
+.methods .method div span{
+    margin-right: 0.5rem;
+}
+
+.complete{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25%;
+}
+
+.complete-order{
+    margin-top: 1.75rem;
+    height: 3rem;
+    
+}
+
+.complete-order button{
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    
+}

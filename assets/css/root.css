@@ -1,0 +1,31 @@
+/* CSS Variables */
+:root {
+    --extra-light-font: 200;
+    --light-font:300;
+    --normal-font: 400;
+    --bold-font: 600;
+    --bolder-font: 900;
+    --size-1: 12px;
+    --size-2: 14px;
+    --size-3: 16px;
+    --size-4: 18px;
+    --size-5: 20px;
+    --size-6: 24px;
+    --size-7: 32px;
+    --size-8: 48px;
+    --size-9: 60px;
+    --size-10: 72px;
+    --dark-ui-color: #121212;
+    --gray-shade-1: #999999;
+    --gray-shade-2: #777777;
+    --gray-shade-3: #555555;
+    --gray-shade-4: #333333;
+    --gray-shade-5: #111111;
+    --primary-color: #000;
+    --secondary-color: #0652dd;
+    --tertiary-color: #888888;
+    --white: #fff;
+    --line-height: 1.7rem;
+    --transition: 0.1s ease-in;
+  }
+

@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;1,200;1,400;1,500&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+}
+
+.container {
+    position: relative;
+    width: 400px;
+    height: 500px;
+}
+
+.form-container {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    justify-content:center;
+    top:0;
+    left:0;
+    background: oldlace;
+    z-index: 4;
+}
+
+h2 {
+    text-align: center;
+    font-size: 40px;
+}
+
+.input-group {
+    margin: 35px 0;
+    position:relative;
+}
+
+.input-group label {
+    font-size: 20px;
+    position: absolute;
+    padding: 0 5px;
+    top: 55%;
+    left: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: rgb(70, 62, 62);
+    transition: .5s;
+}
+ 
+.input-group input {
+    font-size: 17px;
+    color: rgb(70, 62, 62);
+    width: 320px;
+    height: 50px;
+    padding: 0 15px;
+    border: 2px solid black;
+    border-radius: 5px;
+    outline: none;
+}
+
+.input-group input:focus~label,
+.input-group input:valid~label {
+    font-size: 15px;
+    top: 0;
+    background: oldlace;
+}
+
+.Premind {
+    margin:-20px 0 20px;
+}
+
+.Premind label {
+    font-size:15px ;
+    color: dimgrey;
+}
+
+.Premind label input {
+    accent-color: rgb(141, 101, 141) ;
+}
+
+.btn {
+    font-size: 20 px;
+    font-weight: 500;
+    color: bisque;
+    background-color: cadetblue;
+    box-shadow: 0 5px 10px cadetblue;
+    border-radius: 5px;
+    border: none;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    outline: auto;
+}
+
+.signup-link {
+    font-size: 15px;
+    text-align: center;
+    margin:30px 0 ;
+}
+
+.signup-link p {
+    color: black;
+}
+
+.signup-link p a {
+    font-weight: 700;
+    color: blue;
+}
+
+.signup-link p a:hover {
+    text-decoration: underline;
+}

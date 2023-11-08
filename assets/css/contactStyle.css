@@ -1,0 +1,302 @@
+
+
+*{
+    font-family: 'Poppins', sans-serif;
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ 
+
+body{
+    background: linear-gradient(90deg, rgb(180, 220, 221) 0%,rgb(180, 220, 221) 30%, lightgrey 30%, lightgrey 100%);
+}
+
+ 
+
+/*contact form section*/
+.contactUs {
+    padding: 50px 100px;
+    width: 100%;
+    position: relative;
+}
+
+ 
+
+.contactUs .heading {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-size: 2.5rem;
+}
+
+ 
+
+.contactUs .heading h2 {
+    font-weight: 300;
+    color: rgb(46, 41, 34);
+}
+
+ 
+
+ 
+
+.contact {
+    background: #fff;
+    padding: 40px;
+}
+
+ 
+
+.contactSections{
+    display: grid;
+    position: relative;
+    grid-template-columns:  2fr 1fr;
+    grid-template-rows:  5fr 4fr;
+    margin-top: 20px;
+    grid-gap: 20px;
+    grid-template-areas:"contact details" "contact map" ;
+
+}
+
+ 
+
+.contact form {
+    grid-area: contact form;
+}
+
+ 
+
+.contact details {
+    grid-area: contact details;
+}
+
+ 
+
+.contact map {
+    grid-area: contact map;
+}
+
+ 
+
+.contact h3 {
+    font-size: 1.5em;
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: rgb(48, 117, 119);
+}
+
+ 
+
+.formSection {
+    width: 100%;
+    position: relative;
+}
+
+ 
+
+.formSection .sectionInfo {
+    display: flex;
+    gap: 19px;
+}
+
+ 
+
+.inputBox {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+ 
+
+.inputBox span {
+    font-weight: 400;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    color: rgb(113, 113, 197);
+}
+
+ 
+
+.inputBox input {
+    font-size: 1.1em;
+    padding: 5px;
+    border: 1px solid #6b6565;
+    outline: none;
+}
+
+ 
+
+.formSection .sectionMessage .inputBox {
+    width: 100%;
+}
+
+ 
+
+.inputBox textarea {
+    min-height: 200px;
+    resize: none;
+    font-size: 1.1em;
+    padding: 5px;
+    border: 1px solid #6b6565;
+    outline: none;
+    margin-bottom: 9px;
+}
+
+ 
+
+.inputBox input[type="submit"] {
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 400;
+    border: none;
+    padding: 10px 12px;
+    max-width: 100px;
+    color: whitesmoke;
+    background-color: rgb(168, 123, 63);
+}
+
+ 
+
+/*contact details section*/
+
+ 
+
+.details {
+    background: rgb(154, 202, 202);
+}
+
+ 
+
+.details h3 {
+    color: rgb(92, 59, 15);
+}
+
+ 
+
+.details .detailsBox div {
+    align-items: center;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+ 
+
+.details .detailsBox div span {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-size: 1.5em;
+    height: 38px;
+    margin-right: 15px;
+    min-width: 38px;
+    border-radius: 50%;
+    background-color: #fff;
+}
+
+ 
+
+.details .detailsBox div a  {
+    text-decoration: none;
+    color: #181414;
+}
+
+ 
+
+.socialLinks {
+    display: flex;
+    margin-top: 40px;
+}
+
+ 
+
+ 
+
+.socialLinks li {
+    list-style: none;
+    margin-right: 15px;
+}
+
+ 
+
+.socialLinks li a {
+    color: #311717;
+}
+
+ 
+
+.socialLinks li a:hover {
+    color: #6b6565;
+}
+
+ 
+
+ 
+
+/*contact map section*/
+
+ 
+
+.map{
+    padding: 0;
+}
+
+ 
+
+.map iframe {
+    width: 100%;
+    height: 100%;
+}
+
+ 
+
+/*The responsiveness section*/
+
+ 
+
+@media (max-width:991px){
+    body {
+        background: #b4dcdd;
+    }
+
+ 
+
+    .contactUs {
+        padding: 20px;
+    }
+
+ 
+
+    .contactSections {
+        grid-template-columns: fr;
+        grid-template-rows: auto;
+        margin-top: 20px;
+        grid-gap: 20px;
+        grid-template-areas:
+            "contact"
+            "details"
+            "map";
+    }
+
+ 
+
+    .map {
+        min-height: 300px;
+    }
+
+ 
+
+    .formSection .sectionInfo {
+        display: flex;
+        gap: 0;
+        flex-direction: column;
+    }
+
+}
+
+ 
+
+ 

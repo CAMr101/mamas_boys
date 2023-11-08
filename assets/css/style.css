@@ -1,0 +1,388 @@
+@import url('components.css');
+
+/****************************************************************** Home Section ********************************************************************************/ 
+
+/* Add this CSS to your stylesheet */
+.remove-item {
+   background: none;
+   border: none;
+   font-size: 20px;
+   cursor: pointer;
+   color: black; /* Default color */
+   padding: 0; /* Remove any padding or margin to make the icon appear properly */
+   transition: color 0.2s; /* Smooth color transition on hover */
+}
+
+.remove-item:hover {
+   color: gray; /* Color when hovered */
+}
+
+.sidebar .head h4 {
+   font-size: 20px;
+   font-family: Verdana, Geneva, Tahoma, sans-serif; 
+   color:dodgerblue;
+   text-emphasis: bold;
+   text-align: center;
+}
+ 
+ #count {
+   position: absolute;
+   top: 50px; /* Adjust this value to your desired vertical position */
+   right: -5px; /* Adjust this value to your desired horizontal position */
+   background-color: red; /* Choose your desired background color */
+   color: white; /* Choose your desired text color */
+   border-radius: 50%; /* Make it a circle */
+   padding: 5px 10px; /* Adjust the padding to your desired size */
+   font-size: 14px; /* Adjust the font size to your desired size */
+ }
+ 
+
+.home-bg{
+   background-image: url("kota8.png");
+   background-size: cover;
+   background-position: center;
+}
+
+.header .flex .new a{
+   font-size: medium;
+   padding: 2.5rem;
+   color:black;
+}
+
+.header .flex .new a:hover{
+   text-decoration: underline;
+   color:var(--black);
+}
+
+.home-bg .home{
+   display: flex;
+   align-items: center;
+   min-height: 60vh;
+}
+
+.home-bg .home .content .btn{
+   background-color: black;
+}
+
+.home-bg .home .content .btn:hover{
+   cursor: pointer;
+   background-color: gray;
+}
+
+.home-category .box-container .btn:hover{
+   cursor: pointer;
+   background-color: gray;
+}
+
+.home-bg .home .content{
+   width: 50rem;
+}
+
+.home-bg .home .content span{
+   color:var(--orange);
+   font-size: 2.5rem;
+}
+
+.home-bg .home .content h3{
+   text-emphasis: bold;
+   font-size: 3rem;
+   text-transform: uppercase;
+   margin-top: 1.5rem;
+   color:black;
+   animation: color-animation 4s linear infinite;
+   --color-1: yellow;
+   --color-2: red;
+   --color-3: green;
+}
+
+@keyframes color-animation {
+   0% {color: var(--color-1)}
+   32% {color: var(--color-1)}
+   33% {color: var(--color-2)}
+   65% {color: var(--color-2)}
+   66% {color: var(--color-3)}
+   99% {color: var(--color-3)}
+   100% {color: var(--color-1)}
+} 
+
+.home-bg .home .content p{
+   font-size: 2rem;
+   padding:1rem 0;
+   line-height: 2.5;
+   color:white;
+}
+
+.home-bg .home .content a{
+   display: inline-block;
+   width: auto;
+}
+
+.home-category .box-container{
+   display: grid;
+   grid-template-columns: repeat(auto-fit, 27rem);
+   gap:1.5rem;
+   justify-content: space-between;
+   align-items: flex-start;
+}
+
+.credit span{
+position: relative;
+-webkit-box-reflect: below -20px linear-gradient (transparent, rgba(0,0,0,.2));
+font-size: 20px;
+display: inline-block;
+color: black;
+text-transform: uppercase;
+animation: flip 10s infinite;
+animation-delay: calc(.2s * var(--i));
+}
+@keyframes flip{
+   0%, 80% {
+      transform: rotateY(360deg)
+   }
+}
+
+.home-category .title h1{
+   animation: 2s anim-poputin ease infinite;
+   }
+
+@keyframes anim-popoutin {
+   0% {
+      color: black;
+      transform: scale(0);
+      opacity: 0;
+      text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+   }
+   25% {
+      color: red;
+      transform: scale(2);
+      opacity: 1;
+      text-shadow: 1px 0 0 rgba(0, 0, 0, 0.5);
+   }
+   50% {
+      color: black;
+      transform: scale(1);
+      opacity: 1;
+      text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
+   }
+   100% {
+      transform: scale(1);
+      opacity: 1;
+      text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
+   }
+}
+
+@keyframes anim-fromtop {
+   0% {opacity: 0; transform: translateY(-100%);}
+   25% {opacity: 1; transform: translateY(0%);}
+   50% {
+
+   }
+   100% {
+
+   }
+}
+
+.home-category .box-container .box{
+   padding:2rem;
+   text-align: center;
+   border:var(--border);
+   background-color: var(--white);
+   box-shadow: var(--box-shadow);
+   border-radius: .5rem;
+}
+
+.home-category .box-container .box img{
+   width: 100%;
+   margin-bottom: 1rem;
+}
+
+.home-category .box-container .box h3{
+   text-transform: uppercase;
+   color:var(--black);
+   padding:1rem 0;
+   font-size: 2rem;
+}
+
+.home-category .box-container .box p{
+   line-height: 2;
+   font-size: 1.5rem;
+   color:var(--light-color);
+   padding:.5rem 0;
+}
+
+.home-category{
+   padding-bottom: 0;
+}
+/** -------------------------------------------------------------------------------------------------------------------------------------------------- **/
+
+/************************************************************************* Best Selling Section **************************************************************/ 
+.p-category{
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
+   gap:1.5rem;
+   justify-content: center;
+   align-items: flex-start;
+}
+
+.p-category{
+   padding-bottom: 0;
+}
+
+.p-category a{
+   padding:1.5rem;
+   text-align: center;
+   border:var(--border);
+   background-color: var(--white);
+   box-shadow: var(--box-shadow);
+   border-radius: .5rem;
+   font-size: 2rem;
+   text-transform: capitalize;
+   color:var(--black);
+}
+
+.p-category a:hover{
+   background-color: var(--black);
+   color: var(--white);
+}
+
+/** ------------------------------------------------------------------------------------------------------------------------------------------------------------------- **/
+
+/********************************************************************************** About Section ***********************************************************************/
+.about .row{
+   display: flex;
+   flex-wrap: wrap;
+   gap:3rem;
+   align-items: center;
+}
+
+.about .row .box{
+   flex:1 1 40rem;
+   text-align: center;
+}
+
+.about .row .box img{
+   margin-bottom: 2rem;
+   height: 40rem;
+}
+
+.about .row .box h3{
+   padding:1rem 0;
+   font-size: 2.5rem;
+   text-transform: uppercase;
+   color:var(--black);
+}
+
+.about .row .box p{
+   line-height: 2;
+   font-size: 1.5rem;
+   color:var(--light-color);
+   padding:1rem 0;
+}
+
+.about .row .box .btn{
+   display: inline-block;
+   width: auto;
+   
+}
+
+.about .row .box .btn:hover{
+   cursor: pointer;
+   background-color: gray;
+}
+/** --------------------------------------------------------------------------------------------------------------------------------------------------------- **/
+
+/*********************************************************************** Reviews ********************************************************************************/
+.reviews .box-container{
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+   gap:1.5rem;
+   justify-content: center;
+   align-items: flex-start;
+}
+
+.reviews .box-container .box{
+   padding:2rem;
+   text-align: center;
+   border:var(--border);
+   background-color: var(--white);
+   box-shadow: var(--box-shadow);
+   border-radius: .5rem;
+}
+
+.reviews .box-container .box img{
+   height: 10rem;
+   width: 10rem;
+   border-radius: 50%;
+   margin-bottom: 1rem;
+   object-fit: cover;
+}
+
+.reviews .box-container .box p{
+   padding:1rem 0;
+   font-size: 1.6rem;
+   color:var(--light-color);
+   line-height: 2;
+}
+
+.reviews .box-container .box .stars{
+   display: inline-block;
+   padding:1rem;
+   background-color: var(--light-bg);
+   border:var(--border);
+   border-radius: .5rem;
+   margin:.5rem 0;
+}
+
+.reviews .box-container .box .stars i{
+   font-size: 1.7rem;
+   color:var(--orange);
+   margin:0 .3rem;
+}
+
+.reviews .box-container .box h3{
+   margin-top: 1rem;
+   color:var(--black);
+   font-size: 2rem;
+}
+
+.bottom-box{
+   background-color: var(--black);
+   width: 100%;
+   height: 7.5vh;
+}
+
+/** ------------------------------------------------------------------------------------------------------------------------------------------------------- **/
+
+@media (max-width:768px){
+
+   .home-bg{
+      background-position: left;
+   }
+
+   .home-bg .home{
+      justify-content: center;
+      text-align: center;
+   }
+
+}
+
+@media (max-width:450px){
+
+   .home-category .box-container{
+      grid-template-columns: 1fr;
+   }
+
+   .about .row .box img{
+      width: 100%;
+      height: auto;
+   }  
+}
+
+/*********************************************************************** Shop ********************************************************************************/
+
+h2{
+      color:red;
+   }
+
+
+   

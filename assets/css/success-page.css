@@ -1,0 +1,40 @@
+body {
+    font-family: Arial, sans-serif;
+}
+ 
+#thankYou,
+.unsuccessful {
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #f5f5f5; */
+}
+
+#thankYou h1,
+.unsuccessful h1{
+    font-size: var(--size-7);
+}
+
+#thankYou p,
+.unsuccessful p{
+    font-size: var(--size-3);
+}
+
+.button{
+    background-color: var(--black);
+    width: 10%;
+    margin: 1.75rem;
+    border-radius: 0.5rem;
+    color: var(--white);
+    font-size: var(--size-2);
+    padding: 1.75rem;
+    cursor: pointer;
+    text-transform: capitalize;
+    text-align: center;
+}
+
+.hidden{
+    display: none;
+}
