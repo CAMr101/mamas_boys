@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 08, 2023 at 07:17 PM
+-- Generation Time: Nov 09, 2023 at 07:44 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -57,7 +57,7 @@ CREATE TABLE `cart` (
 CREATE TABLE `category` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `description` int(11) NOT NULL,
+  `description` varchar(255) NOT NULL,
   `image_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -66,9 +66,10 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `name`, `description`, `image_id`) VALUES
-(0, 'Kota', 0, NULL),
-(1, 'Chips', 0, NULL),
-(2, 'Extras', 0, NULL);
+(0, 'Kota', '0', NULL),
+(1, 'Chips', '0', NULL),
+(2, 'Extras', '0', NULL),
+(10, 'that new new', 'description you know ittttt..', 2);
 
 -- --------------------------------------------------------
 
@@ -102,6 +103,13 @@ CREATE TABLE `images` (
   `category_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `images`
+--
+
+INSERT INTO `images` (`id`, `name`, `location`, `product_id`, `category_id`) VALUES
+(2, 'MicrosoftTeams-image.png', '../assets/images/category/MicrosoftTeams-image.png', NULL, 10);
+
 -- --------------------------------------------------------
 
 --
@@ -113,36 +121,37 @@ CREATE TABLE `product` (
   `name` varchar(255) NOT NULL,
   `price` decimal(10,0) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `category_id` int(11) NOT NULL
+  `category_id` int(11) NOT NULL,
+  `image_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`id`, `name`, `price`, `description`, `category_id`) VALUES
-(3, 'Porche', 22, 'Bread, Atchar, Polony, Chips & Vienna', 0),
-(4, 'Porche', 22, 'Bread, Atchar, Polony, Chips & Vienna', 0),
-(5, 'Mahindra', 23, 'Bread, Atchar, Polony, Chips & Cheese', 0),
-(6, 'Mustang', 27, 'Bread, Atchar, Polony, Chips & Eggs', 0),
-(7, 'Rolce Royce', 30, 'Bread, Atchar, Polony, Chips & Russian', 0),
-(8, 'Mini Cooper', 35, 'Bread, Atchar, Polony, Chips, Russian & Vienna', 0),
-(9, 'Polo', 40, 'Bread, Atchar, Polony, Chips, Russian, Vienna & Cheese', 0),
-(10, 'Bently', 50, 'Bread, Atchar, Polony, Chips, Russian, Vienna, Cheese & Burger', 0),
-(11, 'Staria', 60, 'Bread, Atchar, Polony, Chips, Russian, Vienna, Cheese, Burger & Egg', 0),
-(12, 'Lambogini', 70, 'Bread, Atchar, Polony, Chips, Russian, Vienna, Cheese, Burger, Egg & Fish Finger', 0),
-(13, 'Toyota', 80, 'Bread, Atchar, Polony, Chips, Russian, Vienna, Cheese, Burger, Egg, Fish Finger & Bacon', 0),
-(14, 'Small', 40, '', 1),
-(15, 'Medium', 55, '', 1),
-(16, 'Large', 70, '', 1),
-(17, 'Egg', 12, '', 2),
-(18, 'Russian', 15, '', 2),
-(19, 'Vienna', 10, '', 2),
-(20, 'Cheese', 10, '', 2),
-(21, 'Burger', 15, '', 2),
-(22, 'Fish Finger', 12, '', 2),
-(23, 'Bacon', 13, '', 2),
-(24, 'Polony', 5, '', 2);
+INSERT INTO `product` (`id`, `name`, `price`, `description`, `category_id`, `image_id`) VALUES
+(3, 'Porche', 22, 'Bread, Atchar, Polony, Chips & Vienna', 0, NULL),
+(4, 'Porche', 22, 'Bread, Atchar, Polony, Chips & Vienna', 0, NULL),
+(5, 'Mahindra', 23, 'Bread, Atchar, Polony, Chips & Cheese', 0, NULL),
+(6, 'Mustang', 27, 'Bread, Atchar, Polony, Chips & Eggs', 0, NULL),
+(7, 'Rolce Royce', 30, 'Bread, Atchar, Polony, Chips & Russian', 0, NULL),
+(8, 'Mini Cooper', 35, 'Bread, Atchar, Polony, Chips, Russian & Vienna', 0, NULL),
+(9, 'Polo', 40, 'Bread, Atchar, Polony, Chips, Russian, Vienna & Cheese', 0, NULL),
+(10, 'Bently', 50, 'Bread, Atchar, Polony, Chips, Russian, Vienna, Cheese & Burger', 0, NULL),
+(11, 'Staria', 60, 'Bread, Atchar, Polony, Chips, Russian, Vienna, Cheese, Burger & Egg', 0, NULL),
+(12, 'Lambogini', 70, 'Bread, Atchar, Polony, Chips, Russian, Vienna, Cheese, Burger, Egg & Fish Finger', 0, NULL),
+(13, 'Toyota', 80, 'Bread, Atchar, Polony, Chips, Russian, Vienna, Cheese, Burger, Egg, Fish Finger & Bacon', 0, NULL),
+(14, 'Small', 40, '', 1, NULL),
+(15, 'Medium', 55, '', 1, NULL),
+(16, 'Large', 70, '', 1, NULL),
+(17, 'Egg', 12, '', 2, NULL),
+(18, 'Russian', 15, '', 2, NULL),
+(19, 'Vienna', 10, '', 2, NULL),
+(20, 'Cheese', 10, '', 2, NULL),
+(21, 'Burger', 15, '', 2, NULL),
+(22, 'Fish Finger', 12, '', 2, NULL),
+(23, 'Bacon', 13, '', 2, NULL),
+(24, 'Polony', 5, '', 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -195,6 +204,14 @@ CREATE TABLE `staff` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `staff`
+--
+
+INSERT INTO `staff` (`id`, `name`, `surname`, `email`, `phone`, `password`, `created_at`, `type`) VALUES
+(4, 'neo', 'tom', 'neo@email.com', 761234567, 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', '2023-11-09 12:42:06', 'admin'),
+(5, 'neo', 'tom', 'neo@email.com', 761234567, 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', '2023-11-09 12:42:34', 'admin');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -240,7 +257,8 @@ ALTER TABLE `images`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `product_fk_categoryid` (`category_id`);
+  ADD KEY `product_fk_categoryid` (`category_id`),
+  ADD KEY `product_fk_imageId` (`image_id`);
 
 --
 -- Indexes for table `shop_order`
@@ -276,7 +294,7 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -288,13 +306,13 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `shop_order`
@@ -306,7 +324,7 @@ ALTER TABLE `shop_order`
 -- AUTO_INCREMENT for table `staff`
 --
 ALTER TABLE `staff`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
@@ -316,46 +334,47 @@ ALTER TABLE `staff`
 -- Constraints for table `card_payment_details`
 --
 ALTER TABLE `card_payment_details`
-  ADD CONSTRAINT `card_payment_details_fk_customerid` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`);
+  ADD CONSTRAINT `card_payment_details_fk_customerid` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `cart`
 --
 ALTER TABLE `cart`
-  ADD CONSTRAINT `cart_fk_customerid` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`);
+  ADD CONSTRAINT `cart_fk_customerid` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `category`
 --
 ALTER TABLE `category`
-  ADD CONSTRAINT `category_fk_imageid` FOREIGN KEY (`image_id`) REFERENCES `images` (`id`);
+  ADD CONSTRAINT `category_fk_imageid` FOREIGN KEY (`image_id`) REFERENCES `images` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `customer`
 --
 ALTER TABLE `customer`
-  ADD CONSTRAINT `customer_fk_cardPaymentDetailsId` FOREIGN KEY (`card_id`) REFERENCES `card_payment_details` (`id`),
-  ADD CONSTRAINT `customer_fk_cartid` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`id`);
+  ADD CONSTRAINT `customer_fk_cardPaymentDetailsId` FOREIGN KEY (`card_id`) REFERENCES `card_payment_details` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `customer_fk_cartid` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`id`) ON DELETE SET NULL;
 
 --
 -- Constraints for table `images`
 --
 ALTER TABLE `images`
-  ADD CONSTRAINT `images_fk_categoryid` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`),
-  ADD CONSTRAINT `images_fk_productid` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
+  ADD CONSTRAINT `images_fk_categoryid` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `images_fk_productid` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `product`
 --
 ALTER TABLE `product`
-  ADD CONSTRAINT `product_fk_categoryid` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
+  ADD CONSTRAINT `product_fk_categoryid` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `product_fk_imageId` FOREIGN KEY (`image_id`) REFERENCES `images` (`product_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `shop_order`
 --
 ALTER TABLE `shop_order`
-  ADD CONSTRAINT `shop_order_fk_customerid` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`),
-  ADD CONSTRAINT `shop_order_fk_staffid` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`id`);
+  ADD CONSTRAINT `shop_order_fk_customerid` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `shop_order_fk_staffid` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`id`) ON DELETE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

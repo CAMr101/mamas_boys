@@ -20,7 +20,7 @@ include '../components/admin-header.php';
         <div class="left">
             <h1>New Category</h1>
             <ul class="breadcrumb">
-                <li><a href="shop.html">
+                <li><a href="shop.php">
                         Category
                     </a></li>
                 /
@@ -32,7 +32,9 @@ include '../components/admin-header.php';
     <div class="bottom-data">
         <div class="orders">
 
-            <form action="" method="post" enctype="multipart/form-data" id="new-category">
+            <form action="../handlers/processNewCategory.php" method="post" enctype="multipart/form-data"
+                id="new-category">
+                <!-- <input type="hidden" name="MAX_FILE_SIZE" value=""> -->
                 <table>
 
                     <tbody>
@@ -66,11 +68,13 @@ include '../components/admin-header.php';
 
                         <tr>
                             <td colspan="3">
-                                <button>Create Category</button>
+
                             </td>
                         </tr>
                     </tbody>
                 </table>
+
+                <button>Create Category</button>
             </form>
 
 

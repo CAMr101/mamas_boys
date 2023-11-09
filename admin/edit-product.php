@@ -1,14 +1,31 @@
 <?php
 include("../handlers/processCategory.php");
+include("../handlers/processProducts.php");
+include("../handlers/processImage.php");
+
+$pathParams = $_SERVER['QUERY_STRING'];
+if ($pathParams == null) {
+    header("location:shop.php");
+}
+
+$pathParams = explode('=', $pathParams);
+$productId = $pathParams[1];
+
+$product = getProduct($productId);
+$image = getImageByCategoryId($product["id"]);
+
+if ($image == null) {
+    $image["name"] = "Image not found";
+    $image["location"] = "";
+}
 
 $categories = getAllCategories();
-?>
 
+?>
 
 <?php
 include '../components/admin-header.php';
 ?>
-
 
 <!-- Top nav -->
 <!-- <nav class="top-nav">
@@ -26,22 +43,71 @@ include '../components/admin-header.php';
 <main class="main-content">
     <div class="header">
         <div class="left">
-            <h1>New Product</h1>
+            <h1>Edit
+                <?php echo ($product["name"]); ?>
+            </h1>
             <ul class="breadcrumb">
-                <li><a href="shop.php">
+                <li>
+                    <a href="products.php">
                         Product
-                    </a></li>
+                    </a>
+                </li>
                 /
-                <li><a href="#" class="active">New</a></li>
+                <li><a href="new-category.html" class="active">Edit</a></li>
             </ul>
+        </div>
+    </div>
+
+    <div class="bottom-data">
+        <div class="card-container">
+            <div class="card">
+                <div class="header">
+                    <span class="material-symbols-outlined">
+                        description
+                    </span>
+                    <h3>Description</h3>
+                </div>
+                <div class="text">
+                    <p>
+                        <?php
+                        echo ($product["description"]);
+                        ?>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-container">
+            <div class="card">
+                <div class="header">
+                    <span class="material-symbols-outlined">
+                        image
+                    </span>
+                    <h3>Image</h3>
+                </div>
+                <div class="img-container">
+                    <img src="<?php echo ($image["location"]); ?>" alt="<?php echo ($image["name"]); ?>">
+                </div>
+            </div>
+        </div>
+
+        <div class="card-container">
+            <a href="../handlers/processCategory.php?delete=<?php echo ($productId); ?>" onclick="confirmDelete(1)">
+                <div class="header delete">
+                    <span class="material-symbols-outlined">
+                        delete
+                    </span>
+                    <h3>Delete</h3>
+                </div>
+            </a>
         </div>
     </div>
 
     <div class="bottom-data">
         <div class="orders">
 
-            <form action="../handlers/processNewProduct.php" method="post" enctype="multipart/form-data"
-                id="new-product">
+            <form action="../handlers/processProducts.php?update=<?php echo ($productId); ?>" method="post"
+                enctype="multipart/form-data" id="update-product">
                 <datalist id="categories">
                     <?php foreach ($categories as $category) { ?>
                         <option value="<?php echo ($category["name"]) ?>"></option>
@@ -74,7 +140,7 @@ include '../components/admin-header.php';
                             </td>
                             <td>
                                 <textarea name="ingredients" id="description" cols="60" rows="5"
-                                    form="new-product"></textarea>
+                                    form="update-product"></textarea>
                             </td>
                         </tr>
 
@@ -104,8 +170,12 @@ include '../components/admin-header.php';
                     </tbody>
                 </table>
 
-                <button>Create Product</button>
+                <input type="hidden" name="id" value="<?php
+                echo ($productId);
+                ?>">
+                <button>Update Product</button>
             </form>
+
 
         </div>
 
@@ -114,6 +184,7 @@ include '../components/admin-header.php';
 </main>
 
 
+<script src="../assets/js/"></script>
 
 </body>
 

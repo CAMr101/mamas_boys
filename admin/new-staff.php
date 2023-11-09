@@ -1,14 +1,6 @@
 <?php
-include("../handlers/processCategory.php");
-
-$categories = getAllCategories();
-?>
-
-
-<?php
 include '../components/admin-header.php';
 ?>
-
 
 <!-- Top nav -->
 <!-- <nav class="top-nav">
@@ -26,13 +18,13 @@ include '../components/admin-header.php';
 <main class="main-content">
     <div class="header">
         <div class="left">
-            <h1>New Product</h1>
+            <h1>New Staff Member</h1>
             <ul class="breadcrumb">
                 <li><a href="shop.php">
-                        Product
+                        Satff
                     </a></li>
                 /
-                <li><a href="#" class="active">New</a></li>
+                <li><a href="new-category.html" class="active">New</a></li>
             </ul>
         </div>
     </div>
@@ -40,15 +32,17 @@ include '../components/admin-header.php';
     <div class="bottom-data">
         <div class="orders">
 
-            <form action="../handlers/processNewProduct.php" method="post" enctype="multipart/form-data"
-                id="new-product">
-                <datalist id="categories">
-                    <?php foreach ($categories as $category) { ?>
-                        <option value="<?php echo ($category["name"]) ?>"></option>
-                    <?php } ?>
+            <form action="../handlers/processNewStaff.php" method="post" enctype="multipart/form-data"
+                id="new-category">
+
+                <datalist id="employee-type">
+                    <option value="admin"></option>
+                    <option value="kitchen"></option>
                 </datalist>
+
                 <!-- <input type="hidden" name="MAX_FILE_SIZE" value=""> -->
                 <table>
+
                     <tbody>
                         <tr>
                             <td>
@@ -61,38 +55,57 @@ include '../components/admin-header.php';
 
                         <tr>
                             <td>
-                                <label for="price">Price</label>
+                                <label for="surname">Surname</label>
                             </td>
                             <td>
-                                <input type="number" name="price">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <label for="ingredients">Ingredients</label>
-                            </td>
-                            <td>
-                                <textarea name="ingredients" id="description" cols="60" rows="5"
-                                    form="new-product"></textarea>
+                                <input type="text" name="surname">
                             </td>
                         </tr>
 
                         <tr>
                             <td>
-                                <label for="category">Category</label>
+                                <label for="email">Email</label>
                             </td>
                             <td>
-                                <input list="categories" name="category">
+                                <input type="email" name="email">
                             </td>
                         </tr>
 
                         <tr>
                             <td>
-                                <label for="image">Image</label>
+                                <label for="phone">Phone Number</label>
                             </td>
                             <td>
-                                <input type="file" name="image">
+                                <input type="text" name="phone">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="password">Password</label>
+                            </td>
+                            <td>
+                                <input type="password" name="password" id="password">
+                                <span id="message" style="color:red"> </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="password">Confirm Password</label>
+                            </td>
+                            <td>
+                                <input type="password" name="password" id="confirmPassword">
+                                <span id="confirmMessage" style="color:red"> </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="type">Type</label>
+                            </td>
+                            <td>
+                                <input list="employee-type" name="type">
                             </td>
                         </tr>
 
@@ -104,8 +117,9 @@ include '../components/admin-header.php';
                     </tbody>
                 </table>
 
-                <button>Create Product</button>
+                <button id="submitButton">Add Staff</button>
             </form>
+
 
         </div>
 
@@ -113,6 +127,7 @@ include '../components/admin-header.php';
 
 </main>
 
+<script src="../assets/js/verifyPassword.js"></script>
 
 
 </body>

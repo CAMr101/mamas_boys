@@ -1,51 +1,28 @@
 <?php
 include("../handlers/processCategory.php");
 include("../handlers/processProducts.php");
+include("../handlers/processImage.php");
+
+$pathParams = $_SERVER['QUERY_STRING'];
+if ($pathParams == null) {
+    header("location:shop.php");
+}
+
+$pathParams = explode('=', $pathParams);
+$categoryId = $pathParams[1];
+
+$category = getCategory($categoryId);
+$image = getImageByCategoryId($category["id"]);
+
+if ($image == null) {
+    $image["name"] = "Image not found";
+    $image["location"] = "";
+}
 
 ?>
 
 
 <?php include '../components/admin-header.php'; ?>
-
-<?php
-if (isset($_POST)) {
-    $data = file_get_contents("php://input");
-    $customerOrder = json_decode($data, true);
-
-    $cName = $customerOrder["cName"];
-    $cEmail = $customerOrder["cEmail"];
-    $cPhone = $customerOrder["cPhone"];
-    $orderTotal = $customerOrder["orderTotal"];
-    $orderItems = json_encode($customerOrder["orderItems"]);
-    $paymentMethod = $customerOrder["paymentMethod"];
-    $paid = 0;
-
-
-    try {
-        require_once "../config/dbh.inc.php";
-
-        $query = "INSERT INTO category (name, description, image_id) 
-        VALUES (?,?,?);";
-
-        $stmt = $pdo->prepare($query);
-
-        $stmt->execute([$name, $description, $imageId]);
-
-        $pdo = null;
-        $stmt = null;
-
-        echo (1);
-
-        die();
-
-    } catch (PDOException $e) {
-        echo (0);
-        die("Query Failed: " . $e->getMessage());
-    }
-} else {
-    header("location:../home.php");
-}
-?>
 
 <!-- Top nav -->
 <!-- <nav class="top-nav">
@@ -63,22 +40,105 @@ if (isset($_POST)) {
 <main class="main-content">
     <div class="header">
         <div class="left">
-            <h1>Category Name</h1>
+            <h1>
+                <?php
+                echo ($category["name"]);
+                ?>
+                <a href="edit-category.php?id=<?php echo $categoryId; ?>">
+                    <span class="material-symbols-outlined">
+                        edit
+                    </span>
+                </a>
+            </h1>
             <ul class="breadcrumb">
-                <li><a href="shop.html">
+                <li>
+                    <a href="shop.php">
                         Category
-                    </a></li>
+                    </a>
+                </li>
                 /
-                <li><a href="new-category.html" class="active">New</a></li>
+                <li>
+                    <a href="#" class="active">
+                        <?php
+                        echo ($category["name"]);
+                        ?>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
+
+    <ul class="insights">
+        <a>
+            <li>
+                <i class='bx bx-dollar-circle'>
+                    <span class="material-symbols-outlined">
+                        description
+                    </span>
+                </i>
+                <span class="info">
+                    <h3>
+                        Description
+                    </h3>
+                    <p>
+                        <?php
+                        echo ($category["description"]);
+                        ?>
+                    </p>
+                </span>
+            </li>
+        </a>
+
+        <a>
+            <li>
+                <i class='bx bx-dollar-circle'>
+                    <span class="material-symbols-outlined">
+                        image
+                    </span>
+                </i>
+                <span class="info">
+                    <h3>
+                        Image
+                    </h3>
+                    <p>
+                        <img src="<?php echo ($image["location"]); ?>" alt="<?php echo ($image["name"]); ?>">
+                    </p>
+                </span>
+            </li>
+        </a>
+
+        <a href="../handlers/processCategory.php?fn=delete&id=<?php echo ($categoryId); ?>" class="delete">
+            <li>
+                <i class='bx bx-dollar-circle'>
+                    <span class="material-symbols-outlined">
+                        delete
+                    </span>
+                </i>
+                <span class="info">
+                    <h3>
+                        Delete
+                    </h3>
+                    <p>
+                        This will also delete all products within the
+                        <?php echo ($category["name"]); ?> category
+                    </p>
+                </span>
+            </li>
+        </a>
+    </ul>
 
     <div class="bottom-data">
         <div class="orders">
             <div class="header">
                 <i class='bx bx-receipt'></i>
-                <h3>Products</h3>
+                <h3>
+                    Products
+                    <a href="new-product.php">
+                        <span class="material-symbols-outlined">
+                            add
+                        </span>
+                    </a>
+                </h3>
             </div>
             <table>
                 <thead>
@@ -99,7 +159,7 @@ if (isset($_POST)) {
                         </tr> -->
 
                     <?php
-                    $products = getProductsByCategoryId();
+                    $products = getProductsByCategoryId($category["id"]);
 
                     if ($products !== null) {
                         foreach ($products as $product) { ?>

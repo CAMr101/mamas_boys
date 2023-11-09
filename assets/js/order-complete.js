@@ -17,10 +17,10 @@ window.onload = () =>{
             unsuccessfulSection.classList.remove("hidden");
         }
     }else{
-        window.location = "home.php";
+        window.location = "index.php";
     }
 }
 
 function redirect(){
-    window.location = "home.php";
+    window.location = "index.php";
 }

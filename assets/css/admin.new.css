@@ -13,6 +13,7 @@
     --light-warning: #FFF2C6;
     --success: #388E3C;
     --light-success: #BBF7D0;
+    --silver: #C0C0C0;
 }
 
 *{
@@ -340,6 +341,10 @@ main .header .left h1{
     color: var(--dark);
 }
 
+main .header .left h1 a{
+    color: var(--primary);
+}
+
 main .header .left .breadcrumb{
     display: flex;
     align-items: center;
@@ -352,7 +357,7 @@ main .header .left .breadcrumb li{
 
 main .header .left .breadcrumb li a{
     color: var(--dark-grey);
-    pointer-events: none;
+    /* pointer-events: none; */
 }
 
 main .header .left .breadcrumb li a.active{
@@ -379,6 +384,16 @@ main .insights{
     grid-gap: 24px;
     margin-top: 36px;
     margin-bottom: 36px;
+}
+
+main .insights .delete li .bx{
+    background-color: var(--light-danger) !important;
+}
+
+main .insights .delete li .bx,
+main .insights .delete li .info h3,
+main .insights .delete li .info p{
+    color: var(--danger) !important;
 }
 
 main .insights li{
@@ -431,6 +446,32 @@ main .insights li .info p{
     color: var(--dark);
 }
 
+main .insights li .info form#updateOrderStatus input,
+main .insights li .info form#updateOrderStatus button{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+main .insights li .info form#updateOrderStatus input{
+  background-color: white;
+  border-radius: 0.25rem;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  /* padding: 0.5rem 0.75rem; */
+}
+
+main .insights li .info form#updateOrderStatus button:hover{
+    color: var(--primary);
+    cursor: pointer;
+}
+
 main .bottom-data{
     display: flex;
     flex-wrap: wrap;
@@ -447,11 +488,25 @@ main .bottom-data>div{
     overflow-x: auto;
 }
 
+main .bottom-data>div a{
+    color: var(--dark);
+}
+
+main .bottom-data>div a .delete{
+    color: var(--danger);
+}
+
 main .bottom-data .header{
     display: flex;
     align-items: center;
     grid-gap: 16px;
     margin-bottom: 24px;
+}
+
+main .bottom-data .img-container img{
+    position: relative;
+    width: 50%;
+    /* height: 10%; */
 }
 
 main .bottom-data .header h3{
@@ -526,6 +581,20 @@ main .bottom-data .orders table tr td .status.process{
 
 main .bottom-data .orders table tr td .status.pending{
     background: var(--warning);
+}
+
+main .bottom-data .orders table tr td .status.notStarted{
+    background: var(--silver);
+    color: var(--dark);
+}
+
+main .bottom-data .orders table tr td .status.ready{
+    background: var(--light-primary);
+    color: var(--dark);
+}
+
+main .bottom-data .orders table tr td .status.cancelled{
+    background: var(--danger);
 }
 
 main .bottom-data .reminders{

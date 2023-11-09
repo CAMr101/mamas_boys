@@ -6,7 +6,7 @@ function createFooter()
     <section class="box-container">
        <div class="box">
           <h3>quick links</h3>
-          <a href="home.php"> <i class="fas fa-angle-right"></i> Home</a>
+          <a href="index.php"> <i class="fas fa-angle-right"></i> Home</a>
           <a href="products.php"> <i class="fas fa-angle-right"></i> Shop</a>
           <a href="about.php"> <i class="fas fa-angle-right"></i> About Us</a>
           <a href="Contact.php"> <i class="fas fa-angle-right"></i> Contact Us</a>
@@ -17,7 +17,7 @@ function createFooter()
           <a href="cart.php"> <i class="fas fa-angle-right"></i> Cart</a>
           <a href="Login.php"> <i class="fas fa-angle-right"></i> Login</a>
           <a href="Register.php"> <i class="fas fa-angle-right"></i> Create Account</a>
-          <a href="admin.login.php"> <i class="fas fa-angle-right"></i> Admin Dashboard</a>
+          <a href="./admin/admin.php"> <i class="fas fa-angle-right"></i> Admin Dashboard</a>
        </div>
 
        <div class="box">

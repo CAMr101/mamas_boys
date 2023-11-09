@@ -36,5 +36,5 @@ if (isset($_POST)) {
         die("Query Failed: " . $e->getMessage());
     }
 } else {
-    header("location:../home.php");
+    header("location:../index.php");
 }

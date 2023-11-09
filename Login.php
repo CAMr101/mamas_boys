@@ -18,7 +18,7 @@ if (isset($_POST['login'])) {
     } else {
         if (password_verify($password, $result['password'])) {
             $_SESSION['email'] = $result['email'];
-            header("location: home.php");
+            header("location: index.php");
             exit;
         } else {
             echo '<p class="error">Incorrect password!</p>';

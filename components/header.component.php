@@ -1,21 +1,21 @@
 <?php
 function createHeader()
 {
-    return '
+   return '
         <header class="header">
         <div class="flex">
   
-         <a href="home.php">
+         <a href="index.php">
             <img src="Website pictures\logo.png" width=120px alt="">
          </a>
 
-         <a href="home.php">
+         <a href="index.php">
             <h1> MAMAS BOYS KOTA AND CHIPS</h1>
          </a>
            
   
            <div class="new">
-              <a href="home.php">Home</a>
+              <a href="index.php">Home</a>
               <a href="products.php">Shop</a>
               <a href="about.php">About</a>
               <a href="Contact.php">Contact</a>

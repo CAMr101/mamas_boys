@@ -68,7 +68,7 @@ session_start();
                 </a>
             </li>
             <li class="side-menu-item">
-                <a href="customer.php">
+                <a href="customers.php">
                     <span class="material-symbols-outlined">
                         groups
                     </span>

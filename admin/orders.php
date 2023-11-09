@@ -30,10 +30,6 @@ include("../handlers/processProducts.php");
 
     <div class="bottom-data">
         <div class="orders">
-            <div class="header">
-                <i class='bx bx-receipt'></i>
-                <h3>Products</h3>
-            </div>
             <table>
                 <thead>
                     <tr>
@@ -50,26 +46,6 @@ include("../handlers/processProducts.php");
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- <tr>
-                            <td>001</td>
-                            <td>Cameron</td>
-                            <td>john@email.com</td>
-                            <td>0671234567</td>
-                            <td colspan="1">
-                                Porche
-                                <br>
-                                Mustang
-                            </td>
-                            <td colspan="1">
-                                2
-                                <br>
-                                1
-                            </td>
-                            <td>R 120</td>
-                            <td>14-08-2023</td>
-                            <td><span class="status completed">Completed</span></td>
-                        </tr> -->
-
                     <?php
                     $orders = getOrders();
 
@@ -78,53 +54,117 @@ include("../handlers/processProducts.php");
 
                             <tr>
                                 <td>
-                                    <?php echo $order['id']; ?>
+                                    <a href="order.php?id=<?php echo $order['id']; ?>">
+                                        <?php echo $order['id']; ?>
+                                    </a>
                                 </td>
                                 <td>
-                                    <?php echo $order['name']; ?>
+                                    <a href="order.php?id=<?php echo $order['id']; ?>">
+                                        <?php echo $order['name']; ?>
+                                    </a>
                                 </td>
                                 <td>
-                                    <?php echo $order['email']; ?>
+                                    <a href="order.php?id=<?php echo $order['id']; ?>">
+                                        <?php echo $order['email']; ?>
+                                    </a>
                                 </td>
                                 <td>
-                                    <?php echo $order['phone']; ?>
+                                    <a href="order.php?id=<?php echo $order['id']; ?>">
+                                        <?php echo $order['phone']; ?>
+                                    </a>
                                 </td>
                                 <td colspan="1">
-                                    <?php
-                                    $order_items = json_decode($order['order_items'], true);
-                                    $productName = getProductName($order_items[0]['id']);
+                                    <a href="order.php?id=<?php echo $order['id']; ?>">
+                                        <?php
+                                        $order_items = json_decode($order['order_items'], true);
+                                        $productName = getProductName($order_items[0]['id']);
 
-                                    echo $productName[0]['name']; ?>
-                                    <br>
-                                    <?php
-                                    $order_items = json_decode($order['order_items'], true);
-                                    $productName = getProductName($order_items[1]['id']);
+                                        echo $productName[0]['name']; ?>
+                                        <br>
+                                        <?php
+                                        $order_items = json_decode($order['order_items'], true);
+                                        $productName = getProductName($order_items[1]['id']);
 
-                                    echo $productName[0]['name']; ?>
+                                        echo $productName[0]['name']; ?>
+                                    </a>
                                 </td>
                                 <td colspan="1">
-                                    <?php
-                                    $order_items = json_decode($order['order_items'], true);
-                                    $item = $order_items[0]['quantity'];
+                                    <a href="order.php?id=<?php echo $order['id']; ?>">
+                                        <?php
+                                        $order_items = json_decode($order['order_items'], true);
+                                        $item = $order_items[0]['quantity'];
 
-                                    echo $order_items[0]['quantity']; ?>
-                                    <br>
-                                    <?php
-                                    $order_items = json_decode($order['order_items'], true);
-                                    $item = $order_items[0]['quantity'];
+                                        echo $order_items[0]['quantity']; ?>
+                                        <br>
+                                        <?php
+                                        $order_items = json_decode($order['order_items'], true);
+                                        $item = $order_items[0]['quantity'];
 
-                                    echo $order_items[1]['quantity']; ?>
+                                        echo $order_items[1]['quantity']; ?>
+                                    </a>
                                 </td>
                                 <td>R
-                                    <?php echo $order['order_total']; ?>
+                                    <a href="order.php?id=<?php echo $order['id']; ?>">
+                                        <?php echo $order['order_total']; ?>
+                                    </a>
                                 </td>
                                 <td>
-                                    <?php echo $order['created_at']; ?>
+                                    <a href="order.php?id=<?php echo $order['id']; ?>">
+                                        <?php echo $order['created_at']; ?>
+                                    </a>
                                 </td>
                                 <td>
-                                    <?php echo $order['payment_method']; ?>
+                                    <a href="order.php?id=<?php echo $order['id']; ?>">
+                                        <?php echo $order['payment_method']; ?>
+                                    </a>
                                 </td>
-                                <td><span class="status completed">Completed</span></td>
+                                <td>
+                                    <span class="status <?php
+                                    switch ($order['order_status']) {
+                                        case 'NotStarted':
+                                            echo 'notStarted';
+                                            break;
+                                        case 'Started':
+                                            echo 'pending';
+                                            break;
+                                        case 'Ready':
+                                            echo 'ready';
+                                            break;
+                                        case 'Completed':
+                                            echo 'completed';
+                                            break;
+                                        case 'Cancelled':
+                                            echo 'cancelled';
+                                            break;
+                                        default:
+                                            echo 'pending';
+                                            break;
+                                    }
+                                    ?>">
+                                        <?php
+                                        switch ($order['order_status']) {
+                                            case 'NotStarted':
+                                                echo 'Not Started';
+                                                break;
+                                            case 'Started':
+                                                echo 'Started';
+                                                break;
+                                            case 'Ready':
+                                                echo 'Ready';
+                                                break;
+                                            case 'Completed':
+                                                echo 'Completed';
+                                                break;
+                                            case 'Cancelled':
+                                                echo 'Cancelled';
+                                                break;
+                                            default:
+                                                echo 'none';
+                                                break;
+                                        }
+                                        ?>
+                                    </span>
+                                </td>
                             </tr>
 
                         <?php }

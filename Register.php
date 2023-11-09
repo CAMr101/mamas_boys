@@ -52,7 +52,7 @@ if (isset($_POST['register'])) {
             $result = $query->execute();
 
             if ($result) {
-                header("Location: home.php");
+                header("Location: index.php");
                 exit();
 
                 // Send a registration confirmation email

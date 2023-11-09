@@ -2,6 +2,7 @@
 include("../handlers/processCategory.php");
 include("../handlers/processProducts.php");
 
+
 ?>
 
 
@@ -24,64 +25,7 @@ include("../handlers/processProducts.php");
 <main class="main-content">
     <div class="header">
         <div class="left">
-            <h1>Categories</h1>
-        </div>
-    </div>
-
-    <ul class="insights">
-        <!-- <li><img class='bx bx-dollar-circle' alt="kota"></img>
-                <span class="info">
-                    <h3>
-                        Kota
-                    </h3>
-                </span>
-            </li> -->
-
-        <?php
-        $categories = getAllCategories();
-
-        if ($categories !== null) {
-            foreach ($categories as $category) { ?>
-                <a href="category.php?id=<?php echo $category['id']; ?>">
-                    <li><img class='bx bx-dollar-circle' alt="kota"></img>
-                        <span class="info">
-                            <h3>
-                                <?php echo $category['name']; ?>
-                            </h3>
-                        </span>
-                    </li>
-                </a>
-            <?php }
-        } else {
-            echo "No products found";
-        }
-        ?>
-        <a href="new-category.php">
-            <li><i class='bx bx-dollar-circle'>
-                    <span class="material-symbols-outlined">
-                        add
-                    </span>
-                </i>
-                <span class="info">
-                    <h3>
-                        New
-                    </h3>
-                    <p>Category</p>
-                </span>
-            </li>
-        </a>
-    </ul>
-
-    <div class="header">
-        <div class="left">
-            <h1>
-                Products
-                <a href="new-product.php">
-                    <span class="material-symbols-outlined">
-                        add
-                    </span>
-                </a>
-            </h1>
+            <h1>All Products</h1>
         </div>
     </div>
 
@@ -117,7 +61,6 @@ include("../handlers/processProducts.php");
                         foreach ($products as $product) {
                             $categoryName = getCategoryName($product['category_id']);
                             ?>
-
                             <tr>
                                 <td>
                                     <a href="product.php?id=<?php echo $product['id']; ?>">
@@ -146,7 +89,6 @@ include("../handlers/processProducts.php");
                                 </td>
 
                             </tr>
-
                         <?php }
                     } else {
 
