@@ -1,4 +1,6 @@
-<?php include '../components/admin-header.php'; ?>
+<?php
+include '../components/admin-header.php';
+?>
 
 <!-- Top nav -->
 <!-- <nav class="top-nav">
@@ -30,47 +32,48 @@
     <div class="bottom-data">
         <div class="orders">
 
-            <form action="">
+            <form action="" method="post" enctype="multipart/form-data" id="new-category">
+                <table>
 
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label for="name">Name</label>
+                            </td>
+                            <td>
+                                <input type="text" name="name">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="description">Description</label>
+                            </td>
+                            <td>
+                                <textarea name="description" id="description" cols="60" rows="5"
+                                    form="new-category"></textarea>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="image">Image</label>
+                            </td>
+                            <td>
+                                <input type="file" name="image">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="3">
+                                <button>Create Category</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </form>
 
-            <table>
 
-                <tbody>
-                    <tr>
-                        <td>
-                            <label for="">Name</label>
-                        </td>
-                        <td>
-                            <input type="text">
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label for="">Description</label>
-                        </td>
-                        <td>
-                            <input type="text">
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label for="">Image</label>
-                        </td>
-                        <td>
-                            <input type="file">
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="3">
-                            <button>Create Category</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
 
     </div>
