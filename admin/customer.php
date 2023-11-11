@@ -2,6 +2,12 @@
 include("../handlers/processOrder.php");
 include("../handlers/processCustomer.php");
 
+session_start();
+
+if (!isset($_SESSION["user_id"])) {
+    header("location:login.php");
+}
+
 $pathParams = $_SERVER['QUERY_STRING'];
 if ($pathParams == null) {
     header("location:shop.php");
@@ -16,7 +22,9 @@ $orders = getOrderByCustomerId($customerId);
 ?>
 
 
+<!-- Linking the static Header Components to Page -->
 <?php include '../components/admin-header.php'; ?>
+<?php include '../components/admin-navigation.php'; ?>
 
 <main class="main-content">
     <div class="header">

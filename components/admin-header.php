@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 
 ?>
 
@@ -97,7 +97,7 @@ session_start();
         </ul>
         <ul class="side-menu">
             <li class="side-menu-item">
-                <a href="login.php" class="logout">
+                <a href="../handlers/logout.php" class="logout">
                     <span class="material-symbols-outlined">
                         logout
                     </span>

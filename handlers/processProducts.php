@@ -71,11 +71,9 @@ function getProductName($id)
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $query = "SELECT name FROM product WHERE id = $id;";
-
         $stmt = $pdo->prepare($query);
-
         $stmt->execute();
-        $result = $stmt->fetchAll();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
         $pdo = null;

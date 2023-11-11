@@ -1,6 +1,12 @@
 <?php
 include("../handlers/processStaff.php");
 
+session_start();
+
+if (!isset($_SESSION["user_id"])) {
+    header("location:login.php");
+}
+
 $pathParams = $_SERVER['QUERY_STRING'];
 if ($pathParams == null) {
     header("location:shop.php");
@@ -17,18 +23,9 @@ if ($staffMember == null) {
 
 ?>
 
+<!-- Linking the static Header Components to Page -->
 <?php include '../components/admin-header.php'; ?>
-
-<!-- Top nav -->
-<!-- <nav class="top-nav">
-        <a href="#" class="notif">
-            <i class='bx bx-bell'></i>
-            <span class="count">0</span>
-        </a>
-        <a href="#" class="profile">
-            <img src="./assets/images/logo.png">
-        </a>
-    </nav> -->
+<?php include '../components/admin-navigation.php'; ?>
 
 
 <!-- main content of the page -->

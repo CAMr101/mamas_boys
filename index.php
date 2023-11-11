@@ -4,17 +4,7 @@ session_start();
 include("Configuration.php");
 include "./components/footer.component.php";
 include "./components/header.component.php";
-// Handle adding items to the cart
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add-to-cart"])) {
-   $itemName = $_POST["item-name"];
-   $itemPrice = $_POST["item-price"];
 
-   // You can add the item to the cart array or store it in a database
-}
-
-if (isset($_REQUEST['signup']) && $_REQUEST['signup'] === "success") {
-
-}
 ?>
 
 <!DOCTYPE html>

@@ -24,7 +24,7 @@ session_start();
         <div class="container">
 
             <div class="text-container">
-                <a href="index.html">
+                <a href="../index.php">
                     <span class="heading" id="heading">
                         Mama's Boys
                     </span>
@@ -42,6 +42,7 @@ session_start();
 
                 <label for="password">Password</label>
                 <input type="password" name="password" placeholder="Password" id="password">
+                <input type="hidden" name="page" id="page" value="<?php echo $_SERVER['PHP_SELF']; ?>">
 
                 <button type="submit">Login</button>
                 <div class="forgot-password">

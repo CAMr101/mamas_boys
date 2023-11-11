@@ -1,11 +1,19 @@
 <?php
 include("../handlers/processCustomer.php");
 
+session_start();
+
+if (!isset($_SESSION["user_id"])) {
+    header("location:login.php");
+}
+
 $customers = getCustomers();
 
 ?>
 
+<!-- Linking the static Header Components to Page -->
 <?php include '../components/admin-header.php'; ?>
+<?php include '../components/admin-navigation.php'; ?>
 
 <main class="main-content">
     <div class="header">

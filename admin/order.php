@@ -3,6 +3,12 @@ include("../handlers/processOrder.php");
 include("../handlers/processProducts.php");
 include("../handlers/enums/order-status.php");
 
+session_start();
+
+if (!isset($_SESSION["user_id"])) {
+    header("location:login.php");
+}
+
 $pathParams = $_SERVER['QUERY_STRING'];
 if ($pathParams == null) {
     header("location:shop.php");
@@ -17,7 +23,9 @@ $orderItems = json_decode($order['order_items'], true);
 ?>
 
 
+<!-- Linking the static Header Components to Page -->
 <?php include '../components/admin-header.php'; ?>
+<?php include '../components/admin-navigation.php'; ?>
 
 <main class="main-content">
     <div class="header">
@@ -257,7 +265,7 @@ $orderItems = json_decode($order['order_items'], true);
                                         <?php echo $item['quantity']; ?>
                                     </a>
                                 </td>
-                                <td>R
+                                <td>
                                     <a href="product.php?id=<?php echo $product['id']; ?>">
                                         <?php echo $product['description']; ?>
                                     </a>

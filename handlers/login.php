@@ -3,12 +3,27 @@
 if (isset($_REQUEST['login']) && ($_GET['login'] == 0 || $_GET['login'] == 1) && isset($_POST)) {
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $page = $_POST['page'];
+
     $code = $_GET['login'];
 
-    authenticate($email, $password, $code);
+    switch ($code) {
+        case 0:
+            authenticate($email, $password);
+            break;
+        case 1:
+            # code...
+            break;
+
+        default:
+            // echo 'failed';
+            // header("location:javascript://history.go(-1)");
+            break;
+    }
+    // authenticate($email, $password, $code);
 }
 
-function authenticate($email, $password, $code)
+function authenticate($email, $password)
 {
     include "../config/dbh.inc.php";
     include "./passwordHash.php";
@@ -19,44 +34,32 @@ function authenticate($email, $password, $code)
         $pdo = new PDO($dsn, $dbusername, $dbpassword);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        switch ($code) {
-            case 0:
-                $query = "SELECT * FROM `staff` WHERE email = ?;";
-                break;
-            case 1:
-                $query = "SELECT * FROM `customer` WHERE email = ?;";
-                break;
-            default:
-                header("location:../index.php");
-                break;
-        }
+        $query = "SELECT * FROM `staff` WHERE email = ? AND password=?;";
 
         $stmt = $pdo->prepare($query);
-        $stmt->execute([$email]);
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->execute([$email, $hPw]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        foreach ($result as $row) {
-            if ($row["password"] == $hPw) {
-                switch ($code) {
-                    case 0:
-                        header("location:../admin/admin.php?login=success");
-                        break;
-                    case 1:
-                        header("location:../index.php?login=success");
-                        break;
-                }
-            } else {
-                switch ($code) {
-                    case 0:
-                        header("location:../admin/admin.php?login=failed");
-                        break;
-                    case 1:
-                        header("location:../index.php?login=failed");
-                        break;
-                }
-            }
+        if ($result) {
+            require_once "../config/config_session.inc.php";
+
+            $newSessionId = session_create_id();
+            $sessionId = $newSessionId . "_" . $result["id"];
+
+            session_destroy();
+            session_id($sessionId);
+            session_start();
+
+            $_SESSION["user_id"] = $result["id"];
+            $_SESSION["user_name"] = $result["name"];
+            $_SESSION['last_regeneration'] = time();
+
+            header("location:../admin/admin.php?login=success");
+
+        } else {
+            $_SESSION["error_login"] = "Authenticatin Failed";
+            header("location:../admin/login.php?login=failed");
         }
-
 
         $pdo = null;
         $stmt = null;

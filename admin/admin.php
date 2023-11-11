@@ -2,21 +2,19 @@
 include("../handlers/processOrder.php");
 include("../handlers/processProducts.php");
 
+session_start();
+
+if (!isset($_SESSION["user_id"])) {
+    header("location:login.php");
+}
+
+$orders = getOrders();
+
 ?>
 
 <!-- Linking the static Header Components to Page -->
 <?php include '../components/admin-header.php'; ?>
-
-<!-- Top nav -->
-<!-- <nav class="top-nav">
-        <a href="#" class="notif">
-            <i class='bx bx-bell'></i>
-            <span class="count">0</span>
-        </a>
-        <a href="#" class="profile">
-            <img src="./assets/images/logo.png">
-        </a>
-    </nav> -->
+<?php include '../components/admin-navigation.php'; ?>
 
 
 <!-- main content of the page -->
@@ -110,7 +108,7 @@ include("../handlers/processProducts.php");
                 </thead>
                 <tbody>
                     <?php
-                    $orders = getOrders();
+
 
                     if ($orders !== null) {
                         foreach ($orders as $order) { ?>
@@ -140,30 +138,24 @@ include("../handlers/processProducts.php");
                                     <a href="order.php?id=<?php echo $order['id']; ?>">
                                         <?php
                                         $order_items = json_decode($order['order_items'], true);
-                                        $productName = getProductName($order_items[0]['id']);
 
-                                        echo $productName[0]['name']; ?>
-                                        <br>
-                                        <?php
-                                        $order_items = json_decode($order['order_items'], true);
-                                        $productName = getProductName($order_items[1]['id']);
-
-                                        echo $productName[0]['name']; ?>
+                                        foreach ($order_items as $item) {
+                                            $name = getProductName($item['id']);
+                                            echo $name['name'];
+                                            echo "<br>";
+                                        } ?>
                                     </a>
                                 </td>
                                 <td colspan="1">
                                     <a href="order.php?id=<?php echo $order['id']; ?>">
                                         <?php
                                         $order_items = json_decode($order['order_items'], true);
-                                        $item = $order_items[0]['quantity'];
 
-                                        echo $order_items[0]['quantity']; ?>
-                                        <br>
-                                        <?php
-                                        $order_items = json_decode($order['order_items'], true);
-                                        $item = $order_items[0]['quantity'];
+                                        foreach ($order_items as $item) {
+                                            echo $item['quantity'];
+                                            echo "<br>";
+                                        } ?>
 
-                                        echo $order_items[1]['quantity']; ?>
                                     </a>
                                 </td>
                                 <td>R
