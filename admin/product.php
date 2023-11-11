@@ -16,7 +16,7 @@ $image = getImageByProductId($product["id"]);
 
 $categoryName = getCategoryName($product["category_id"]);
 
-print_r($categoryName["name"]);
+// print_r($image);
 
 if ($image == null) {
     $image["name"] = "Image not found";
@@ -127,7 +127,7 @@ if ($image == null) {
             </div>
         </div>
 
-        <div class="card-container">
+        <div class="card-container imgContainer">
             <div class="card">
                 <div class="header">
                     <span class="material-symbols-outlined">

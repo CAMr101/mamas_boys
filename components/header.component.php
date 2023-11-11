@@ -23,7 +23,6 @@ function createHeader()
            </div>
   
            <div class="icons">
-              <a href="search_page.html" class="fas fa-search"></a>
               <a href="Login.php"> <id="user-btn" class="fas fa-user"></id>
                     <a href="cart.php" id="add-to-cart-icon" class="fas fa-shopping-cart"> <span id="count">0</span></a>
            </div>

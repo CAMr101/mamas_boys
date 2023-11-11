@@ -2,46 +2,38 @@
 
 function saveCategoryImage($name, $location, $catId)
 {
+    include "../config/dbh.inc.php";
+
     try {
-        $dsn = "mysql:host=localhost;dbname=mamas_boys";
-        $dbusername = "root";
-        $dbpassword = "";
+        $pdo = new PDO($dsn, $dbusername, $dbpassword);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        try {
-            $pdo = new PDO($dsn, $dbusername, $dbpassword);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query = "INSERT INTO images (name, location, category_id) 
+        VALUES (?,?,?);";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$name, $location, $catId]);
 
-            $query = "INSERT INTO images (name, location, category_id) 
-            VALUES (?,?,?);";
-            $stmt = $pdo->prepare($query);
-            $stmt->execute([$name, $location, $catId]);
+        $query = "SELECT id FROM images WHERE category_id = ?;";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$catId]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            $query = "SELECT id FROM images WHERE category_id = ?;";
-            $stmt = $pdo->prepare($query);
-            $stmt->execute([$catId]);
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            $imageId = $result[0]["id"];
+        $imageId = $result[0]["id"];
 
 
-            $pdo = null;
-            $stmt = null;
+        $pdo = null;
+        $stmt = null;
 
-            return $imageId;
-
-        } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
-        }
+        return $imageId;
 
     } catch (PDOException $e) {
-        echo (0);
-        die("Query Failed: " . $e->getMessage());
+        echo "Connection failed: " . $e->getMessage();
     }
 }
 
 function saveProductImage($name, $location, $prodId)
 {
-    require_once "../config/dbh.inc.php";
+    include "../config/dbh.inc.php";
 
     try {
         $pdo = new PDO($dsn, $dbusername, $dbpassword);
@@ -71,77 +63,63 @@ function saveProductImage($name, $location, $prodId)
 
 function getImageByCategoryId($catId)
 {
+    include "../config/dbh.inc.php";
+
     try {
-        $dsn = "mysql:host=localhost;dbname=mamas_boys";
-        $dbusername = "root";
-        $dbpassword = "";
+        $pdo = new PDO($dsn, $dbusername, $dbpassword);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        try {
-            $pdo = new PDO($dsn, $dbusername, $dbpassword);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query = "SELECT name, location FROM images WHERE category_id = ?;";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$catId]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            $query = "SELECT name, location FROM images WHERE category_id = ?;";
-            $stmt = $pdo->prepare($query);
-            $stmt->execute([$catId]);
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $pdo = null;
+        $stmt = null;
 
-            $pdo = null;
-            $stmt = null;
-
-            if (empty($result)) {
-                return null;
-            } else {
-                return $result[0];
-            }
-
-        } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
+        if (empty($result)) {
+            return null;
+        } else {
+            return $result[0];
         }
 
     } catch (PDOException $e) {
-        echo (0);
-        die("Query Failed: " . $e->getMessage());
+        echo "Connection failed: " . $e->getMessage();
     }
 }
 
 function getImageByProductId($prodId)
 {
+    include "../config/dbh.inc.php";
+
     try {
-        $dsn = "mysql:host=localhost;dbname=mamas_boys";
-        $dbusername = "root";
-        $dbpassword = "";
+        $pdo = new PDO($dsn, $dbusername, $dbpassword);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        try {
-            $pdo = new PDO($dsn, $dbusername, $dbpassword);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query = "SELECT name, location FROM images WHERE product_id = ?;";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$prodId]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            $query = "SELECT name, location FROM images WHERE product_id = ?;";
-            $stmt = $pdo->prepare($query);
-            $stmt->execute([$prodId]);
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            $pdo = null;
-            $stmt = null;
+        $pdo = null;
+        $stmt = null;
 
-            if (empty($result)) {
-                return null;
-            } else {
-                return $result[0];
-            }
-
-        } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
+        if (empty($result)) {
+            return null;
+        } else {
+            $image = $result[0];
+            return $image;
         }
 
     } catch (PDOException $e) {
-        echo (0);
-        die("Query Failed: " . $e->getMessage());
+        echo "Connection failed: " . $e->getMessage();
     }
 }
 
 function updateCategoryImageLocation($id, $location, $name)
 {
-    require_once "../config/dbh.inc.php";
+    include "../config/dbh.inc.php";
 
     try {
         $query = "UPDATE `images` SET `location`=?, `name`=? WHERE category_id = ?;";
@@ -160,17 +138,14 @@ function updateCategoryImageLocation($id, $location, $name)
 
 function updateProductImageLocation($id, $location, $name)
 {
-    require_once "../config/dbh.inc.php";
+    include "../config/dbh.inc.php";
 
     try {
         $query = "UPDATE `images` SET `location`=?, `name`=? WHERE product_id = ?;";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$location, $name, $id]);
-
         $pdo = null;
         $stmt = null;
-
-        die();
 
     } catch (PDOException $e) {
         echo "Connection failed: " . $e->getMessage();

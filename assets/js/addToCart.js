@@ -193,7 +193,7 @@ window.onload = function (){
 function addtocart(id){
     // cart.push({...categories[id]});
     createCartObj(parseInt(id));
-    
+    alert("Successfully added to cart\n");
 }
 
 function createCartObj(id){

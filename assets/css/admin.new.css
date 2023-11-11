@@ -488,6 +488,10 @@ main .bottom-data>div{
     overflow-x: auto;
 }
 
+main .bottom-data>div.imgContainer{
+    width: 25%;
+}
+
 main .bottom-data>div a{
     color: var(--dark);
 }

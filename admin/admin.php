@@ -68,7 +68,7 @@ include("../handlers/processProducts.php");
                 </span>
             </li>
         </a>
-        <a href="">
+        <a href="reports.php">
             <li><i class='bx bx-dollar-circle'>
                     <span class="material-symbols-outlined">
                         description
@@ -78,7 +78,7 @@ include("../handlers/processProducts.php");
                     <h3>
                         Generate
                     </h3>
-                    <p>Order Report</p>
+                    <p>Report</p>
                 </span>
             </li>
         </a>

@@ -11,6 +11,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add-to-cart"])) {
 
    // You can add the item to the cart array or store it in a database
 }
+
+if (isset($_REQUEST['signup']) && $_REQUEST['signup'] === "success") {
+
+}
 ?>
 
 <!DOCTYPE html>

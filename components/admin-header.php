@@ -60,6 +60,14 @@ session_start();
                 </a>
             </li>
             <li class="side-menu-item">
+                <a href="reports.php">
+                    <span class="material-symbols-outlined">
+                        description
+                    </span>
+                    Reports
+                </a>
+            </li>
+            <li class="side-menu-item">
                 <a href="staff.php">
                     <span class="material-symbols-outlined">
                         badge
@@ -75,13 +83,21 @@ session_start();
                     Customers
                 </a>
             </li>
+            <li class="side-menu-item">
+                <a href="messages.php">
+                    <span class="material-symbols-outlined">
+                        mail
+                    </span>
+                    Messages
+                </a>
+            </li>
             <!-- <li class="side-menu-item">
                 <a href="/admin/staff.html">Staff</a>
             </li> -->
         </ul>
         <ul class="side-menu">
             <li class="side-menu-item">
-                <a href="" class="logout">
+                <a href="login.php" class="logout">
                     <span class="material-symbols-outlined">
                         logout
                     </span>

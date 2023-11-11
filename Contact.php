@@ -13,23 +13,23 @@ if (isset($_POST['contact']))
    $firstName = $lastName = $email = $phoneNumber = $message = '';
 
 // Check if the form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-   $firstName = $_POST["firstName"];
-   $lastName = $_POST["lastName"];
-   $email = $_POST["email"];
-   $phoneNumber = $_POST["phoneNumber"];
-   $message = $_POST["message"];
+// if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//    $firstName = $_POST["firstName"];
+//    $lastName = $_POST["lastName"];
+//    $email = $_POST["email"];
+//    $phoneNumber = $_POST["phoneNumber"];
+//    $message = $_POST["message"];
 
-   // Prepare and execute an SQL INSERT statement to insert data into the messages table
-   $sql = "INSERT INTO messages (firstName, lastName, email, phoneNumber, message) 
-            VALUES ('$firstName', '$lastName', '$email', '$phoneNumber', '$message')";
+//    // Prepare and execute an SQL INSERT statement to insert data into the messages table
+//    $sql = "INSERT INTO messages (firstName, lastName, email, phoneNumber, message) 
+//             VALUES ('$firstName', '$lastName', '$email', '$phoneNumber', '$message')";
 
-   if ($connection->query($sql) === TRUE) {
-      echo '<p class="success"> Message sent successfully!</p>';
-   } else {
-      echo '<p class="error"> Message not sent!</p>';
-   }
-}
+//    if ($connection->query($sql) === TRUE) {
+//       echo '<p class="success"> Message sent successfully!</p>';
+//    } else {
+//       echo '<p class="error"> Message not sent!</p>';
+//    }
+// }
 
 ?>
 
@@ -92,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          <div class="contact form">
             <h3>Leave us a message</h3>
 
-            <form method="post" action="" name="contact-form">
+            <form method="post" action="./handlers/contact.php" name="contact-form">
                <div class="formSection">
                   <div class="sectionInfo">
                      <div class="inputBox">
@@ -141,7 +141,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="detailsBox">
                <div>
                   <span><i class="fa-solid fa-location-dot"></i></span>
-                  <p>Malamulele, Limpopo</p>
+                  <a href="https://goo.gl/maps/geo5jKh6H9bvQVNc9">Malamulele, Limpopo</a>
                </div>
                <div>
                   <span><i class="fa-solid fa-envelope"></i></span>

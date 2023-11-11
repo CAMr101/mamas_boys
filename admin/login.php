@@ -34,18 +34,18 @@ session_start();
             </div>
 
 
-            <form>
+            <form action="../handlers/login.php?login=0" method="post">
                 <h3>Admin Login</h3>
 
-                <label for="username">Email</label>
-                <input type="text" placeholder="Email" id="username">
+                <label for="email">Email</label>
+                <input type="text" name="email" placeholder="Email" id="email">
 
                 <label for="password">Password</label>
-                <input type="password" placeholder="Password" id="password">
+                <input type="password" name="password" placeholder="Password" id="password">
 
-                <button type="button">Login</button>
+                <button type="submit">Login</button>
                 <div class="forgot-password">
-                    <a href="#">
+                    <a href="forgot-password.php">
                         Forgot Password ?
                     </a>
                 </div>

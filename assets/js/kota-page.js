@@ -195,3 +195,36 @@ products.forEach(prod =>{
     )
     }
 });
+
+
+function addtocart(id){
+    // cart.push({...categories[id]});
+    createCartObj(parseInt(id));
+    alert("Successfully added to cart\n");
+}
+
+function createCartObj(id){
+    var quantityIncreased = false;
+    let newObj = {
+        id: id,
+        quantity: 1
+    }
+
+    if(cartItemsObj.length > 0){
+        cartItemsObj.forEach(element => {
+            if(element.id == id){
+                element.quantity= element.quantity + 1;
+                quantityIncreased = true;
+            }
+        });
+
+        if(quantityIncreased == false){
+            cartItemsObj.push(newObj);
+        }
+    }else{
+        cartItemsObj.push(newObj);
+    }
+
+    cartCount.textContent = cartItemsObj.length;
+    saveCart(cartItemsObj)
+}

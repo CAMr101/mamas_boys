@@ -2,6 +2,8 @@
 include("../handlers/processOrder.php");
 include("../handlers/processProducts.php");
 
+$orders = getOrders();
+
 ?>
 
 <?php include '../components/admin-header.php'; ?>
@@ -47,7 +49,6 @@ include("../handlers/processProducts.php");
                 </thead>
                 <tbody>
                     <?php
-                    $orders = getOrders();
 
                     if ($orders !== null) {
                         foreach ($orders as $order) { ?>

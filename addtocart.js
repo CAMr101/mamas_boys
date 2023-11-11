@@ -16,7 +16,7 @@ window.onload = function (){
 
 function addtocart(id){
     createCartObj(parseInt(id));
-    
+    alert("Successfully added to cart\n");
 }
 
 function createCartObj(id){

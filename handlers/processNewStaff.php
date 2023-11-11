@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $hashed_password = hashPassword($password);
 
         try {
-            require_once "../config/dbh.inc.php";
+            include "../config/dbh.inc.php";
 
             $query = "INSERT INTO staff (name, surname, email, phone, password, type) 
         VALUES (?,?,?,?,?,?);";

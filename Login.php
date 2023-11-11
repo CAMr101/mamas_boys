@@ -1,61 +1,78 @@
 <?php
 session_start();
-include('Configuration.php');
+
 include "./components/footer.component.php";
 include "./components/header.component.php";
 
-if (isset($_POST['login'])) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    $query = $connection->prepare("SELECT * FROM users WHERE email = :email");
-    $query->bindParam(":email", $email, PDO::PARAM_STR);
-    $query->execute();
-    $result = $query->fetch(PDO::FETCH_ASSOC);
-
-    if (!$result) {
-        echo '<p class="error">User not found!</p>';
-    } else {
-        if (password_verify($password, $result['password'])) {
-            $_SESSION['email'] = $result['email'];
-            header("location: index.php");
-            exit;
-        } else {
-            echo '<p class="error">Incorrect password!</p>';
-        }
-    }
-}
 ?>
 
-
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 
 <head>
-    <title>Login</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="./assets/css/Stylee.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/style3.css">
+    <link rel="stylesheet" href="./assets/css/addtocart.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        /* Initially hide container2 */
+        .container2 {
+            display: none;
+        }
+
+        .main-content {
+            background-color: #AAAAAA !important;
+        }
+    </style>
+
 </head>
 
 <body>
 
-
-    <form method="post" action="" name="signin-form">
-        <div class="form-element">
-            <label>Email</label>
-            <input type="text" name="email" required />
-        </div>
-
-        <div class="form-element">
-            <label>Password</label>
-            <input type="password" name="password" required />
-        </div>
-        <button type="submit" name="login" value="login">Log In</button>
-        <p>Do not have an account? <a href="register.php">Register here</a></p>
-        <p>Forgot Password? <a href="reset_password.php">Reset Password</a></p>
-    </form>
+    <?php
+    echo createHeader();
+    ?>
 
 
-</body>
+    <main class="main-content">
+        <!-- Login Section -->
+        <section id="login" class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <h2>Login</h2>
+                    <form id="loginForm">
 
-</html>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" class="form-control" id="password" placeholder="Enter password"
+                                required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Login</button>
+                    </form>
+
+                    <div>
+                        <p class="text-center mt-3">Don't have an account? <a href="register.php">Signup</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <?php
+    echo createFooter();
+    ?>

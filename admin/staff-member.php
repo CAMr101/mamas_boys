@@ -57,6 +57,7 @@ if ($staffMember == null) {
                         <th>Email</th>
                         <th>Telephone</th>
                         <th>Type</th>
+                        <th>Remove</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -83,6 +84,13 @@ if ($staffMember == null) {
                             </td>
                             <td>
                                 <?php echo $staffMember['type']; ?>
+                            </td>
+                            <td>
+                                <a href="../handlers/processStaff.php?delete=<?php echo $staffMember['id']; ?>">
+                                    <span class="material-symbols-outlined">
+                                        delete
+                                    </span>
+                                </a>
                             </td>
                         </tr>
                         <?php

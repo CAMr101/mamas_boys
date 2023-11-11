@@ -2,7 +2,7 @@
 
 function getStaff()
 {
-    require_once "../config/dbh.inc.php";
+    include "../config/dbh.inc.php";
 
     try {
         $pdo = new PDO($dsn, $dbusername, $dbpassword);
@@ -27,7 +27,7 @@ function getStaff()
 
 function getStaffById($id)
 {
-    require_once "../config/dbh.inc.php";
+    include "../config/dbh.inc.php";
 
     try {
         $pdo = new PDO($dsn, $dbusername, $dbpassword);

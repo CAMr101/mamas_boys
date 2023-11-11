@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     try {
-        require_once "../config/dbh.inc.php";
+        include "../config/dbh.inc.php";
 
         $query = "INSERT INTO category (name, description) 
         VALUES (?,?);";

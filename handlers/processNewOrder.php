@@ -15,7 +15,7 @@ if (isset($_POST)) {
 
 
     try {
-        require_once "../config/dbh.inc.php";
+        include "../config/dbh.inc.php";
 
         $query = "INSERT INTO shop_order (name, email, phone, order_total, order_items, payment_method, paid) 
         VALUES (?,?,?,?,?,?,?);";

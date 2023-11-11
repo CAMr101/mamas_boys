@@ -9,139 +9,108 @@ if (isset($_REQUEST['update'])) {
     $categoryId = $_GET['update'];
 
     updateProduct($categoryId);
+    echo '11';
 }
 
 function getAllProducts()
 {
+    include "../config/dbh.inc.php";
+
     try {
-        $dsn = "mysql:host=localhost;dbname=mamas_boys";
-        $dbusername = "root";
-        $dbpassword = "";
+        $pdo = new PDO($dsn, $dbusername, $dbpassword);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        try {
-            $pdo = new PDO($dsn, $dbusername, $dbpassword);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query = "SELECT * FROM product";
 
-            $query = "SELECT * FROM product";
+        $stmt = $pdo->prepare($query);
 
-            $stmt = $pdo->prepare($query);
-
-            $stmt->execute();
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
-            $pdo = null;
-            $stmt = null;
+        $pdo = null;
+        $stmt = null;
 
-            return $result;
-
-        } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
-        }
+        return $result;
 
     } catch (PDOException $e) {
-        echo (0);
-        die("Query Failed: " . $e->getMessage());
+        echo "Connection failed: " . $e->getMessage();
     }
 }
 
 function getProduct($id)
 {
+    include "../config/dbh.inc.php";
+
     try {
-        $dsn = "mysql:host=localhost;dbname=mamas_boys";
-        $dbusername = "root";
-        $dbpassword = "";
+        $pdo = new PDO($dsn, $dbusername, $dbpassword);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        try {
-            $pdo = new PDO($dsn, $dbusername, $dbpassword);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query = "SELECT * FROM product WHERE id=?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$id]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $product = $result[0];
 
-            $query = "SELECT * FROM product WHERE id=?";
-            $stmt = $pdo->prepare($query);
-            $stmt->execute([$id]);
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            $product = $result[0];
+        $pdo = null;
+        $stmt = null;
 
-            $pdo = null;
-            $stmt = null;
-
-            return $product;
-
-        } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
-        }
+        return $product;
 
     } catch (PDOException $e) {
-        echo (0);
-        die("Query Failed: " . $e->getMessage());
+        echo "Connection failed: " . $e->getMessage();
     }
 }
 
 function getProductName($id)
 {
+    include "../config/dbh.inc.php";
+
     try {
-        $dsn = "mysql:host=localhost;dbname=mamas_boys";
-        $dbusername = "root";
-        $dbpassword = "";
+        $pdo = new PDO($dsn, $dbusername, $dbpassword);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        try {
-            $pdo = new PDO($dsn, $dbusername, $dbpassword);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query = "SELECT name FROM product WHERE id = $id;";
 
-            $query = "SELECT name FROM product WHERE id = $id;";
+        $stmt = $pdo->prepare($query);
 
-            $stmt = $pdo->prepare($query);
-
-            $stmt->execute();
-            $result = $stmt->fetchAll();
+        $stmt->execute();
+        $result = $stmt->fetchAll();
 
 
-            $pdo = null;
-            $stmt = null;
+        $pdo = null;
+        $stmt = null;
 
-            return $result;
-
-        } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
-        }
+        return $result;
 
     } catch (PDOException $e) {
-        echo (0);
-        die("Query Failed: " . $e->getMessage());
+        echo "Connection failed: " . $e->getMessage();
     }
 }
 
 function getProductsByCategoryId($id)
 {
+    include "../config/dbh.inc.php";
+
     try {
-        $dsn = "mysql:host=localhost;dbname=mamas_boys";
-        $dbusername = "root";
-        $dbpassword = "";
+        $pdo = new PDO($dsn, $dbusername, $dbpassword);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        try {
-            $pdo = new PDO($dsn, $dbusername, $dbpassword);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query = "SELECT * FROM product WHERE category_id=?";
 
-            $query = "SELECT * FROM product WHERE category_id=?";
+        $stmt = $pdo->prepare($query);
 
-            $stmt = $pdo->prepare($query);
-
-            $stmt->execute([$id]);
-            $result = $stmt->fetchAll();
+        $stmt->execute([$id]);
+        $result = $stmt->fetchAll();
 
 
-            $pdo = null;
-            $stmt = null;
+        $pdo = null;
+        $stmt = null;
 
-            return $result;
-
-        } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
-        }
+        return $result;
 
     } catch (PDOException $e) {
-        echo (0);
-        die("Query Failed: " . $e->getMessage());
+        echo "Connection failed: " . $e->getMessage();
     }
 }
 
@@ -183,6 +152,7 @@ function deleteProductByCategoryId($id)
 function updateProduct($id)
 {
     include 'processImage.php';
+
 
     $updateProdUrl = "../admin/edit-product.php";
     $productUrl = "../admin/product.php";
@@ -249,7 +219,7 @@ function updateProduct($id)
 
 
         try {
-            require_once "../config/dbh.inc.php";
+            include "../config/dbh.inc.php";
 
             $query = "SELECT id FROM category WHERE name = ?;";
             $stmt = $pdo->prepare($query);
@@ -258,7 +228,8 @@ function updateProduct($id)
             $categoryId = $result[0]["id"];
 
             if ($image != null) {
-                updateProductImageLocation($productId, $destination, $image["name"]);
+                updateProductImageLocation($id, $destination, $image["name"]);
+
             }
 
             $query = "UPDATE `product` SET `name`=?, `price`=?, `description`=?, `category_id`=? WHERE id = ?;";
@@ -270,7 +241,7 @@ function updateProduct($id)
 
             header("location:$productUrl?id=$id");
 
-            die();
+            // die();
 
         } catch (PDOException $e) {
             echo (0);

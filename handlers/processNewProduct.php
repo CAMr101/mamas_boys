@@ -16,8 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $category = $_POST['category'];
     $image;
 
-    print_r($category);
-
 
     if ($_FILES["image"]["error"] !== UPLOAD_ERR_OK) {
 
@@ -39,7 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $error = 'Failed to save';
             default:
                 $error = 'Unknown errors.';
-
 
                 header("location:$newProdUrl?error=$error");
         }
@@ -66,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     try {
-        require_once "../config/dbh.inc.php";
+        include "../config/dbh.inc.php";
 
         $query = "SELECT id FROM category WHERE name = ?;";
         $stmt = $pdo->prepare($query);
@@ -86,10 +83,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $productId = $result[0]["id"];
 
         $imgId = saveProductImage($image["name"], $destination, $productId);
-
         $query = "UPDATE `product` SET `image_id`=? WHERE id = ?";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$imgId, $productId]);
+
+
 
         $query = "SELECT * FROM category WHERE id=?";
         $stmt = $pdo->prepare($query);
@@ -104,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die();
 
     } catch (PDOException $e) {
-        echo (0);
+        echo ("error");
         die("Query Failed: " . $e->getMessage());
     }
 } else {
