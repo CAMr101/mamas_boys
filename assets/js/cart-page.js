@@ -6,13 +6,18 @@ var subTotalDomElement = document.getElementById("subtotal-amount");
 var orderTotalDomElement = document.getElementById("total-amount");
 let subTotal = 0;
 
-window.onload = function(){
-    if(cart){
-        loadCart(cart)
-    }
+const priceArr = document.querySelectorAll("#unit-price");
+const quantityArr = document.querySelectorAll("#prod-quantity");
+const summedPrice = document.querySelectorAll("#total-prod-price");
 
-    for(let i = 0 ; i < totalDomElements.length; i++){
-        subTotal += parseInt(totalDomElements[i].innerText)
+window.onload = function(){
+
+    for(let x = 0; x<quantityArr.length; x++){
+        let price = parseInt(priceArr[x].innerText);
+        let quantity = parseInt(quantityArr[x].innerText);
+
+        summedPrice[x].innerText = price * quantity;
+        subTotal += price * quantity;
     }
 
     subTotalDomElement.innerText = subTotal;
@@ -125,11 +130,28 @@ function updateSummary(){
 function saveCart(obj){
     if(localStorage.getItem("usercart")==null){
         localStorage.setItem("usercart", JSON.stringify(obj));
+        deleteCookie("usercart");
+        setCookie("usercart", obj, 5);
     }else{
         localStorage.removeItem("usercart");
         localStorage.setItem("usercart", JSON.stringify(obj));
+        deleteCookie("usercart");
+        setCookie("usercart", obj, 5);
     }
 }
+
+function setCookie(name, values, days){
+    const d = new Date();
+    d.setTime(d.getTime() + (days*24*60*60*1000));
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = name + "=" + JSON.stringify(values) + ";" + expires + ";path=/";
+    console.log(document.cookie)
+}
+
+function deleteCookie(name){
+    document.cookie = name + "= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+}
+
 
 const products = [
     {

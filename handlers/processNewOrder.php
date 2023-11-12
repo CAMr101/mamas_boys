@@ -1,5 +1,7 @@
 <?php
 
+
+
 //inserting a new order into the DB
 if (isset($_POST)) {
     $data = file_get_contents("php://input");
@@ -12,17 +14,18 @@ if (isset($_POST)) {
     $orderItems = json_encode($customerOrder["orderItems"]);
     $paymentMethod = $customerOrder["paymentMethod"];
     $paid = 0;
+    $status = "NotStarted";
 
 
     try {
         include "../config/dbh.inc.php";
 
-        $query = "INSERT INTO shop_order (name, email, phone, order_total, order_items, payment_method, paid) 
-        VALUES (?,?,?,?,?,?,?);";
+        $query = "INSERT INTO shop_order (name, email, phone, order_total, order_items, order_status, payment_method, paid) 
+        VALUES (?,?,?,?,?,?,?,?);";
 
         $stmt = $pdo->prepare($query);
 
-        $stmt->execute([$cName, $cEmail, $cPhone, $orderTotal, $orderItems, $paymentMethod, $paid]);
+        $stmt->execute([$cName, $cEmail, $cPhone, $orderTotal, $orderItems, $status, $paymentMethod, $paid]);
 
         $pdo = null;
         $stmt = null;

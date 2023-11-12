@@ -3,6 +3,19 @@
 include("Configuration.php");
 include "./components/footer.component.php";
 include "./components/header.component.php";
+include "./handlers/processProducts.php";
+include "./handlers/processImage.php";
+
+$cart = json_decode($_COOKIE['usercart'], true);
+$products = [];
+$counter = 0;
+
+foreach ($cart as $item) {
+    $products[$counter] = getProduct($item['id']);
+    $counter++;
+}
+
+print_r($products);
 
 ?>
 
@@ -32,6 +45,8 @@ include "./components/header.component.php";
                 <div class="cart">
                     <p class="heading" id="heading">Cart Items</p>
                     <div class="cart-items" id="cart-items">
+
+
                         <!-- <div class="cart-item">
                             <div class="prod-image">
                                 <img src="assets/images/kota.jpg" alt="Kota 1">

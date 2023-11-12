@@ -242,8 +242,24 @@ function deleteCartObj(id){
 function saveCart(obj){
     if(localStorage.getItem("usercart")==null){
         localStorage.setItem("usercart", JSON.stringify(obj));
+        deleteCookie("usercart");
+        setCookie("usercart", obj, 5);
     }else{
         localStorage.removeItem("usercart");
         localStorage.setItem("usercart", JSON.stringify(obj));
+        deleteCookie("usercart");
+        setCookie("usercart", obj, 5);
     }
+}
+
+function setCookie(name, values, days){
+    const d = new Date();
+    d.setTime(d.getTime() + (days*24*60*60*1000));
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = name + "=" + JSON.stringify(values) + ";" + expires + ";path=/";
+    console.log(document.cookie)
+}
+
+function deleteCookie(name){
+    document.cookie = name + "= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
 }

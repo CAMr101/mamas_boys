@@ -1,9 +1,61 @@
 <?php
 session_start();
 
-include("Configuration.php");
 include "./components/footer.component.php";
 include "./components/header.component.php";
+
+$categories = getAllCategories();
+
+function getAllCategories()
+{
+   include "./config/dbh.inc.php";
+
+   try {
+      $pdo = new PDO($dsn, $dbusername, $dbpassword);
+      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+      $query = "SELECT * FROM category";
+      $stmt = $pdo->prepare($query);
+      $stmt->execute();
+      $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+      $pdo = null;
+      $stmt = null;
+
+      return $result;
+
+   } catch (PDOException $e) {
+      echo "Connection failed: " . $e->getMessage();
+   }
+}
+
+function getImageByCategoryId($catId)
+{
+   include "./config/dbh.inc.php";
+
+   try {
+      $pdo = new PDO($dsn, $dbusername, $dbpassword);
+      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+      $query = "SELECT name, location FROM images WHERE category_id = ?;";
+      $stmt = $pdo->prepare($query);
+      $stmt->execute([$catId]);
+      $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+      $pdo = null;
+      $stmt = null;
+
+      if (empty($result)) {
+         return null;
+      } else {
+         return $result[0];
+      }
+
+   } catch (PDOException $e) {
+      echo "Connection failed: " . $e->getMessage();
+   }
+}
 
 ?>
 
@@ -25,9 +77,43 @@ include "./components/header.component.php";
 
 <body>
 
-   <?php
-   echo createHeader();
-   ?>
+   <header class="header">
+      <div class="flex">
+
+         <a href="index.php">
+            <img src="./Website pictures/logo.png" width=120px alt="">
+         </a>
+
+         <a href="index.php">
+            <h1> MAMAS BOYS KOTA AND CHIPS</h1>
+         </a>
+
+
+         <div class="new">
+            <a href="#">Home</a>
+            <a href="./pages/products.php">Shop</a>
+            <a href="./pages/about.php">About</a>
+            <a href="./pages/contact.php">Contact</a>
+
+         </div>
+
+         <div class="icons">
+            <a href="./pages/login.php"> <id="user-btn" class="fas fa-user"></id>
+                  <a href="./pages/cart.php" id="add-to-cart-icon" class="fas fa-shopping-cart"> <span
+                        id="count">0</span></a>
+         </div>
+
+         <div class="profile">
+
+            <a href="user_profile_update.html" class="btn">update profile</a>
+            <a href="../handlers/logout.php" class="delete-btn">logout</a>
+            <div class="flex-btn">
+               <a href="./pages/login.php" class="option-btn">login</a>
+               <a href="./pages/register.php" class="option-btn">register</a>
+            </div>
+         </div>
+      </div>
+   </header>
 
    <style>
       .home-bg {
@@ -51,20 +137,28 @@ include "./components/header.component.php";
       <h1 class="title">Our Categories</h1>
       <br>
       <div class="box-container">
-         <div class="box">
-            <img src="Website pictures\kota3.jpg" alt="">
-            <a href="kota.php" class="btn">KOTA</a>
-         </div>
+         <?php
+         foreach ($categories as $category) {
+            $image = getImageByCategoryId($category["id"]); ?>
+            <div class="box">
+               <img src="<?php
+               if ($image)
+                  echo ($image['location']);
+               ?>" alt="<?php
+               if ($image) {
+                  echo ($image['name']);
+               } else {
+                  echo "'" . $category['name'] . "' " . "Image not found";
+               }
 
-         <div class="box">
-            <img src="Website pictures\french.jpg" alt="">
-            <a href="chips.php" class="btn">CHIPS</a>
-         </div>
-
-         <div class="box">
-            <img src="Website pictures\extra2.png" alt="">
-            <a href="extras.php" class="btn">EXTRAS</a>
-         </div>
+               ?>">
+               <a href="./pages/category.php?id=<?php echo ($category['id']); ?>" class="btn">
+                  <?php echo ($category['name']); ?>
+               </a>
+            </div>
+            <?php
+         }
+         ?>
 
       </div>
       <br>
@@ -97,7 +191,8 @@ include "./components/header.component.php";
          <div class="box">
             <img src="Website pictures\small chips 2.webp" alt="">
             <h3>R55</h3>
-            <button class="btn add-to-cart-btn" data-name="small chips 2" data-price="55" onclick="addtocart(10)">ADD TO
+            <button class="btn add-to-cart-btn" data-name="small chips 2" data-price="55" onclick="addtocart(10)">ADD
+               TO
                CART</button>
          </div>
 
@@ -105,9 +200,44 @@ include "./components/header.component.php";
    </section>
    <br>
 
-   <?php
-   echo createFooter();
-   ?>
+   <footer class="footer">
+      <section class="box-container">
+         <div class="box">
+            <h3>quick links</h3>
+            <a href="index.php"> <i class="fas fa-angle-right"></i> Home</a>
+            <a href="./pages/products.php"> <i class="fas fa-angle-right"></i> Shop</a>
+            <a href="./pages/about.php"> <i class="fas fa-angle-right"></i> About Us</a>
+            <a href="./pages/contact.php"> <i class="fas fa-angle-right"></i> Contact Us</a>
+         </div>
+
+         <div class="box">
+            <h3>Additional Links</h3>
+            <a href="./pages/cart.php"> <i class="fas fa-angle-right"></i> Cart</a>
+            <a href="./pages/login.php"> <i class="fas fa-angle-right"></i> Login</a>
+            <a href="./pages/register.php"> <i class="fas fa-angle-right"></i> Create Account</a>
+            <a href="../admin/login.php"> <i class="fas fa-angle-right"></i> Admin Dashboard</a>
+         </div>
+
+         <div class="box">
+            <h3>contact info</h3>
+            <p> <a href="tel:+27621127909"> <i class="fas fa-phone"></i> +27 62 112 7909 </a>
+            <p> <a href="mailto:theonetshik@gmail.com"> <i class="fas fa-envelope"></i> theonetshik@gmail.com </a>
+            <p> <a href="https://goo.gl/maps/geo5jKh6H9bvQVNc9"> <i class="fas fa-map-marker-alt"></i> malamulele, south
+                  africa - 0982 </p> </a>
+         </div>
+
+         <div class="box">
+            <h3>follow us</h3>
+            <a href="https://www.facebook.com/profile.php?id=100046590500835&mibextid=ZbWKwL"> <i
+                  class="fab fa-facebook-f"></i> facebook </a>
+            <a href="https://www.twitter.com"> <i class="fab fa-twitter"></i> twitter </a>
+            <a href="https://www.instagram.com"> <i class="fab fa-instagram"></i> instagram </a>
+         </div>
+      </section>
+
+      <div class="bottom-box"></div>
+
+   </footer>
 
    <script src="./assets/js/main.js"></script>
    <script src="./assets/js/addToCart.js"></script>

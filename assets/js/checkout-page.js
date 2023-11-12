@@ -154,35 +154,37 @@ const localHostUrl = "http://localhost/kota2"
 
 window.onload = () => {
     if(cart){
-        cart.forEach(e => {
-            products.forEach(product => {
-                if(e.id == product.id){
+        // cart.forEach(e => {
+        //     products.forEach(product => {
+        //         if(e.id == product.id){
 
-                    const total = e.quantity * product.price;
-                    totalOrderPrice += total; 
+        //             const total = e.quantity * product.price;
+        //             totalOrderPrice += total; 
 
-                    orderSummaryItemsDomElement.insertAdjacentHTML("beforeend", 
-                    `
-                    <div class="item">
-                        <img src="`+ product.image +`" alt="">
-                        <div class="prod-info">
-                            <p>
-                                <span class="quantity">`+ e.quantity +` </span>
-                                <span class="name">x Masarati<span>
-                            </p>
-                            <p>
-                                R <span class="price">`+ total +`</span>
-                            </p>
-                        </div>
-                    </div>
-                    `
-                    )}
-            });
-        });
+        //             orderSummaryItemsDomElement.insertAdjacentHTML("beforeend", 
+        //             `
+        //             <div class="item">
+        //                 <img src="`+ product.image +`" alt="">
+        //                 <div class="prod-info">
+        //                     <p>
+        //                         <span class="quantity">`+ e.quantity +` </span>
+        //                         <span class="name">x Masarati<span>
+        //                     </p>
+        //                     <p>
+        //                         R <span class="price">`+ total +`</span>
+        //                     </p>
+        //                 </div>
+        //             </div>
+        //             `
+        //             )}
+        //     });
+        // });
     }
 
-    totalOrderPriceDomElement.innerText = totalOrderPrice;
+    // totalOrderPriceDomElement.innerText = totalOrderPrice;
     removeClassInit(paymentMethods)
+
+    totalOrderPrice = totalOrderPriceDomElement.innerText;
 }
 
 function removeClassInit(list){
@@ -212,12 +214,17 @@ function paymentOptionOnClick(index){
         }
     }
 
-    if(index == 0){
-        paymentMethod = "card";
-    }else if (index == 1){
-        paymentMethod = "cash";
-    }
+    switch (index) {
+        case 0:
+            paymentMethod = "card";
+            break;
+        case 1:
+            paymentMethod = "cash";
+            break;
     
+        default:
+            break;
+    }
 }
 
 function saveContactInfo(){
@@ -253,7 +260,7 @@ function completeOrder(){
             cName: contactInfo.cName,
             cEmail: contactInfo.cEmail,
             cPhone: contactInfo.cPhone,
-            orderTotal: totalOrderPrice,
+            orderTotal: totalOrderPriceext,
             orderItems: cart,
             paymentMethod: paymentMethod,
         }
@@ -272,7 +279,7 @@ function completeOrder(){
 
             localStorage.setItem("orderComplete", data);
 
-            window.location = "success-page.php"
+            window.location = "order-complete.php"
         })
         
     }

@@ -4,13 +4,7 @@ session_start();
 include("Configuration.php");
 include "./components/footer.component.php";
 include "./components/header.component.php";
-// Handle adding items to the cart
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add-to-cart"])) {
-   $itemName = $_POST["item-name"];
-   $itemPrice = $_POST["item-price"];
 
-   // You can add the item to the cart array or store it in a database
-}
 ?>
 
 <!DOCTYPE html>
@@ -85,6 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add-to-cart"])) {
 
    <script src="./assets/js/main.js"></script>
    <script src="./assets/js/kota-page.js"></script>
+   <script src="./assets/js/addToCart.js"></script>
 
    <!-- <script>
    // JavaScript to handle showing/hiding container2 and back functionality

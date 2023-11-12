@@ -211,7 +211,7 @@ function loadProducts(){
                         <img class="prod-img" src="`+ e.image +`" alt="`+ e.name +`">
                         <h2>`+ e.name +`</h2>
                         <p>`+ e.description +`</p>
-                        <h3>`+ e.price +`</h3>
+                        <h3>R `+ e.price +`</h3>
                         <button class="btn add-to-cart-btn" data-name="Toyota" data-price="22" onclick="addtocart(`+ e.id +`)">ADD TO CART</button>
                     </div>
                 `
@@ -222,7 +222,7 @@ function loadProducts(){
                     <div class="box">
                         <img class="prod-img" src="`+ e.image +`" alt="`+ e.name +`">
                         <h2>`+ e.name +`</h2>
-                        <h3>`+ e.price +`</h3>
+                        <h3>R `+ e.price +`</h3>
                         <button class="btn add-to-cart-btn" data-name="Toyota" data-price="22" onclick="addtocart(`+ e.id +`)">ADD TO CART</button>
                     </div>
                 `
