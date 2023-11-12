@@ -113,7 +113,6 @@ if (!isset($_SESSION["user_id"])) {
                         foreach ($products as $product) {
                             $categoryName = getCategoryName($product['category_id']);
                             ?>
-
                             <tr>
                                 <td>
                                     <a href="product.php?id=<?php echo $product['id']; ?>">
@@ -142,7 +141,6 @@ if (!isset($_SESSION["user_id"])) {
                                 </td>
 
                             </tr>
-
                         <?php }
                     } else {
 

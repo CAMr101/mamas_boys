@@ -24,10 +24,14 @@
    text-emphasis: bold;
    text-align: center;
 }
+
+#header-logo{
+   width: 70px !important;
+}
  
  #count {
    position: absolute;
-   top: 50px; /* Adjust this value to your desired vertical position */
+   top: 25px; /* Adjust this value to your desired vertical position */
    right: -5px; /* Adjust this value to your desired horizontal position */
    background-color: red; /* Choose your desired background color */
    color: white; /* Choose your desired text color */

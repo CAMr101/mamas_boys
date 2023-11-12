@@ -1,0 +1,567 @@
+html{
+    overflow-x: hidden;
+}
+
+a{
+    text-decoration: none;
+}
+
+li{
+    list-style: none;
+}
+
+body.dark{
+    --light: #181a1e;
+    --grey: #25252c;
+    --dark: #fbfbfb
+}
+
+.side-nav{
+    position: fixed;
+    top: 175px;
+    left: 0;
+    /* background: #f6f6f9; */
+    width: 230px;
+    height: 100%;
+    z-index: 2000;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    transition: all 0.3s ease;
+}
+
+.side-nav::-webkit-scrollbar{
+    display: none;
+}
+
+.side-nav.close{
+    width: 60px;
+}
+
+.side-nav .logo{
+    font-size: 24px;
+    font-weight: 700;
+    height: 56px;
+    /* padding: 0 1.75rem; */
+    /* display: flex; */
+    /* align-items: center; */
+    color: #CFE8FF;
+    z-index: 500;
+    box-sizing: content-box;
+    position: relative;
+    top: 25px;
+    left: 20%;
+}
+
+.side-nav .logo img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.side-nav .logo .logo-name span{
+    color: #363949;
+}
+
+.side-nav .logo .bx{
+    min-width: 60px;
+    display: flex;
+    justify-content: center;
+    font-size: 2.2rem;
+}
+
+.side-nav .side-menu{
+    width: 100%;
+    margin-top: 48px;
+    padding: 1.75rem;
+}
+
+.side-nav .side-menu li{
+    height: 48px;
+    background: transparent;
+    margin-left: 6px;
+    border-radius: 48px 0 0 48px;
+    padding: 4px;
+}
+
+.side-nav .side-menu li.active{
+    background: #eee;
+    position: relative;
+}
+
+.side-nav .side-menu li.active::before{
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    top: -40px;
+    right: 0;
+    box-shadow: 20px 20px 0 #eee;
+    z-index: -1;
+}
+
+.side-nav .side-menu li.active::after{
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    bottom: -40px;
+    right: 0;
+    box-shadow: 20px -20px 0 #eee;
+    z-index: -1;
+}
+
+.side-nav .side-menu li a{
+    width: 100%;
+    height: 100%;
+    background: #f6f6f9;
+    display: flex;
+    align-items: center;
+    border-radius: 48px;
+    font-size: 16px;
+    color: #363949;
+    white-space: nowrap;
+    overflow-x: hidden;
+    transition: all 0.3s ease;
+}
+
+.side-nav .side-menu li.active a{
+    color: #388E3C;
+}
+
+.side-nav.close .side-menu li a{
+    width: calc(48px - (4px * 2));
+    transition: all 0.3s ease;
+}
+
+.side-nav .side-menu li a .bx{
+    min-width: calc(60px - ((4px + 6px) * 2));
+    display: flex;
+    font-size: 1.6rem;
+    justify-content: center;
+}
+
+.side-nav .side-menu li a.logout{
+    color: #D32F2F;
+}
+
+main{
+    position: relative;
+    width: calc(100% - 230px);
+    left: 230px;
+    transition: all 0.3s ease;
+}
+
+.side-nav.close~main{
+    width: calc(100% - 60px);
+    left: 60px;
+}
+
+main{
+    position: relative;
+    width: calc(100% - 230px);
+    left: 230px;
+    transition: all 0.3s ease;
+}
+
+.side-nav.close~main{
+    width: calc(100% - 60px);
+    left: 60px;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .side-nav{
+        width: 200px;
+    }
+
+}
+
+main{
+    padding: 36px 24px;
+    max-height: calc(100vh - 56px);
+}
+
+main .header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    grid-gap: 16px;
+    flex-wrap: wrap;
+}
+
+main .header .left h1{
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--dark);
+}
+
+main .header .left h1 a{
+    color: var(--primary);
+}
+
+main .header .left .breadcrumb{
+    display: flex;
+    align-items: center;
+    grid-gap: 16px;
+}
+
+main .header .left .breadcrumb li{
+    color: var(--dark);
+}
+
+main .header .left .breadcrumb li a{
+    color: var(--dark-grey);
+    /* pointer-events: none; */
+}
+
+main .header .left .breadcrumb li a.active{
+    color: var(--primary);
+    pointer-events: none;
+}
+
+main .header .report{
+    height: 36px;
+    padding: 0 16px;
+    border-radius: 36px;
+    background: var(--primary);
+    color: var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 10px;
+    font-weight: 500;
+}
+
+main .insights{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-gap: 24px;
+    margin-top: 36px;
+    margin-bottom: 36px;
+}
+
+main .insights .delete li .bx{
+    background-color: var(--light-danger) !important;
+}
+
+main .insights .delete li .bx,
+main .insights .delete li .info h3,
+main .insights .delete li .info p{
+    color: var(--danger) !important;
+}
+
+main .insights li{
+    padding: 24px;
+    background: var(--light);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    grid-gap: 24px;
+    cursor: pointer;
+}
+
+main .insights li .bx{
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    font-size: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main .insights a li:nth-child(1) .bx{
+    background: var(--light-primary);
+    color: var(--primary);
+}
+
+main .insights a li:nth-child(2) .bx{
+    background: var(--light-warning);
+    color: var(--warning);
+}
+
+main .insights a li:nth-child(3) .bx{
+    background: var(--light-success);
+    color: var(--success);
+}
+
+main .insights a li:nth-child(4) .bx{
+    background: var(--light-danger);
+    color: var(--danger);
+}
+
+main .insights li .info h3{
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+main .insights li .info p{
+    color: var(--dark);
+}
+
+main .insights li .info form#updateOrderStatus input,
+main .insights li .info form#updateOrderStatus button{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+main .insights li .info form#updateOrderStatus input{
+  background-color: white;
+  border-radius: 0.25rem;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  /* padding: 0.5rem 0.75rem; */
+}
+
+main .insights li .info form#updateOrderStatus button:hover{
+    color: var(--primary);
+    cursor: pointer;
+}
+
+main .bottom-data{
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 24px;
+    margin-top: 24px;
+    width: 100%;
+    color: var(--dark);
+}
+
+main .bottom-data>div{
+    border-radius: 20px;
+    background: var(--light);
+    padding: 24px;
+    overflow-x: auto;
+}
+
+main .bottom-data>div.imgContainer{
+    width: 25%;
+}
+
+main .bottom-data>div a{
+    color: var(--dark);
+}
+
+main .bottom-data>div a .delete{
+    color: var(--danger);
+}
+
+main .bottom-data .header{
+    display: flex;
+    align-items: center;
+    grid-gap: 16px;
+    margin-bottom: 24px;
+}
+
+main .bottom-data .img-container img{
+    position: relative;
+    width: 50%;
+    /* height: 10%; */
+}
+
+main .bottom-data .header h3{
+    margin-right: auto;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+main .bottom-data .header .bx{
+    cursor: pointer;
+}
+
+main .bottom-data .orders{
+    flex-grow: 1;
+    flex-basis: 500px;
+}
+
+main .bottom-data .orders table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+main .bottom-data .orders table th{
+    padding-bottom: 12px;
+    font-size: 13px;
+    text-align: left;
+    border-bottom: 1px solid var(--grey);
+}
+
+main .bottom-data .orders table td{
+    padding: 16px 0;
+}
+
+main .bottom-data .orders table tr td:first-child{
+    display: flex;
+    align-items: center;
+    grid-gap: 12px;
+    padding-left: 6px;
+}
+
+main .bottom-data .orders table td img{
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+main .bottom-data .orders table tbody tr{
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+main .bottom-data .orders table tbody tr:hover{
+    background: var(--grey);
+}
+
+main .bottom-data .orders table tr td .status{
+    font-size: 10px;
+    padding: 6px 16px;
+    color: var(--light);
+    border-radius: 20px;
+    font-weight: 700;
+}
+
+main .bottom-data .orders table tr td .status.completed{
+    background: var(--success);
+}
+
+main .bottom-data .orders table tr td .status.process{
+    background: var(--primary);
+}
+
+main .bottom-data .orders table tr td .status.pending{
+    background: var(--warning);
+}
+
+main .bottom-data .orders table tr td .status.notStarted{
+    background: var(--silver);
+    color: var(--dark);
+}
+
+main .bottom-data .orders table tr td .status.ready{
+    background: var(--light-primary);
+    color: var(--dark);
+}
+
+main .bottom-data .orders table tr td .status.cancelled{
+    background: var(--danger);
+}
+
+main .bottom-data .reminders{
+    flex-grow: 1;
+    flex-basis: 300px;
+}
+
+main .bottom-data .reminders .task-list{
+    width: 100%;
+}
+
+main .bottom-data .reminders .task-list li{
+    width: 100%;
+    margin-bottom: 16px;
+    background: var(--grey);
+    padding: 14px 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+main .bottom-data .reminders .task-list li .task-title{
+    display: flex;
+    align-items: center;
+}
+
+main .bottom-data .reminders .task-list li .task-title p{
+    margin-left: 6px;
+}
+
+main .bottom-data .reminders .task-list li .bx{
+  cursor: pointer;  
+}
+
+main .bottom-data .reminders .task-list li.completed{
+    border-left: 10px solid var(--success);
+}
+
+main .bottom-data .reminders .task-list li.not-completed{
+    border-left: 10px solid var(--danger);
+}
+
+main .bottom-data .reminders .task-list li:last-child{
+   margin-bottom: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .side-nav{
+        width: 200px;
+    }
+
+    main{
+        width: calc(100% - 60px);
+        left: 200px;
+    }
+
+}
+
+@media screen and (max-width: 576px) {
+    
+    .top-nav form .form-input input{
+        display: none;
+    }
+
+    .top-nav form .form-input button{
+        width: auto;
+        height: auto;
+        background: transparent;
+        color: var(--dark);
+        border-radius: none;
+    }
+
+    .top-nav form.show .form-input input{
+        display: block;
+        width: 100%;
+    }
+
+    .top-nav form.show .form-input button{
+        width: 36px;
+        height: 100%;
+        color: var(--light);
+        background: var(--danger);
+        border-radius: 0 36px 36px 0;
+    }
+
+    .top-nav form.show~.notif, .top-nav form.show~.profile{
+        display: none;
+    }
+
+    main .insights {
+        grid-template-columns: 1fr;
+    }
+
+    main .bottom-data .header{
+        min-width: 340px;
+    }
+
+    main .bottom-data .orders table{
+        min-width: 340px;
+    }
+
+    main .bottom-data .reminders .task-list{
+        min-width: 340px;
+    }
+
+}

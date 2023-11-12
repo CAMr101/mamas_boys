@@ -11,9 +11,6 @@ function getAllCategories()
    include "./config/dbh.inc.php";
 
    try {
-      $pdo = new PDO($dsn, $dbusername, $dbpassword);
-      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
       $query = "SELECT * FROM category";
       $stmt = $pdo->prepare($query);
       $stmt->execute();
@@ -35,8 +32,6 @@ function getImageByCategoryId($catId)
    include "./config/dbh.inc.php";
 
    try {
-      $pdo = new PDO($dsn, $dbusername, $dbpassword);
-      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
       $query = "SELECT name, location FROM images WHERE category_id = ?;";
       $stmt = $pdo->prepare($query);
@@ -66,6 +61,17 @@ function getImageByCategoryId($catId)
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="keywords" content="Mams Boys Kota & Chips">
+   <meta name="description"
+      content="Founded by Nhlanhla Theobold Mabasa, a culinary enthusiast with a passion for creating simple yet exceptional South African street cuisine. 
+                                                The food truck has gained a loyal following of food enthusiasts and has become a go-to spot for foodies seeking trusted and flavourful experiences.
+                                                With a background in the vibrant culture of street food, Nhlanhla decided to venture out and create his own brand. His aspiration is for his brand to center around the customer's complete immersion in the diverse array of flavors presented by the distinctive taste of the country. The client exclusively offers street food, specializing in kota’s and chips.">
+   <meta name="author" content="p-themes">
+   <!-- Favicon -->
+   <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/favicon.png">
+   <meta name="apple-mobile-web-app-title" content="Mams Boys Kota & Chips">
+   <meta name="application-name" content="Mams Boys Kota & Chips">
+   <meta name="theme-color" content="#ffffff">
    <title>home page</title>
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
    <link rel="stylesheet" href="./assets/css/style.css">
@@ -81,7 +87,7 @@ function getImageByCategoryId($catId)
       <div class="flex">
 
          <a href="index.php">
-            <img src="./Website pictures/logo.png" width=120px alt="">
+            <img src="./Website pictures/logo.png" width=70px alt="" id="header-logo">
          </a>
 
          <a href="index.php">
@@ -168,28 +174,28 @@ function getImageByCategoryId($catId)
       <div class="box-container">
 
          <div class="box">
-            <img src="Website pictures\bacon.jpeg" alt="">
+            <img src="assets/images/bacon.jpeg" alt="">
             <h3>R13</h3>
             <button class="btn add-to-cart-btn" data-name="Bacon" data-price="13" onclick="addtocart(19)">ADD TO
                CART</button>
          </div>
 
          <div class="box">
-            <img src="Website pictures\okota1.jpg" alt="">
+            <img src="assets/images/okota1.jpg" alt="">
             <h3>R80</h3>
             <button class="btn add-to-cart-btn" data-name="OKota" data-price="80" onclick="addtocart(7)">ADD TO
                CART</button>
          </div>
 
          <div class="box">
-            <img src="Website pictures\kota cheese.png" alt="">
+            <img src="assets/images/kota cheese.png" alt="">
             <h3>R23</h3>
             <button class="btn add-to-cart-btn" data-name="kota cheese" data-price="23" onclick="addtocart(5)">ADD TO
                CART</button>
          </div>
 
          <div class="box">
-            <img src="Website pictures\small chips 2.webp" alt="">
+            <img src="assets/images/small chips 2.webp" alt="">
             <h3>R55</h3>
             <button class="btn add-to-cart-btn" data-name="small chips 2" data-price="55" onclick="addtocart(10)">ADD
                TO
@@ -215,7 +221,7 @@ function getImageByCategoryId($catId)
             <a href="./pages/cart.php"> <i class="fas fa-angle-right"></i> Cart</a>
             <a href="./pages/login.php"> <i class="fas fa-angle-right"></i> Login</a>
             <a href="./pages/register.php"> <i class="fas fa-angle-right"></i> Create Account</a>
-            <a href="../admin/login.php"> <i class="fas fa-angle-right"></i> Admin Dashboard</a>
+            <a href="./admin/login.php"> <i class="fas fa-angle-right"></i> Admin Dashboard</a>
          </div>
 
          <div class="box">

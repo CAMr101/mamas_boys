@@ -6,7 +6,7 @@ function createHeader()
         <div class="flex">
   
          <a href="../index.php">
-            <img src="../Website pictures/logo.png" width=120px alt="">
+            <img src="../Website pictures/logo.png" width=70px alt="">
          </a>
 
          <a href="../index.php">
@@ -18,7 +18,7 @@ function createHeader()
               <a href="../index.php">Home</a>
               <a href="products.php">Shop</a>
               <a href="about.php">About</a>
-              <a href="Contact.php">Contact</a>
+              <a href="contact.php">Contact</a>
   
            </div>
   

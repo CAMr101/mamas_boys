@@ -23,7 +23,10 @@ include "../components/footer.php";
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/style3.css">
     <link rel="stylesheet" href="../assets/css/addtocart.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/login-page.css">
+    <link rel="stylesheet" href="../assets/css/root.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css'>
 
     <style>
         /* Initially hide container2 */
@@ -44,38 +47,70 @@ include "../components/footer.php";
     echo createHeader();
     ?>
 
+    <div class="user-modal-container">
 
-    <main class="main-content">
-        <!-- Login Section -->
-        <section id="login" class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <h2>Login</h2>
-                    <form action="../handlers/login.php?login=1" id="loginForm">
+        <form action="../handlers/login.php?login=1" method="post" class="form">
+            <p class="fieldset">
+                <label class="image-replace email" for="signin-email">E-mail</label>
+                <input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="E-mail">
+                <!-- <span class="error-message">An account with this email address does not exist!</span> -->
+            </p>
 
-                        <div class="form-group">
-                            <label for="email">Email:</label>
-                            <input type="email" class="form-control" id="email" placeholder="Enter email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password:</label>
-                            <input type="password" class="form-control" id="password" placeholder="Enter password"
-                                required>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Login</button>
-                    </form>
+            <p class="fieldset">
+                <label class="image-replace password" for="signin-password">Password</label>
+                <input class="full-width has-padding has-border" id="signin-password" type="password"
+                    placeholder="Password">
+                <!-- <a href="#0" class="hide-password">Show</a> -->
+                <!-- <span class="error-message">Wrong password! Try again.</span> -->
+            </p>
 
-                    <div>
-                        <p class="text-center mt-3">Don't have an account? <a href="register.php">Signup</a></p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+            <!-- <p class="fieldset">
+                <input type="checkbox" id="remember-me" checked>
+                <label for="remember-me">Remember me</label>
+            </p> -->
+
+            <p class="fieldset">
+                <input class="full-width" type="submit" value="Login">
+            </p>
+
+            <button>submit</button>
+
+            <p>Don't have an account?
+                <a href="register.php" style="color:#0652dd;text-align:center;">Create An Account</a>
+            </p>
+        </form>
+
+        <!-- <p class="form-bottom-message"><a href="#0">Forgot your password?</a></p> -->
+        <!-- <a href="#0" class="close-form">Close</a> -->
+
+        <div id="reset-password">
+            <p class="form-message">Lost your password? Please enter your email address.</br> You will receive a
+                link to create a new password.</p>
+
+            <form class="form">
+                <p class="fieldset">
+                    <label class="image-replace email" for="reset-email">E-mail</label>
+                    <input class="full-width has-padding has-border" id="reset-email" type="email" placeholder="E-mail">
+                    <span class="error-message">An account with this email does not exist!</span>
+                </p>
+
+                <p class="fieldset">
+                    <input class="full-width has-padding" type="submit" value="Reset password">
+                </p>
+            </form>
+
+            <p class="form-bottom-message"><a href="#0">Back to log-in</a></p>
+        </div>
+        <a href="#0" class="close-form">Close</a>
+    </div>
 
     <?php
     echo createFooter();
     ?>
+    <!-- partial -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <!-- <script src="../assets/js/login-register.js"></script> -->
+    <script src="../assets/js/main.js"></script>
 
 </body>
 

@@ -68,14 +68,13 @@ function getCategoryName($id)
         $query = "SELECT name FROM category WHERE id = $id;";
         $stmt = $pdo->prepare($query);
         $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $categoryName = $result[0];
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
         $pdo = null;
         $stmt = null;
 
-        return $categoryName;
+        return $result;
 
     } catch (PDOException $e) {
         echo "Connection failed: " . $e->getMessage();

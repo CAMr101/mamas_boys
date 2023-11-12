@@ -4,6 +4,7 @@ session_start();
 
 include "../components/header.php";
 include "../components/footer.php";
+include "../handlers/processCategory.php";
 include "../handlers/processProducts.php";
 include "../handlers/processImage.php";
 

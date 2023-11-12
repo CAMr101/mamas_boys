@@ -1,4 +1,5 @@
 const cartCount = document.getElementById("count");
+var cart = JSON.parse(localStorage.getItem("usercart"));
 
 window.onload = setCartCount();
 

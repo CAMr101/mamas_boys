@@ -1,18 +1,21 @@
 <?php
 
 if (isset($_REQUEST['login']) && ($_GET['login'] == 0 || $_GET['login'] == 1) && isset($_POST)) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $page = $_POST['page'];
 
     $code = $_GET['login'];
 
     //code 0 = admin and code 1 = customer
     switch ($code) {
         case 0:
+            $page = $_POST['page'];
+            $email = $_POST['email'];
+            $password = $_POST['password'];
             authenticate($email, $password);
             break;
         case 1:
+            print_r($_POST);
+            $email = $_POST['signin-email'];
+            $password = $_POST['signin-password'];
             authenticateCustomer($email, $password);
             break;
 
@@ -20,7 +23,6 @@ if (isset($_REQUEST['login']) && ($_GET['login'] == 0 || $_GET['login'] == 1) &&
             header("location:javascript://history.go(-1)");
             break;
     }
-    // authenticate($email, $password, $code);
 }
 
 function authenticate($email, $password)
@@ -31,8 +33,6 @@ function authenticate($email, $password)
     $hPw = hashPassword($password);
 
     try {
-        $pdo = new PDO($dsn, $dbusername, $dbpassword);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $query = "SELECT * FROM `staff` WHERE email = ? AND password=?;";
 
@@ -80,9 +80,6 @@ function authenticateCustomer($email, $password)
     $hPw = hashPassword($password);
 
     try {
-        $pdo = new PDO($dsn, $dbusername, $dbpassword);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
         $query = "SELECT * FROM `customer` WHERE email = ? AND password=?;";
 
         $stmt = $pdo->prepare($query);
@@ -107,7 +104,7 @@ function authenticateCustomer($email, $password)
 
         } else {
             $_SESSION["error_login"] = "Authenticatin Failed";
-            header("location:../pages/login.php?login=failed");
+            // header("location:../pages/login.php?login=failed");
         }
 
         $pdo = null;
