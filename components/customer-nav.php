@@ -12,7 +12,7 @@
             </a>
         </li>
         <li class="side-menu-item">
-            <a href="payment-information.php">
+            <a href="billing-information.php">
                 Billing Information
             </a>
         </li>

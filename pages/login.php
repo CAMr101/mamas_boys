@@ -16,6 +16,10 @@ if (isset($_REQUEST['login'])) {
             $message = "User does not exist. Please reate an account";
             echo "<script>alert('$message');</script>";
             break;
+        case "denied":
+            $message = "Access denied. Please login";
+            echo "<script>alert('$message');</script>";
+            break;
         case "error":
             $message = "Something went wrong. Please try again";
             echo "<script>alert('$message');</script>";

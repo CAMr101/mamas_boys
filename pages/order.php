@@ -2,21 +2,30 @@
 
 include "../components/header.php";
 include "../components/footer.php";
-include("../handlers/processOrder.php");
-include("../handlers/processProducts.php");
+include "../handlers/processOrder.php";
+include "../handlers/processProducts.php";
+include "../handlers/processCustomer.php";
 
 session_start();
 
-$pathParams = $_SERVER['QUERY_STRING'];
-if ($pathParams == null) {
-    header("location:shop.php");
+if (isset($_SESSION["customer_id"])) {
+    $customerId = $_SESSION["customer_id"];
+    $customerData = getCustomer($customerId);
+
+    if (isset($_REQUEST['id'])) {
+        $orderId = $_REQUEST['id'];
+
+        $order = getOrder($orderId);
+        $orderItems = json_decode($order['order_items'], true);
+    }
+
+} else {
+    header("location:login.php?login=denied");
 }
 
-$pathParams = explode('=', $pathParams);
-$orderId = $pathParams[1];
 
-$order = getOrder($orderId);
-$orderItems = json_decode($order['order_items'], true);
+
+
 
 ?>
 
@@ -251,7 +260,7 @@ $orderItems = json_decode($order['order_items'], true);
             <a>
                 <li>
                     <span class="info">
-                        Order Item
+                        <h3>Products</h3>
                     </span>
                 </li>
             </a>

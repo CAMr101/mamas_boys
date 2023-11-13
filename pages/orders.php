@@ -7,7 +7,13 @@ include("../handlers/processProducts.php");
 
 session_start();
 
-$orders = getOrders();
+if (isset($_SESSION["customer_id"])) {
+    $userId = $_SESSION["customer_id"];
+    $orders = getOrderByCustomerId($userId);
+
+} else {
+    header("location:login.php?login=denied");
+}
 
 ?>
 

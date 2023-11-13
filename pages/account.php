@@ -8,10 +8,12 @@ include "../handlers/processOrder.php";
 session_start();
 
 if (isset($_SESSION["customer_id"])) {
-    $customerId = $_SESSION["customer_id"];
-    $cusomterData = getCustomer($customerId);
-    $orders = getOrderByCustomerId($customerId);
+    $userId = $_SESSION["customer_id"];
+    $user = getCustomer($userId);
+    $orders = getOrderByCustomerId($userId);
 
+} else {
+    header("location:login.php?login=denied");
 }
 
 ?>
@@ -73,7 +75,9 @@ if (isset($_SESSION["customer_id"])) {
             <a>
                 <li>
                     <span class="info">
-                        <h3>Name Surname</h3>
+                        <h3>
+                            <?php echo ucfirst($user['name']) . " " . ucfirst($user['surname']); ?>
+                        </h3>
                         <p>User</p>
                     </span>
                 </li>
@@ -83,7 +87,9 @@ if (isset($_SESSION["customer_id"])) {
             <a href="products.php">
                 <li>
                     <span class="info">
-                        <h3>Email</h3>
+                        <h3>
+                            <?php echo $user['email']; ?>
+                        </h3>
                         <p>Email</p>
                     </span>
                 </li>
@@ -92,7 +98,7 @@ if (isset($_SESSION["customer_id"])) {
                 <li>
                     <span class="info">
                         <h3>
-                            Number
+                            <?php echo $user['phone'] ?>
                         </h3>
                         <p>Phone Number</p>
                     </span>
@@ -100,7 +106,7 @@ if (isset($_SESSION["customer_id"])) {
             </a>
         </ul>
         <ul class="insights">
-            <a href="edit-account.php">
+            <a href="edit-account.php?id=<?php echo $user['id'] ?>">
                 <li>
                     <span class="info">
                         <h3> Edit Account</h3>
@@ -113,13 +119,18 @@ if (isset($_SESSION["customer_id"])) {
             </a>
 
         </ul>
+        <ul class="insights">
+            <a>
+                <li>
+                    <span class="info">
+                        <h3>Orders</h3>
+                    </span>
+                </li>
+            </a>
+        </ul>
 
         <div class="bottom-data">
             <div class="orders">
-                <div class="header">
-                    <i class='bx bx-receipt'></i>
-                    <h3>Recent Orders</h3>
-                </div>
 
                 <table>
                     <thead>
@@ -136,6 +147,146 @@ if (isset($_SESSION["customer_id"])) {
                             <th>Status</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        <?php
+
+
+                        if ($orders !== null) {
+                            foreach ($orders as $order) { ?>
+
+                        <tr>
+                            <td>
+                                <a href="order.php?id=<?php echo $order['id']; ?>">
+                                    <?php echo $order['id']; ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="order.php?id=<?php echo $order['id']; ?>">
+                                    <?php echo $order['name']; ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="order.php?id=<?php echo $order['id']; ?>">
+                                    <?php echo $order['email']; ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="order.php?id=<?php echo $order['id']; ?>">
+                                    <?php echo $order['phone']; ?>
+                                </a>
+                            </td>
+                            <td colspan="1">
+                                <a href="order.php?id=<?php echo $order['id']; ?>">
+                                    <?php
+                                    $order_items = json_decode($order['order_items'], true);
+
+                                    foreach ($order_items as $item) {
+                                        $name = getProductName($item['id']);
+                                        echo $name['name'];
+                                        echo "<br>";
+                                    } ?>
+                                </a>
+                            </td>
+                            <td colspan="1">
+                                <a href="order.php?id=<?php echo $order['id']; ?>">
+                                    <?php
+                                    $order_items = json_decode($order['order_items'], true);
+
+                                    foreach ($order_items as $item) {
+                                        echo $item['quantity'];
+                                        echo "<br>";
+                                    } ?>
+
+                                </a>
+                            </td>
+                            <td>R
+                                <a href="order.php?id=<?php echo $order['id']; ?>">
+                                    <?php echo $order['order_total']; ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="order.php?id=<?php echo $order['id']; ?>">
+                                    <?php echo $order['created_at']; ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="order.php?id=<?php echo $order['id']; ?>">
+                                    <?php echo $order['payment_method']; ?>
+                                </a>
+                            </td>
+                            <td>
+                                <span class="status <?php
+                                switch ($order['order_status']) {
+                                    case 'NotStarted':
+                                        echo 'notStarted';
+                                        break;
+                                    case 'Started':
+                                        echo 'pending';
+                                        break;
+                                    case 'Ready':
+                                        echo 'ready';
+                                        break;
+                                    case 'Completed':
+                                        echo 'completed';
+                                        break;
+                                    case 'Cancelled':
+                                        echo 'cancelled';
+                                        break;
+                                    default:
+                                        echo 'pending';
+                                        break;
+                                }
+                                ?>">
+                                    <?php
+                                    switch ($order['order_status']) {
+                                        case 'NotStarted':
+                                            echo 'Not Started';
+                                            break;
+                                        case 'Started':
+                                            echo 'Started';
+                                            break;
+                                        case 'Ready':
+                                            echo 'Ready';
+                                            break;
+                                        case 'Completed':
+                                            echo 'Completed';
+                                            break;
+                                        case 'Cancelled':
+                                            echo 'Cancelled';
+                                            break;
+                                        default:
+                                            echo 'none';
+                                            break;
+                                    }
+                                    ?>
+                                </span>
+                            </td>
+                        </tr>
+
+                        <?php }
+                        } else {
+                            echo "No products found";
+                        }
+                        ?>
+
+                        <!-- <tr>
+                            <td>
+                                <img src="images/profile-1.jpg">
+                                <p>John Doe</p>
+                            </td>
+                            <td>14-08-2023</td>
+                            <td><span class="status pending">Pending</span></td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <img src="images/profile-1.jpg">
+                                <p>John Doe</p>
+                            </td>
+                            <td>14-08-2023</td>
+                            <td><span class="status process">Processing</span></td>
+                        </tr> -->
+                    </tbody>
                 </table>
             </div>
 
