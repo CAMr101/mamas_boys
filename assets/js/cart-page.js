@@ -9,6 +9,7 @@ let subTotal = 0;
 const priceArr = document.querySelectorAll("#unit-price");
 const quantityArr = document.querySelectorAll("#prod-quantity");
 const summedPrice = document.querySelectorAll("#total-prod-price");
+let count = document.getElementById("count");
 
 window.onload = function(){
 
@@ -101,6 +102,8 @@ function decreaseQuantity(id){
     var newCart = JSON.parse(localStorage.getItem("usercart"));
     loadCart(newCart)
     updateSummary();
+    
+    count.textContent = newCart.length;
 }
 
 function increaseQuantity(id){
@@ -114,6 +117,8 @@ function increaseQuantity(id){
     var newCart = JSON.parse(localStorage.getItem("usercart"));
     loadCart(newCart)
     updateSummary();
+
+    count.textContent = newCart.length;
 }
 
 function updateSummary(){
@@ -145,7 +150,6 @@ function setCookie(name, values, days){
     d.setTime(d.getTime() + (days*24*60*60*1000));
     let expires = "expires="+ d.toUTCString();
     document.cookie = name + "=" + JSON.stringify(values) + ";" + expires + ";path=/";
-    console.log(document.cookie)
 }
 
 function deleteCookie(name){

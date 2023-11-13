@@ -30,14 +30,15 @@ if (isset($_POST)) {
         $pdo = null;
         $stmt = null;
 
-        echo (1);
+        echo (true);
 
         die();
 
     } catch (PDOException $e) {
-        echo (0);
+        echo (false);
         die("Query Failed: " . $e->getMessage());
     }
 } else {
+    echo (null);
     header("location:../index.php");
 }

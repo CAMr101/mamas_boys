@@ -1,10 +1,21 @@
 <?php
 
+//Update order status
 if (isset($_REQUEST['uos']) && isset($_POST)) {
     $orderId = $_GET['uos'];
     $status = $_POST['orderStatus'];
 
     updateOrderStatus($orderId, $status);
+}
+
+//New Order
+if (isset($_POST) && isset($_REQUEST['cd'])) {
+    $code = $_GET['cd'];
+
+    if ($code == 1)
+        createNewOrder();
+    else
+        echo "Null";
 }
 
 //get all orders from the db
@@ -31,6 +42,47 @@ function getOrders()
         echo "Connection failed: " . $e->getMessage();
     }
 
+}
+
+function createNewOrder()
+{
+    $data = file_get_contents("php://input");
+    $customerOrder = json_decode($data, true);
+
+    $cName = $customerOrder["cName"];
+    $cEmail = $customerOrder["cEmail"];
+    $cPhone = $customerOrder["cPhone"];
+    $orderTotal = $customerOrder["orderTotal"];
+    $orderItems = json_encode($customerOrder["orderItems"]);
+    $paymentMethod = $customerOrder["paymentMethod"];
+    $paid = 0;
+    $status = "NotStarted";
+
+
+    try {
+        include "../config/dbh.inc.php";
+
+        $query = "INSERT INTO shop_order (name, email, phone, order_total, order_items, order_status, payment_method, paid) 
+            VALUES (?,?,?,?,?,?,?,?);";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$cName, $cEmail, $cPhone, $orderTotal, $orderItems, $status, $paymentMethod, $paid]);
+
+        $query = "SELECT `id`, `name`, `email` FROM `shop_order` WHERE name=? AND email=? AND phone=?;";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$cName, $cEmail, $cPhone]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $pdo = null;
+        $stmt = null;
+
+        echo json_encode($result);
+
+        die();
+
+    } catch (PDOException $e) {
+        echo "false";
+        die("Query Failed: " . $e->getMessage());
+    }
 }
 
 function getOrder($id)

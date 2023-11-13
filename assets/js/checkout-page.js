@@ -260,29 +260,43 @@ function completeOrder(){
             cName: contactInfo.cName,
             cEmail: contactInfo.cEmail,
             cPhone: contactInfo.cPhone,
-            orderTotal: totalOrderPriceext,
+            orderTotal: totalOrderPriceDomElement.innerText,
             orderItems: cart,
             paymentMethod: paymentMethod,
         }
 
-        fetch(`${localHostUrl}/handlers/processNewOrder.php`,{
+        fetch(`${localHostUrl}/handlers/processOrder.php?cd=1`,{
             "method": "POST",
             "headers": {
                 "Content-type": "application/json; charset=utf-8"
             },
             "body": JSON.stringify(orderInfo)
         }).then(function(response){
-            return response.text();
+            return response.json();
         }).then(function(data){
-            console.log("Data from server")
+            console.log("Data from server");
             console.log(data);
 
-            localStorage.setItem("orderComplete", data);
+            if(data){
+                localStorage.removeItem("usercart");
+                deleteCookie("usercart");
 
-            window.location = "order-complete.php"
+                window.location = "order-success.php";
+            }else if(data == ""){
+                let message = "Could not process your order. Please try Again.";
+                window.alert(message);
+            } else{
+                let message = "Something went wrong. Please try again.";
+                window.alert(message);
+            }
+
+            
         })
         
     }
 }
 
+function deleteCookie(name){
+    document.cookie = name + "= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+}
 
