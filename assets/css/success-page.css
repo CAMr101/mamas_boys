@@ -35,6 +35,10 @@ body {
     text-align: center;
 }
 
+.button a{
+    color: white;
+}
+
 .hidden{
     display: none;
 }

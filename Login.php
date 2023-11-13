@@ -66,7 +66,7 @@ include "./components/header.component.php";
                     </form>
 
                     <div>
-                        <p class="text-center mt-3">Don't have an account? <a href="register.php">Signup</a></p>
+                        <p class="text-center mt-3">Don't have an account? <a href="signup.php">Signup</a></p>
                     </div>
                 </div>
             </div>

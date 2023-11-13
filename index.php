@@ -4,6 +4,111 @@ session_start();
 include "./components/footer.component.php";
 include "./components/header.component.php";
 
+$header = "";
+
+if (isset($_SESSION["customer_id"])) {
+   $thisName = ucfirst($_SESSION["customer_name"]);
+   $subject = '
+   <header class="header">
+   <div class="flex">
+
+      <a href="index.php">
+         <img src="./assets/images/logo.png" width=70px alt="" id="header-logo">
+      </a>
+
+      <a href="index.php">
+         <h1> MAMAS BOYS KOTA AND CHIPS</h1>
+      </a>
+
+
+      <div class="new">
+         <a href="#">Home</a>
+         <a href="./pages/products.php">Shop</a>
+         <a href="./pages/about.php">About</a>
+         <a href="./pages/contact.php">Contact</a>
+
+      </div>
+
+      <div class="icons">
+         <a href="./pages/account.php"> <id="user-btn" class="fas fa-user"></id>
+               <a href="./pages/cart.php" id="add-to-cart-icon" class="fas fa-shopping-cart"> <span
+                     id="count">0</span></a>
+      </div>
+
+      <div class="profile">
+
+         <a href="user_profile_update.html" class="btn">update profile</a>
+         <a href="../handlers/logout.php" class="delete-btn">logout</a>
+         <div class="flex-btn">
+            <a href="./pages/login.php" class="option-btn">login</a>
+            <a href="./pages/signup.php" class="option-btn">register</a>
+         </div>
+      </div>
+   </div>
+</header>
+   ';
+   $search = '<id="user-btn" class="fas fa-user">';
+
+   $header = str_replace($search, $thisName, $subject);
+} else {
+
+   $header = '
+   <header class="header">
+   <div class="flex">
+
+      <a href="index.php">
+         <img src="./assets/images/logo.png" width=70px alt="" id="header-logo">
+      </a>
+
+      <a href="index.php">
+         <h1> MAMAS BOYS KOTA AND CHIPS</h1>
+      </a>
+
+
+      <div class="new">
+         <a href="#">Home</a>
+         <a href="./pages/products.php">Shop</a>
+         <a href="./pages/about.php">About</a>
+         <a href="./pages/contact.php">Contact</a>
+
+      </div>
+
+      <div class="icons">
+         <a href="./pages/login.php"> <id="user-btn" class="fas fa-user"></id>
+               <a href="./pages/cart.php" id="add-to-cart-icon" class="fas fa-shopping-cart"> <span
+                     id="count">0</span></a>
+      </div>
+
+      <div class="profile">
+
+         <a href="user_profile_update.html" class="btn">update profile</a>
+         <a href="../handlers/logout.php" class="delete-btn">logout</a>
+         <div class="flex-btn">
+            <a href="./pages/login.php" class="option-btn">login</a>
+            <a href="./pages/signup.php" class="option-btn">register</a>
+         </div>
+      </div>
+   </div>
+</header>
+     ';
+}
+
+if (isset($_REQUEST['login'])) {
+   $code = $_REQUEST['login'];
+
+   switch ($code) {
+      case "success":
+         $nameLoggedIn = ucfirst($_SESSION["customer_name"]);
+         $message = "Welcome back $nameLoggedIn";
+         echo "<script>alert('$message');</script>";
+         break;
+      default:
+         break;
+   }
+}
+
+
+
 $categories = getAllCategories();
 
 function getAllCategories()
@@ -68,7 +173,7 @@ function getImageByCategoryId($catId)
                                                 With a background in the vibrant culture of street food, Nhlanhla decided to venture out and create his own brand. His aspiration is for his brand to center around the customer's complete immersion in the diverse array of flavors presented by the distinctive taste of the country. The client exclusively offers street food, specializing in kota’s and chips.">
    <meta name="author" content="p-themes">
    <!-- Favicon -->
-   <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/favicon.png">
+   <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/favicon.png">
    <meta name="apple-mobile-web-app-title" content="Mams Boys Kota & Chips">
    <meta name="application-name" content="Mams Boys Kota & Chips">
    <meta name="theme-color" content="#ffffff">
@@ -83,47 +188,13 @@ function getImageByCategoryId($catId)
 
 <body>
 
-   <header class="header">
-      <div class="flex">
-
-         <a href="index.php">
-            <img src="./Website pictures/logo.png" width=70px alt="" id="header-logo">
-         </a>
-
-         <a href="index.php">
-            <h1> MAMAS BOYS KOTA AND CHIPS</h1>
-         </a>
-
-
-         <div class="new">
-            <a href="#">Home</a>
-            <a href="./pages/products.php">Shop</a>
-            <a href="./pages/about.php">About</a>
-            <a href="./pages/contact.php">Contact</a>
-
-         </div>
-
-         <div class="icons">
-            <a href="./pages/login.php"> <id="user-btn" class="fas fa-user"></id>
-                  <a href="./pages/cart.php" id="add-to-cart-icon" class="fas fa-shopping-cart"> <span
-                        id="count">0</span></a>
-         </div>
-
-         <div class="profile">
-
-            <a href="user_profile_update.html" class="btn">update profile</a>
-            <a href="../handlers/logout.php" class="delete-btn">logout</a>
-            <div class="flex-btn">
-               <a href="./pages/login.php" class="option-btn">login</a>
-               <a href="./pages/register.php" class="option-btn">register</a>
-            </div>
-         </div>
-      </div>
-   </header>
+   <?php
+   echo $header;
+   ?>
 
    <style>
       .home-bg {
-         background-image: url("Website pictures/kota8.png");
+         background-image: url("./assets/images/kota8.png");
       }
    </style>
 
@@ -220,7 +291,7 @@ function getImageByCategoryId($catId)
             <h3>Additional Links</h3>
             <a href="./pages/cart.php"> <i class="fas fa-angle-right"></i> Cart</a>
             <a href="./pages/login.php"> <i class="fas fa-angle-right"></i> Login</a>
-            <a href="./pages/register.php"> <i class="fas fa-angle-right"></i> Create Account</a>
+            <a href="./pages/signup.php"> <i class="fas fa-angle-right"></i> Create Account</a>
             <a href="./admin/login.php"> <i class="fas fa-angle-right"></i> Admin Dashboard</a>
          </div>
 

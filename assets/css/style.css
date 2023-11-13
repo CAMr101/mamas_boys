@@ -42,7 +42,7 @@
  
 
 .home-bg{
-   background-image: url("kota8.png");
+   /* background-image: url("./assets/images/kota8.png"); */
    background-size: cover;
    background-position: center;
 }

@@ -12,6 +12,8 @@ include "../components/footer.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Website meta data -->
+    <?php include "../components/customer-meta-data.php"; ?>
     <title>Contact Us</title>
 
     <!--link to css-->

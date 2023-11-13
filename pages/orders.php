@@ -18,7 +18,9 @@ $orders = getOrders();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Account</title>
+    <!-- Website meta data -->
+    <?php include "../components/customer-meta-data.php"; ?>
+    <title>My Orders</title>
 
     <?php include "../components/customer-meta-data.php"; ?>
 

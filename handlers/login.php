@@ -13,7 +13,6 @@ if (isset($_REQUEST['login']) && ($_GET['login'] == 0 || $_GET['login'] == 1) &&
             authenticate($email, $password);
             break;
         case 1:
-            print_r($_POST);
             $email = $_POST['signin-email'];
             $password = $_POST['signin-password'];
             authenticateCustomer($email, $password);
@@ -35,7 +34,6 @@ function authenticate($email, $password)
     try {
 
         $query = "SELECT * FROM `staff` WHERE email = ? AND password=?;";
-
         $stmt = $pdo->prepare($query);
         $stmt->execute([$email, $hPw]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -80,31 +78,34 @@ function authenticateCustomer($email, $password)
     $hPw = hashPassword($password);
 
     try {
-        $query = "SELECT * FROM `customer` WHERE email = ? AND password=?;";
-
+        $query = "SELECT * FROM `customer` WHERE email = ?;";
         $stmt = $pdo->prepare($query);
-        $stmt->execute([$email, $hPw]);
+        $stmt->execute([$email]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($result) {
-            require_once "../config/config_session.inc.php";
+            if ($result["password"] === $hPw) {
+                require_once "../config/config_session.inc.php";
 
-            $newSessionId = session_create_id();
-            $sessionId = $newSessionId . "_" . $result["id"];
+                $newSessionId = session_create_id();
+                $sessionId = $newSessionId . "_" . $result["id"];
 
-            session_destroy();
-            session_id($sessionId);
-            session_start();
+                session_destroy();
+                session_id($sessionId);
+                session_start();
 
-            $_SESSION["customer_id"] = $result["id"];
-            $_SESSION["customer_name"] = $result["name"];
-            $_SESSION['last_regeneration'] = time();
+                $_SESSION["customer_id"] = $result["id"];
+                $_SESSION["customer_name"] = $result["name"];
+                $_SESSION['last_regeneration'] = time();
 
-            header("location:javascript://history.go(-1)");
+                header("location:../index.php?login=success");
+            } else {
+                header("location:../pages/login.php?login=failed");
+            }
+
 
         } else {
-            $_SESSION["error_login"] = "Authenticatin Failed";
-            // header("location:../pages/login.php?login=failed");
+            header("location:../pages/login.php?login=notFound");
         }
 
         $pdo = null;
@@ -113,7 +114,7 @@ function authenticateCustomer($email, $password)
         die();
 
     } catch (PDOException $e) {
-        echo "Connection failed: " . $e->getMessage();
+        header("location:../pages/login.php?login=error");
     }
 
 }
