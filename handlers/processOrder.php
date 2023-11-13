@@ -13,8 +13,6 @@ function getOrders()
     include "../config/dbh.inc.php";
 
     try {
-        $pdo = new PDO($dsn, $dbusername, $dbpassword);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $query = "SELECT * FROM `shop_order` ORDER BY `shop_order`.`created_at` DESC;";
 
@@ -40,8 +38,6 @@ function getOrder($id)
     include "../config/dbh.inc.php";
 
     try {
-        $pdo = new PDO($dsn, $dbusername, $dbpassword);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $query = "SELECT * FROM shop_order WHERE id=?;";
         $stmt = $pdo->prepare($query);
@@ -64,8 +60,6 @@ function getOrderByCustomerId($id)
     include "../config/dbh.inc.php";
 
     try {
-        $pdo = new PDO($dsn, $dbusername, $dbpassword);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $query = "SELECT * FROM shop_order WHERE customer_id=?;";
         $stmt = $pdo->prepare($query);
@@ -88,8 +82,6 @@ function getTotal()
     include "../config/dbh.inc.php";
 
     try {
-        $pdo = new PDO($dsn, $dbusername, $dbpassword);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $query = "SELECT SUM(order_total) AS totalSales FROM shop_order;";
 
@@ -116,8 +108,6 @@ function updateOrderStatus($id, $status)
     include "../config/dbh.inc.php";
 
     try {
-        $pdo = new PDO($dsn, $dbusername, $dbpassword);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $query = "UPDATE `shop_order` SET `order_status`=?  WHERE id=?;";
         $stmt = $pdo->prepare($query);

@@ -5,7 +5,7 @@ session_unset();
 session_destroy();
 
 if (isset($_REQUEST['logout']) && $_GET['logout'] == 1) {
-    header("location:../index.php");
+    header("location:../index.php?logout=true");
     die();
 }
 

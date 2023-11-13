@@ -1,9 +1,18 @@
 <?php
+include "../components/header.php";
+include "../components/footer.php";
+include "../handlers/processCustomer.php";
+include "../handlers/processOrder.php";
+
 
 session_start();
 
-include "../components/header.php";
-include "../components/footer.php";
+if (isset($_SESSION["customer_id"])) {
+    $customerId = $_SESSION["customer_id"];
+    $cusomterData = getCustomer($customerId);
+    $orders = getOrderByCustomerId($customerId);
+
+}
 
 ?>
 

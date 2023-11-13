@@ -107,7 +107,18 @@ if (isset($_REQUEST['login'])) {
    }
 }
 
+if (isset($_REQUEST['logout'])) {
+   $code = $_REQUEST['logout'];
 
+   switch ($code) {
+      case true:
+         $message = "Successfully logged out.";
+         echo "<script>alert('$message');</script>";
+         break;
+      default:
+         break;
+   }
+}
 
 $categories = getAllCategories();
 
@@ -131,7 +142,6 @@ function getAllCategories()
       echo "Connection failed: " . $e->getMessage();
    }
 }
-
 function getImageByCategoryId($catId)
 {
    include "./config/dbh.inc.php";

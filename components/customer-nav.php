@@ -25,7 +25,7 @@
     <ul class="side-menu">
         <li class="side-menu-item">
             <a href="../handlers/logout.php?logout=1" class="logout">
-                Sign Out
+                Log Out
             </a>
         </li>
     </ul>
