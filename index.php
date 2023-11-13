@@ -214,7 +214,7 @@ function getImageByCategoryId($catId)
          <div class="content">
             <h3>Satisfy Your Craving.</h3>
             <p>We are bringing you the best kota selling business ever.</p>
-            <a href="products.php" class="btn">Shop</a>
+            <a href="./pages/products.php" class="btn">Shop</a>
          </div>
       </section>
    </div>
