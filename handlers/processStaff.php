@@ -1,5 +1,6 @@
 <?php
 
+
 //update staff
 if (isset($_REQUEST['update']) && $_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
     include 'passwordHash.php';
@@ -32,8 +33,10 @@ if (isset($_REQUEST['update']) && $_SERVER["REQUEST_METHOD"] == "POST" && isset(
     }
 }
 
+//delete staff
 if (isset($_REQUEST['delete'])) {
     $id = $_REQUEST['delete'];
+    session_start();
     $user = getStaffById($_SESSION['user_id']);
 
     if ($user['type'] != 'admin') {

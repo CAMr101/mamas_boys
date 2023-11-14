@@ -17,6 +17,6 @@
         account_circle
     </span>
     <?php
-    echo $_SESSION["user_name"];
+    echo ucfirst($_SESSION["user_name"]);
     ?>
 </nav>

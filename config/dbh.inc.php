@@ -5,11 +5,15 @@
 // $dbusername = "mamasboy_user";
 // $dbpassword = "zOK95pYbCQ6m";
 
+// $dbusername = "mamasboy_admin";
+// $dbpassword = "7EVPbDR1DByr";
+
+
+
 $host = "localhost";
 $dbname = "mamasboys_db";
 $dbusername = "root";
 $dbpassword = "";
-
 
 $dsn = "mysql:host=" . $host . ";dbname=" . $dbname;
 

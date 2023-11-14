@@ -13,7 +13,7 @@ if (isset($_REQUEST['login'])) {
             echo "<script>alert('$message');</script>";
             break;
         case "notFound":
-            $message = "User does not exist. Please reate an account";
+            $message = "User does not exist. Please create an account";
             echo "<script>alert('$message');</script>";
             break;
         case "denied":

@@ -19,7 +19,7 @@ if (isset($_REQUEST["success"])) {
     $code = $_REQUEST['success'];
     switch ($code) {
         case 'delete':
-            $message = "Successfully updated user.";
+            $message = "Successfully deleted user.";
             echo "<script>alert('$message');</script>";
             break;
         default:
