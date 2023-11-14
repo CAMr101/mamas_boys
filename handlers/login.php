@@ -33,26 +33,31 @@ function authenticate($email, $password)
 
     try {
 
-        $query = "SELECT * FROM `staff` WHERE email = ? AND password=?;";
+        $query = "SELECT * FROM `staff` WHERE email = ?;";
         $stmt = $pdo->prepare($query);
-        $stmt->execute([$email, $hPw]);
+        $stmt->execute([$email]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($result) {
-            require_once "../config/config_session.inc.php";
+            if ($result['password'] === $hPw) {
+                require_once "../config/config_session.inc.php";
 
-            $newSessionId = session_create_id();
-            $sessionId = $newSessionId . "_" . $result["id"];
+                $newSessionId = session_create_id();
+                $sessionId = $newSessionId . "_" . $result["id"];
 
-            session_destroy();
-            session_id($sessionId);
-            session_start();
+                session_destroy();
+                session_id($sessionId);
+                session_start();
 
-            $_SESSION["user_id"] = $result["id"];
-            $_SESSION["user_name"] = $result["name"];
-            $_SESSION['last_regeneration'] = time();
+                $_SESSION["user_id"] = $result["id"];
+                $_SESSION["user_name"] = $result["name"];
+                $_SESSION['last_regeneration'] = time();
 
-            header("location:../admin/admin.php?login=success");
+                header("location:../admin/admin.php?login=success");
+            } else {
+                header("location:../admin/login.php?login=incorrect");
+            }
+
 
         } else {
             $_SESSION["error_login"] = "Authenticatin Failed";
@@ -65,6 +70,7 @@ function authenticate($email, $password)
         die();
 
     } catch (PDOException $e) {
+        header("location:../admin/login.php?login=error");
         echo "Connection failed: " . $e->getMessage();
     }
 

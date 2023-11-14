@@ -4,7 +4,7 @@ include("../handlers/processStaff.php");
 session_start();
 
 if (!isset($_SESSION["user_id"])) {
-    header("location:login.php");
+    header("location:login.php?login=login");
 }
 
 $pathParams = $_SERVER['QUERY_STRING'];

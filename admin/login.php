@@ -1,6 +1,33 @@
 <?php
 session_start();
 
+if (isset($_REQUEST['login'])) {
+    $code = $_REQUEST['login'];
+
+    switch ($code) {
+        case "login":
+            $message = "User Not Athorised. Please log in";
+            echo "<script>alert('$message');</script>";
+            break;
+        case "failed":
+            $message = "User does not exist. Please contact your employer";
+            echo "<script>alert('$message');</script>";
+            break;
+        case "incorrect":
+            $message = "Wrong password. Please try again";
+            echo "<script>alert('$message');</script>";
+            break;
+        case "error":
+            $message = "Something went wrong. please try again";
+            echo "<script>alert('$message');</script>";
+            break;
+        default:
+            $message = "Something went wrong. please try again";
+            echo "<script>alert('$message');</script>";
+            break;
+    }
+}
+
 ?>
 
 
