@@ -6,15 +6,19 @@ include "../components/footer.php";
 include "../handlers/processProducts.php";
 include "../handlers/processImage.php";
 
-$cart = json_decode($_COOKIE['usercart'], true);
+if (isset($_COOKIE['usercart'])) {
+    $cart = json_decode($_COOKIE['usercart'], true);
+    foreach ($cart as $item) {
+        $products[$counter] = getProduct($item['id']);
+        $products[$counter]['quantity'] = $item['quantity'];
+        $counter++;
+    }
+}
+
 $products = [];
 $counter = 0;
 
-foreach ($cart as $item) {
-    $products[$counter] = getProduct($item['id']);
-    $products[$counter]['quantity'] = $item['quantity'];
-    $counter++;
-}
+
 
 ?>
 
@@ -47,6 +51,12 @@ foreach ($cart as $item) {
                 <div class="cart">
                     <p class="heading" id="heading">Cart Items</p>
                     <div class="cart-items" id="cart-items">
+
+                        <?php
+                        if (!isset($_COOKIE['usercart'])) {
+                            echo '<h2> Cart is empty. </h2>';
+                        }
+                        ?>
 
                         <?php
                         foreach ($products as $product) {

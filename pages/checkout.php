@@ -1,10 +1,20 @@
 <?php
-session_start();
 
 include "../components/header.php";
 include "../components/footer.php";
 include "../handlers/processProducts.php";
 include "../handlers/processImage.php";
+include "../handlers/processCustomer.php";
+
+session_start();
+
+if (isset($_SESSION["customer_id"])) {
+    $userId = $_SESSION["customer_id"];
+    $user = getCustomer($userId);
+
+} else {
+    header("location:login.php?login=denied");
+}
 
 $cart = json_decode($_COOKIE['usercart'], true);
 $products = [];
@@ -109,17 +119,23 @@ foreach ($cart as $item) {
                     <div class="info">
                         <div class="name">
                             <label for="cName">Name</label>
-                            <input type="text" name="cName" id="customer-name">
+                            <input type="text" name="cName" id="customer-name" value="<?php if ($user) {
+                                echo $user['name'];
+                            } ?>">
                         </div>
 
                         <div class="email">
                             <label for="cEmail">Email</label>
-                            <input type="email" name="cEmail" id="customer-email">
+                            <input type="email" name="cEmail" id="customer-email" value="<?php if ($user) {
+                                echo $user['email'];
+                            } ?>">
                         </div>
 
                         <div class="telephone">
                             <label for="cPhone">Telephone</label>
-                            <input type="tel" name="cPhone" id="customer-phone">
+                            <input type="tel" name="cPhone" id="customer-phone" value="<?php if ($user) {
+                                echo $user['phone'];
+                            } ?>">
                         </div>
                     </div>
 
