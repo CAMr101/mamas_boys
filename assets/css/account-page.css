@@ -421,7 +421,7 @@ main .bottom-data .orders table tbody tr{
 }
 
 main .bottom-data .orders table tbody tr:hover{
-    background: var(--grey);
+    /* background: var(--grey); */
 }
 
 main .bottom-data .orders table tr td .status{

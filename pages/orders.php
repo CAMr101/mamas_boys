@@ -245,6 +245,7 @@ if (isset($_SESSION["customer_id"])) {
 
 
     <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/confirmDelete.js"></script>
 
 
 </body>

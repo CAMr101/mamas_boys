@@ -185,6 +185,7 @@ include "../components/customer-meta-data.php";
 
 
     <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/confirmDelete.js"></script>
 
 </body>
 

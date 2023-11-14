@@ -105,20 +105,6 @@ if (isset($_SESSION["customer_id"])) {
             </a>
         </ul>
         <ul class="insights">
-            <a href="edit.php?id=<?php echo $user['id'] ?>">
-                <li>
-                    <span class="info">
-                        <h3> Edit Account</h3>
-
-                    </span>
-                    <p><span class="material-symbols-outlined">
-                            edit
-                        </span></p>
-                </li>
-            </a>
-
-        </ul>
-        <ul class="insights">
             <a>
                 <li>
                     <span class="info">

@@ -2,6 +2,8 @@
 
 //update staff
 if (isset($_REQUEST['update']) && $_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
+    include 'passwordHash.php';
+
     $code = $_GET['update'];
     $staffId = $_POST['id'];
     $name = $_POST['name'];
@@ -12,10 +14,13 @@ if (isset($_REQUEST['update']) && $_SERVER["REQUEST_METHOD"] == "POST" && isset(
     $confirmPassword = $_POST['confirm-password'];
     $type = $_POST['type'];
 
+    $pw_hashed = hashPassword($password);
+    $cPw_hashed = hashPassword($confirmPassword);
+
     switch ($code) {
         case '1':
-            if (checkPasswordMatch($password, $confirmPassword) == true) {
-                updateStaff($name, $surname, $email, $phone, $password, $type, $staffId);
+            if (checkPasswordMatch($pw_hashed, $cPw_hashed) == true) {
+                updateStaff($name, $surname, $email, $phone, $pw_hashed, $password, $type, $staffId);
                 header('location:../admin/staff-member.php?success=true');
             } else {
                 header('location:../admin/staff-member.php?error=pw');
@@ -88,15 +93,21 @@ function getStaffById($id)
     }
 }
 
-function updateStaff($name, $surname, $email, $phone, $password, $type, $id)
+function updateStaff($name, $surname, $email, $phone, $pw, $normalPw, $type, $id)
 {
     include "../config/dbh.inc.php";
 
     try {
+        if ($normalPw == "") {
+            $query = "UPDATE `staff` SET `name`=?, `surname`=?, `email`=?, `phone`=?, `type`=? WHERE id = ?;";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([$name, $surname, $email, $phone, $type, $id]);
+        } else {
+            $query = "UPDATE `staff` SET `name`=?, `surname`=?, `email`=?, `phone`=?, `password`=?, `type`=? WHERE id = ?;";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([$name, $surname, $email, $phone, $pw, $type, $id]);
+        }
 
-        $query = "UPDATE `staff` SET `name`=?, `surname`=?, `email`=?, `phone`=?, `password`=?, `type`=? WHERE id = ?;";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute([$name, $surname, $email, $phone, $password, $type, $id]);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $staff = $result[0];
 
@@ -113,12 +124,8 @@ function updateStaff($name, $surname, $email, $phone, $password, $type, $id)
 
 function checkPasswordMatch($pw, $cPw)
 {
-    include 'passwordHash.php';
 
-    $pw_hashed = hashPassword($pw);
-    $cPw_hashed = hashPassword($cPw);
-
-    if ($pw_hashed === $cPw_hashed)
+    if ($pw === $cPw)
         return true;
     else
         return false;

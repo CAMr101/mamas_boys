@@ -21,6 +21,11 @@
                 Edit Account
             </a>
         </li>
+        <li class="side-menu-item">
+            <a href="../handlers/processCustomer.php?delete=true" class="logout" id="deleteBtn">
+                Delete Account
+            </a>
+        </li>
     </ul>
     <ul class="side-menu">
         <li class="side-menu-item">

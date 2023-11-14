@@ -120,6 +120,19 @@ if (isset($_REQUEST['logout'])) {
    }
 }
 
+if (isset($_REQUEST['success'])) {
+   $code = $_REQUEST['success'];
+
+   switch ($code) {
+      case 'delete':
+         $message = "Account successfully Deleted.";
+         echo "<script>alert('$message');</script>";
+         break;
+      default:
+         break;
+   }
+}
+
 $categories = getAllCategories();
 
 function getAllCategories()
