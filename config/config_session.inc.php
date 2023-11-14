@@ -5,7 +5,7 @@ ini_set("session.use_strict_mode", 1);
 
 session_set_cookie_params([
     'lifetime' => 1800,
-    'domain' => 'localhost',
+    //remove path during prod
     'path' => '/',
     'secure' => true,
     'httponly' => true
@@ -14,7 +14,7 @@ session_set_cookie_params([
 session_start();
 
 
-if (isset($_SESSION["user_id"])) {
+if (isset($_SESSION["user_id"]) || isset($_SESSION["customer_id"])) {
     if (!isset($_SESSION['last_regeneration'])) {
         regenerateSessionIdLoggedIn();
     } else {
