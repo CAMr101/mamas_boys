@@ -108,28 +108,7 @@ if (isset($_REQUEST['login'])) {
             </p>
         </form>
 
-        <!-- <p class="form-bottom-message"><a href="#0">Forgot your password?</a></p> -->
-        <!-- <a href="#0" class="close-form">Close</a> -->
-
-        <div id="reset-password">
-            <p class="form-message">Lost your password? Please enter your email address.</br> You will receive a
-                link to create a new password.</p>
-
-            <form class="form">
-                <p class="fieldset">
-                    <label class="image-replace email" for="reset-email">E-mail</label>
-                    <input class="full-width has-padding has-border" id="reset-email" type="email" placeholder="E-mail">
-                    <span class="error-message">An account with this email does not exist!</span>
-                </p>
-
-                <p class="fieldset">
-                    <input class="full-width has-padding" type="submit" value="Reset password">
-                </p>
-            </form>
-
-            <p class="form-bottom-message"><a href="#0">Back to log-in</a></p>
-        </div>
-        <a href="#0" class="close-form">Close</a>
+        <p class="form-bottom-message"><a href="forgot-password.php">Forgot your password?</a></p>
     </div>
 
     <?php

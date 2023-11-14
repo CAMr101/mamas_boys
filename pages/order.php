@@ -1,12 +1,11 @@
 <?php
+session_start();
 
 include "../components/header.php";
 include "../components/footer.php";
 include "../handlers/processOrder.php";
 include "../handlers/processProducts.php";
 include "../handlers/processCustomer.php";
-
-session_start();
 
 if (isset($_SESSION["customer_id"])) {
     $customerId = $_SESSION["customer_id"];

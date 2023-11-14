@@ -4,6 +4,21 @@ session_start();
 include "../components/header.php";
 include "../components/footer.php";
 
+if (isset($_REQUEST['error'])) {
+    $code = $_REQUEST['error'];
+
+    switch ($code) {
+        case "notFound":
+            $message = "User does not exist. Please reate an account";
+            echo "<script>alert('$message');</script>";
+            break;
+        default:
+            $message = "Something went wrong. Please try again.";
+            echo "<script>alert('$message');</script>";
+            break;
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +30,7 @@ include "../components/footer.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Website meta data -->
     <?php include "../components/customer-meta-data.php"; ?>
-    <title>Login</title>
+    <title>Forgot Password</title>
 
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
@@ -51,60 +66,22 @@ include "../components/footer.php";
 
     <div class="user-modal-container">
 
-        <form action="../handlers/login.php?login=1" method="post" class="form">
-            <h1>Login</h1>
+        <p class="form-message">Lost your password? Please enter your email address.</br> You will receive a
+            link to create a new password.</p>
 
+        <form action="../handlers/forgot-password.php" method="post" class="form">
             <p class="fieldset">
-                <label class="image-replace email" for="email">E-mail</label>
-                <input class="full-width has-padding has-border" name="signin-email" id="signin-email" type="email"
+                <label class="image-replace email" for="reset-email">E-mail</label>
+                <input class="full-width has-padding has-border" name="reset-email" id="reset-email" type="email"
                     placeholder="E-mail">
             </p>
 
-
             <p class="fieldset">
-                <label class="image-replace password" for="signin-password">Password</label>
-                <input class="full-width has-padding has-border" name="signin-password" id="signin-password"
-                    type="password" placeholder="Password">
-                <!-- <a href="#0" class="hide-password">Show</a> -->
-                <!-- <span class="error-message">Wrong password! Try again.</span> -->
-            </p>
-
-            <!-- <p class="fieldset">
-                <input type="checkbox" id="remember-me" checked>
-                <label for="remember-me">Remember me</label>
-            </p> -->
-
-            <p class="fieldset">
-                <input class="full-width" type="submit" value="Login">
-            </p>
-
-            <p>Don't have an account?
-                <a href="signup.php" style="color:#0652dd;text-align:center;">Create An Account</a>
+                <input class="full-width has-padding" type="submit" value="Reset password">
             </p>
         </form>
 
-        <!-- <p class="form-bottom-message"><a href="#0">Forgot your password?</a></p> -->
-        <!-- <a href="#0" class="close-form">Close</a> -->
-
-        <div id="reset-password">
-            <p class="form-message">Lost your password? Please enter your email address.</br> You will receive a
-                link to create a new password.</p>
-
-            <form class="form">
-                <p class="fieldset">
-                    <label class="image-replace email" for="reset-email">E-mail</label>
-                    <input class="full-width has-padding has-border" id="reset-email" type="email" placeholder="E-mail">
-                    <span class="error-message">An account with this email does not exist!</span>
-                </p>
-
-                <p class="fieldset">
-                    <input class="full-width has-padding" type="submit" value="Reset password">
-                </p>
-            </form>
-
-            <p class="form-bottom-message"><a href="#0">Back to log-in</a></p>
-        </div>
-        <a href="#0" class="close-form">Close</a>
+        <p class="form-bottom-message"><a href="login.php">Back to log-in</a></p>
     </div>
 
     <?php
