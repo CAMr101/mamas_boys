@@ -257,6 +257,7 @@ function completeOrder(){
     }else{
 
         orderInfo = {
+            cId : document.getElementById("cId").value,
             cName: contactInfo.cName,
             cEmail: contactInfo.cEmail,
             cPhone: contactInfo.cPhone,

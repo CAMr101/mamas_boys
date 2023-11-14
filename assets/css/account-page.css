@@ -181,7 +181,7 @@ main{
 
 main{
     padding: 36px 0px;
-    min-height: calc(62.5vh - 56px);
+    min-height: 62.5vh;
 }
 
 main .header{

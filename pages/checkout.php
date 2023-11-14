@@ -11,8 +11,6 @@ if (isset($_SESSION["customer_id"])) {
     $userId = $_SESSION["customer_id"];
     $user = getCustomer($userId);
 
-} else {
-    header("location:login.php?login=denied");
 }
 
 $cart = json_decode($_COOKIE['usercart'], true);
@@ -20,13 +18,15 @@ $products = [];
 $counter = 0;
 $orderTotal = 0;
 
-foreach ($cart as $item) {
-    $products[$counter] = getProduct($item['id']);
-    $products[$counter]['quantity'] = $item['quantity'];
+if (isset($cart)) {
+    foreach ($cart as $item) {
+        $products[$counter] = getProduct($item['id']);
+        $products[$counter]['quantity'] = $item['quantity'];
 
-    $orderTotal += $products[$counter]['price'] * $item['quantity'];
+        $orderTotal += $products[$counter]['price'] * $item['quantity'];
 
-    $counter++;
+        $counter++;
+    }
 }
 
 ?>
@@ -118,22 +118,33 @@ foreach ($cart as $item) {
                     <div class="info">
                         <div class="name">
                             <label for="cName">Name</label>
-                            <input type="text" name="cName" id="customer-name" value="<?php if ($user) {
-                                echo $user['name'];
+                            <input type="hidden" name="cId" value="<?php if (isset($_SESSION["customer_id"])) {
+                                if ($user) {
+                                    echo $user['id'];
+                                }
+                            } ?>" id="cId">
+                            <input type="text" name="cName" id="customer-name" value="<?php if (isset($_SESSION["customer_id"])) {
+                                if ($user) {
+                                    echo $user['name'];
+                                }
                             } ?>">
                         </div>
 
                         <div class="email">
                             <label for="cEmail">Email</label>
-                            <input type="email" name="cEmail" id="customer-email" value="<?php if ($user) {
-                                echo $user['email'];
+                            <input type="email" name="cEmail" id="customer-email" value="<?php if (isset($_SESSION["customer_id"])) {
+                                if ($user) {
+                                    echo $user['email'];
+                                }
                             } ?>">
                         </div>
 
                         <div class="telephone">
                             <label for="cPhone">Telephone</label>
-                            <input type="tel" name="cPhone" id="customer-phone" value="<?php if ($user) {
-                                echo $user['phone'];
+                            <input type="tel" name="cPhone" id="customer-phone" value="<?php if (isset($_SESSION["customer_id"])) {
+                                if ($user) {
+                                    echo $user['phone'];
+                                }
                             } ?>">
                         </div>
                     </div>

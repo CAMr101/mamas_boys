@@ -49,6 +49,11 @@ function createNewOrder()
     $data = file_get_contents("php://input");
     $customerOrder = json_decode($data, true);
 
+    if ($customerOrder["cId"] != "") {
+        $cId = $customerOrder["cId"];
+    } else {
+        $cId = null;
+    }
     $cName = $customerOrder["cName"];
     $cEmail = $customerOrder["cEmail"];
     $cPhone = $customerOrder["cPhone"];
@@ -62,10 +67,10 @@ function createNewOrder()
     try {
         include "../config/dbh.inc.php";
 
-        $query = "INSERT INTO shop_order (name, email, phone, order_total, order_items, order_status, payment_method, paid) 
-            VALUES (?,?,?,?,?,?,?,?);";
+        $query = "INSERT INTO shop_order (customer_id, name, email, phone, order_total, order_items, order_status, payment_method, paid) 
+            VALUES (?,?,?,?,?,?,?,?,?);";
         $stmt = $pdo->prepare($query);
-        $stmt->execute([$cName, $cEmail, $cPhone, $orderTotal, $orderItems, $status, $paymentMethod, $paid]);
+        $stmt->execute([$cId, $cName, $cEmail, $cPhone, $orderTotal, $orderItems, $status, $paymentMethod, $paid]);
 
         $query = "SELECT `id`, `name`, `email` FROM `shop_order` WHERE name=? AND email=? AND phone=?;";
         $stmt = $pdo->prepare($query);
