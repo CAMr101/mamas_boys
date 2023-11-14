@@ -2,11 +2,18 @@
 include("../handlers/processOrder.php");
 include("../handlers/processCustomer.php");
 include("../handlers/processMessages.php");
+include("../handlers/processStaff.php");
 
 session_start();
 
 if (!isset($_SESSION["user_id"])) {
     header("location:login.php?login=login");
+}
+
+$user = getStaffById($_SESSION['user_id']);
+
+if ($user['type'] != 'admin') {
+    header('location:../admin/admin.php?error=view');
 }
 
 $messages = getMessages();

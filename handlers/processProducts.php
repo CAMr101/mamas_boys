@@ -17,8 +17,6 @@ function getAllProducts()
     include "../config/dbh.inc.php";
 
     try {
-        $pdo = new PDO($dsn, $dbusername, $dbpassword);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $query = "SELECT * FROM product";
 

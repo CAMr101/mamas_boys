@@ -7,7 +7,25 @@ if (!isset($_SESSION["user_id"])) {
     header("location:login.php?login=login");
 }
 
+$user = getStaffById($_SESSION['user_id']);
+
+if ($user['type'] != 'admin') {
+    header('location:../admin/admin.php?error=view');
+}
+
 $staffMember = getStaff();
+
+if (isset($_REQUEST["success"])) {
+    $code = $_REQUEST['success'];
+    switch ($code) {
+        case 'delete':
+            $message = "Successfully updated user.";
+            echo "<script>alert('$message');</script>";
+            break;
+        default:
+            break;
+    }
+}
 
 ?>
 

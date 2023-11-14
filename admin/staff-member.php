@@ -18,7 +18,32 @@ $staffId = $pathParams[1];
 $staffMember = getStaffById($staffId);
 
 if ($staffMember == null) {
-    header('location:staff.php');
+    header('location:staff.php?error=notfound');
+}
+
+
+if (isset($_REQUEST['error'])) {
+    $code = $_REQUEST['error'];
+
+    switch ($code) {
+        case "pw":
+            $message = "Password does not match. Please try again";
+            echo "<script>alert('$message');</script>";
+            break;
+        case "delete":
+            $message = "Could not delete user. Please try again.";
+            echo "<script>alert('$message');</script>";
+            break;
+        default:
+            $message = "Something went wrong. please try again";
+            echo "<script>alert('$message');</script>";
+            break;
+    }
+}
+
+if (isset($_REQUEST["success"])) {
+    $message = "Successfully updated account.";
+    echo "<script>alert('$message');</script>";
 }
 
 ?>
@@ -33,12 +58,7 @@ if ($staffMember == null) {
     <div class="header">
         <div class="left">
             <h1>
-                Staff Members
-                <a href="edit-staff.php?id=<?php echo $staffMember['id']; ?>">
-                    <span class="material-symbols-outlined">
-                        edit
-                    </span>
-                </a>
+                <?php echo ucfirst($staffMember['name']) . " " . ucfirst($staffMember['surname']); ?>
             </h1>
         </div>
     </div>
@@ -83,7 +103,8 @@ if ($staffMember == null) {
                                 <?php echo $staffMember['type']; ?>
                             </td>
                             <td>
-                                <a href="../handlers/processStaff.php?delete=<?php echo $staffMember['id']; ?>">
+                                <a href="../handlers/processStaff.php?delete=<?php echo $staffMember['id']; ?>"
+                                    id="confirmDeleteUser">
                                     <span class="material-symbols-outlined">
                                         delete
                                     </span>
@@ -119,9 +140,115 @@ if ($staffMember == null) {
 
     </div>
 
+    <div class="bottom-data">
+        <div class="orders">
+
+            <div class="header">
+                <i class='bx bx-receipt'></i>
+                <span class="material-symbols-outlined">
+                    edit
+                </span>
+                <h3>Update</h3>
+
+            </div>
+
+            <form action="../handlers/processStaff.php?update=1" method="post" enctype="multipart/form-data"
+                id="new-category">
+
+                <datalist id="employee-type">
+                    <option value="admin"></option>
+                    <option value="kitchen"></option>
+                </datalist>
+
+                <!-- <input type="hidden" name="MAX_FILE_SIZE" value=""> -->
+                <table>
+
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label for="name">Name</label>
+                            </td>
+                            <td>
+                                <input type="hidden" name="id" value="<?php echo $staffMember['id']; ?>">
+                                <input type="text" name="name" value="<?php echo $staffMember['name']; ?>">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="surname">Surname</label>
+                            </td>
+                            <td>
+                                <input type="text" name="surname" value="<?php echo $staffMember['surname']; ?>">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="email">Email</label>
+                            </td>
+                            <td>
+                                <input type="email" name="email" value="<?php echo $staffMember['email']; ?>">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="phone">Phone Number</label>
+                            </td>
+                            <td>
+                                <input type="text" name="phone" value="<?php echo $staffMember['phone']; ?>">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="password">New Password</label>
+                            </td>
+                            <td>
+                                <input type="password" name="password" id="password">
+                                <span id="message" style="color:red"> </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="password">Confirm New Password</label>
+                            </td>
+                            <td>
+                                <input type="password" name="confirm-password" id="confirmPassword">
+                                <span id="confirmMessage" style="color:red"> </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="type">Type</label>
+                            </td>
+                            <td>
+                                <input list="employee-type" name="type" value="<?php echo $staffMember['type']; ?>">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="3">
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button id="submitButton">Update Staff</button>
+            </form>
+
+
+        </div>
+
+    </div>
+
 </main>
 
-
+<script src="../assets/js/admin_confirmDelete.js"></script>
 
 </body>
 

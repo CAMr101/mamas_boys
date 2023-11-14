@@ -1,8 +1,15 @@
 <?php
 session_start();
 
+include("../handlers/processStaff.php");
+
 if (!isset($_SESSION["user_id"])) {
     header("location:login.php?login=login");
+}
+$user = getStaffById($_SESSION['user_id']);
+
+if ($user['type'] != 'admin') {
+    header('location:../admin/admin.php?error=view');
 }
 ?>
 

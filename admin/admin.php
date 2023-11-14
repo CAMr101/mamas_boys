@@ -1,6 +1,7 @@
 <?php
 include("../handlers/processOrder.php");
 include("../handlers/processProducts.php");
+include("../handlers/processStaff.php");
 
 session_start();
 
@@ -8,7 +9,38 @@ if (!isset($_SESSION["user_id"])) {
     header("location:login.php?login=login");
 }
 
+$user = getStaffById($_SESSION['user_id']);
 $orders = getOrders();
+$authorise;
+
+
+if ($user['type'] != 'admin') {
+    $authorise = false;
+    $total = "--";
+} else {
+    $authorise = true;
+    $total = getTotal();
+}
+
+
+if (isset($_REQUEST['error'])) {
+    $code = $_REQUEST['error'];
+
+    switch ($code) {
+        case "notauthorised":
+            $message = "Not authorised to perform action.";
+            echo "<script>alert('$message');</script>";
+            break;
+        case "view":
+            $message = "Not allowed to view this page.";
+            echo "<script>alert('$message');</script>";
+            break;
+        default:
+            $message = "Something went wrong. please try again";
+            echo "<script>alert('$message');</script>";
+            break;
+    }
+}
 
 ?>
 
@@ -43,7 +75,6 @@ $orders = getOrders();
                 <span class="info">
                     <h3> R
                         <?php
-                        $total = getTotal();
                         echo $total;
                         ?>
 
@@ -66,7 +97,11 @@ $orders = getOrders();
                 </span>
             </li>
         </a>
-        <a href="reports.php">
+
+        <?php
+        if ($authorise == true)
+            echo `
+            <a href="reports.php">
             <li><i class='bx bx-dollar-circle'>
                     <span class="material-symbols-outlined">
                         description
@@ -80,8 +115,8 @@ $orders = getOrders();
                 </span>
             </li>
         </a>
-
-
+        `;
+        ?>
     </ul>
 
     <div class="bottom-data">
