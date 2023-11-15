@@ -6,7 +6,7 @@ use Dotenv\Dotenv as Dotenv;
 
 require '../vendor/autoload.php';
 
-$dotenv = Dotenv::createImmutable(__DIR__ . '/..');
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../..');
 $dotenv->load();
 
 function sendAdminPasswordResetEmail($email, $name, $url)
@@ -66,7 +66,7 @@ function sendPasswordResetEmail($email, $name, $url)
     $mail->Port = 465;
 
     //Recipients
-    $mail->setFrom($_ENV["MAIL_NO_REPLY_USERNAME"], 'no-reply');
+    $mail->setFrom($_ENV["MAIL_NO_REPLY_USERNAME"], $_ENV[]);
     $mail->addAddress($email, $name);
     $mail->isHTML(true); //Set email format to HTML
 
