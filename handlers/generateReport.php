@@ -40,3 +40,29 @@ if (isset($_REQUEST['id'])) {
 } else {
     header("location:../admin/reports.php");
 }
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $startDate = $_POST["start_date"];
+    $endDate = $_POST["end_date"];
+
+    print_r($startDate);
+
+    include "../config/dbh.inc.php";
+
+    try {
+
+        $query = "SELECT * FROM category";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+        $pdo = null;
+        $stmt = null;
+
+        return $result;
+
+    } catch (PDOException $e) {
+        echo "Connection failed: " . $e->getMessage();
+    }
+}

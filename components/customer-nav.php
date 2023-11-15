@@ -11,11 +11,11 @@
                 Orders
             </a>
         </li>
-        <li class="side-menu-item">
+        <!-- <li class="side-menu-item">
             <a href="billing-information.php">
                 Billing Information
             </a>
-        </li>
+        </li> -->
         <li class="side-menu-item">
             <a href="edit.php">
                 Edit Account

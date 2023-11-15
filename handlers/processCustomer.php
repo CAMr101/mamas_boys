@@ -18,7 +18,7 @@ if (isset($_REQUEST['update']) && $_SERVER["REQUEST_METHOD"] == "POST" && isset(
 
     switch ($code) {
         case 1:
-            if (checkPasswordMatch($pw_hashed, $cPw_hashed) == true) {
+            if (checkPassword($pw_hashed, $cPw_hashed) == true) {
                 updateCustomer($name, $surname, $email, $phone, $pw_hashed, $password, $id);
                 $user = getCustomer($id);
                 $_SESSION["customer_name"] = $user["name"];
@@ -135,11 +135,33 @@ function deleteCustomer($id)
     }
 }
 
-function checkPasswordMatch($pw, $cPw)
+function checkPassword($pw, $cPw)
 {
 
     if ($pw === $cPw)
         return true;
     else
         return false;
+}
+
+function getUserByEmail($email)
+{
+    include "../config/dbh.inc.php";
+
+    try {
+
+        $query = "SELECT * FROM customer WHERE email=?;";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$email]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $pdo = null;
+        $stmt = null;
+
+        return $result;
+
+    } catch (PDOException $e) {
+        echo "Connection failed: " . $e->getMessage();
+        return null;
+    }
 }

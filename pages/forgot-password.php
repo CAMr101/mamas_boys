@@ -8,8 +8,16 @@ if (isset($_REQUEST['error'])) {
     $code = $_REQUEST['error'];
 
     switch ($code) {
-        case "notFound":
-            $message = "User does not exist. Please reate an account";
+        case "notfound":
+            $message = "User does not exist. Please enter a registered email.";
+            echo "<script>alert('$message');</script>";
+            break;
+        case "notsent":
+            $message = "Mail not sent. Please try again.";
+            echo "<script>alert('$message');</script>";
+            break;
+        case "con":
+            $message = "Unable to process you request. Please try again.";
             echo "<script>alert('$message');</script>";
             break;
         default:
@@ -69,7 +77,7 @@ if (isset($_REQUEST['error'])) {
         <p class="form-message">Lost your password? Please enter your email address.</br> You will receive a
             link to create a new password.</p>
 
-        <form action="../handlers/forgot-password.php" method="post" class="form">
+        <form action="../handlers/forgot-password.php?mid=1" method="post" class="form">
             <p class="fieldset">
                 <label class="image-replace email" for="reset-email">E-mail</label>
                 <input class="full-width has-padding has-border" name="reset-email" id="reset-email" type="email"
@@ -81,7 +89,7 @@ if (isset($_REQUEST['error'])) {
             </p>
         </form>
 
-        <p class="form-bottom-message"><a href="login.php">Back to log-in</a></p>
+        <p class="form-bottom-message"><a href="login.php">Back to login</a></p>
     </div>
 
     <?php

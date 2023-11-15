@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2023 at 10:35 PM
+-- Generation Time: Nov 14, 2023 at 07:44 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `mamasboys_db`
+-- Database: `mamasboy_db`
 --
 
 -- --------------------------------------------------------
@@ -97,7 +97,8 @@ INSERT INTO `customer` (`id`, `name`, `surname`, `address`, `email`, `phone`, `p
 (1, 'junior', NULL, '515 this address is wherer it goes down', 'neo@email.com', '01239634865', 'cf0b854f5a17fdad773d462438d4d7328722b817d40a74ecb8d9ad79f98aa251', '2023-11-10 09:11:38', NULL, NULL),
 (2, 'junior', NULL, '515 this address is wherer it goes down', 'neo@email.com', '01239634865', 'cf0b854f5a17fdad773d462438d4d7328722b817d40a74ecb8d9ad79f98aa251', '2023-11-10 09:12:53', NULL, NULL),
 (3, 'Oratile', 'akakak', '515 this address is wherer it goes down', 'neo@email.com', '01239634865', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '2023-11-10 09:13:18', NULL, NULL),
-(4, 'Oratile', 'akakak', '515 this address is wherer it goes down', 'neo@email.com', '01239634865', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '2023-11-10 09:14:22', NULL, NULL);
+(4, 'Oratile', 'akakak', '515 this address is wherer it goes down', 'neo@email.com', '01239634865', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '2023-11-10 09:14:22', NULL, NULL),
+(5, 'jeje', 'tom', '123 address street', 'cameron@gmail.com', '0123456789', 'cf0b854f5a17fdad773d462438d4d7328722b817d40a74ecb8d9ad79f98aa251', '2023-11-14 13:41:00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -226,7 +227,15 @@ INSERT INTO `shop_order` (`id`, `customer_id`, `name`, `email`, `phone`, `order_
 (3, NULL, 'tom', 'tom@email.com', '1234567890', 106, '[{\"id\":5,\"quantity\":1},{\"id\":19,\"quantity\":2},{\"id\":10,\"quantity\":1}]', 'Completed', 'cash', 0, '2023-11-07 19:22:29', '2023-11-10 13:36:35', NULL),
 (4, NULL, 'junior', 'jj@email.com', '671234567', 106, '[{\"id\":5,\"quantity\":1},{\"id\":19,\"quantity\":2},{\"id\":10,\"quantity\":1}]', '', 'cash', 0, '2023-11-07 19:52:00', '2023-11-07 17:52:00', NULL),
 (5, NULL, 'glad', 'glad@email.com', '671234567', 133, '[{\"id\":19,\"quantity\":1},{\"id\":5,\"quantity\":1},{\"id\":10,\"quantity\":2}]', '', 'cash', 0, '2023-11-08 08:25:14', '2023-11-08 06:25:14', NULL),
-(8, NULL, 'neo', 'neo@email.com', '01234567896', 0, '[{\"id\":5,\"quantity\":4},{\"id\":4,\"quantity\":3}]', 'NotStarted', 'card', 0, '2023-11-12 03:09:06', '2023-11-12 01:09:06', NULL);
+(9, NULL, 'tom', 'tom@email.com', '01234567896', 288, '[{\"id\":5,\"quantity\":4},{\"id\":4,\"quantity\":3},{\"id\":7,\"quantity\":1},{\"id\":10,\"quantity\":1},{\"id\":8,\"quantity\":1},{\"id\":18,\"quantity\":1}]', 'NotStarted', 'card', 0, '2023-11-14 00:02:31', '2023-11-13 22:02:31', NULL),
+(10, NULL, 'neo', 'tom@email.com', '01234567896', 96, '[{\"id\":4,\"quantity\":3},{\"id\":7,\"quantity\":1}]', 'NotStarted', 'cash', 0, '2023-11-14 00:49:14', '2023-11-13 22:49:14', NULL),
+(11, NULL, 'tom', 'neo@email.com', '01234567896', 81, '[{\"id\":5,\"quantity\":2},{\"id\":8,\"quantity\":1}]', 'NotStarted', 'card', 0, '2023-11-14 00:58:09', '2023-11-13 22:58:09', NULL),
+(12, NULL, 'tom', 'neo@email.com', '01234567896', 46, '[{\"id\":5,\"quantity\":2}]', 'NotStarted', 'card', 0, '2023-11-14 01:03:59', '2023-11-13 23:03:59', NULL),
+(13, NULL, 'tom', 'neo@email.com', '01234567896', 46, '[{\"id\":5,\"quantity\":2}]', 'NotStarted', 'card', 0, '2023-11-14 01:06:28', '2023-11-13 23:06:28', NULL),
+(14, NULL, 'tom', 'neo@email.com', '01234567896', 46, '[{\"id\":5,\"quantity\":2}]', 'NotStarted', 'card', 0, '2023-11-14 01:08:16', '2023-11-13 23:08:16', NULL),
+(15, NULL, 'tom', 'neo@email.com', '01234567896', 90, '[{\"id\":9,\"quantity\":1},{\"id\":10,\"quantity\":1}]', 'Started', 'cash', 0, '2023-11-14 01:17:03', '2023-11-13 23:24:40', NULL),
+(16, NULL, 'jeje', 'cameron@gmail.com', '0123456789', 72, '[{\"id\":3,\"quantity\":1},{\"id\":5,\"quantity\":1},{\"id\":6,\"quantity\":1}]', 'NotStarted', 'card', 0, '2023-11-14 16:15:31', '2023-11-14 14:15:31', NULL),
+(18, 5, 'jeje', 'cameron@gmail.com', '0123456789', 72, '[{\"id\":3,\"quantity\":1},{\"id\":5,\"quantity\":1},{\"id\":6,\"quantity\":1}]', 'Started', 'cash', 0, '2023-11-14 16:19:52', '2023-11-14 14:24:55', NULL);
 
 -- --------------------------------------------------------
 
@@ -250,11 +259,10 @@ CREATE TABLE `staff` (
 --
 
 INSERT INTO `staff` (`id`, `name`, `surname`, `email`, `phone`, `password`, `created_at`, `type`) VALUES
-(4, 'neo', 'tom', 'neo@email.com', '761234567', 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', '2023-11-09 12:42:06', 'admin'),
-(5, 'neo', 'tom', 'neo@email.com', '761234567', 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646', '2023-11-09 12:42:34', 'admin'),
-(6, 'jj', 'surname20', 'jjname@email.com', '0671234567', '777524f0cf9c792596eb2b3c57801dbd37b6999910d7e693922ab25c9193faa9', '2023-11-10 06:36:44', 'kitchen'),
-(7, 'jjjjsjsj', 'sur', 'email@email.com', '0127894563', '777524f0cf9c792596eb2b3c57801dbd37b6999910d7e693922ab25c9193faa9', '2023-11-10 08:48:29', 'kitchen'),
-(8, 'Books', 'surname20', 'books@email.com', '0127894563', 'cf0b854f5a17fdad773d462438d4d7328722b817d40a74ecb8d9ad79f98aa251', '2023-11-10 09:33:15', 'kitchen');
+(4, 'neo', 'tom', 'neo@email.com', '0761234567', 'cf0b854f5a17fdad773d462438d4d7328722b817d40a74ecb8d9ad79f98aa251', '2023-11-09 12:42:06', 'admin'),
+(8, 'Books', 'surname20', 'books@email.com', '0127894563', 'cf0b854f5a17fdad773d462438d4d7328722b817d40a74ecb8d9ad79f98aa251', '2023-11-10 09:33:15', 'kitchen'),
+(9, 'Techie Geeks', 'TG', 'techie.geeks@email.com', '012789541', '94c46f1e99a3c7cab332e3498b766c52f155d7ec120e48b3e2666f4b9f924f66', '2023-11-14 14:49:29', 'admin'),
+(10, 'Bongani', 'Libisi', 'bongani.libisi@email.com', '0123456789', 'cf2ee54de8b2ddd62ded84cd774a42300544a241bd386ebdd93cafa431b9fab9', '2023-11-14 14:51:18', 'kitchen');
 
 --
 -- Indexes for dumped tables
@@ -351,7 +359,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `images`
@@ -375,13 +383,13 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `shop_order`
 --
 ALTER TABLE `shop_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `staff`
 --
 ALTER TABLE `staff`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables

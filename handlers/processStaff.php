@@ -153,3 +153,25 @@ function deleteStaffById($id)
         echo "Connection failed: " . $e->getMessage();
     }
 }
+
+function getStaffByEmail($email)
+{
+    include "../config/dbh.inc.php";
+
+    try {
+
+        $query = "SELECT * FROM staff WHERE email=?;";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$email]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $pdo = null;
+        $stmt = null;
+
+        return $result;
+
+    } catch (PDOException $e) {
+        echo "Connection failed: " . $e->getMessage();
+        return null;
+    }
+}

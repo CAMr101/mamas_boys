@@ -28,6 +28,21 @@ if (isset($_REQUEST['login'])) {
     }
 }
 
+if (isset($_REQUEST['reset'])) {
+    $code = $_REQUEST["reset"];
+
+    switch ($code) {
+        case "success":
+            $message = "Password Successfully reset.";
+            echo "<script>alert('$message');</script>";
+            break;
+        case "error":
+            $message = "Request not allowed.";
+            echo "<script>alert('$message');</script>";
+            break;
+    }
+}
+
 ?>
 
 

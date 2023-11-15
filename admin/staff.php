@@ -77,12 +77,12 @@ if (isset($_REQUEST["success"])) {
                                 </td>
                                 <td>
                                     <a href="staff-member.php?id=<?php echo $staff['id']; ?>">
-                                        <?php echo $staff['name']; ?>
+                                        <?php echo ucfirst($staff['name']); ?>
                                     </a>
                                 </td>
                                 <td>
                                     <a href="staff-member.php?id=<?php echo $staff['id']; ?>">
-                                        <?php echo $staff['surname']; ?>
+                                        <?php echo ucfirst($staff['surname']); ?>
                                     </a>
                                 </td>
                                 <td>

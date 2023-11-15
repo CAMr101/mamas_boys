@@ -17,8 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_REQUEST['method']) && isset(
             $hashedPw = hashPassword($password);
             $confirmHasedPw = hashPassword($confirm_password);
             $confirmed = matchPassword($hashedPw, $confirmHasedPw);
-            if ($confirmed === false)
+
+            if ($confirmed === false) {
                 header('location:../pages/signup.php?error=1');
+            }
 
             signupCustomer($name, $surname, $address, $email, $phone, $hashedPw);
 
