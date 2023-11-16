@@ -13,36 +13,33 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_REQUEST['method']) && isset(
     $password = $_POST['signup-password'];
     $confirm_password = $_POST['signup-password-confirm'];
 
-    switch ($method) {
-        case 1:
-            $hashedPw = hashPassword($password);
-            $confirmHasedPw = hashPassword($confirm_password);
-            $confirmed = matchPassword($hashedPw, $confirmHasedPw);
+    $hashedPw = hashPassword($password);
+    $confirmHasedPw = hashPassword($confirm_password);
+    $confirmed = matchPassword($hashedPw, $confirmHasedPw);
 
-            if ($confirmed === false) {
-                header('location:../pages/signup.php?error=1');
-            }
-
-            signupCustomer($name, $surname, $address, $email, $phone, $hashedPw);
-
-            $selector = createSelector();
-            $token = createToken();
-
-            $url = "www.mamas-boys.co.za/handlers/verifyEmail.php?mid=1&selector=" . $selector . "&validator=" . bin2hex($token);
-
-            deleteExistingToken($email, 0);
-            saveActivationToken($email, $selector, $token);
-            $mailSent = customerVerificationEmail($email, $name, $url);
-
-            if (!$mailSent)
-                header("location:../pages/signup.php?error=mail");
-            else
-                header('location:../pages/signup-success.php');
-            break;
-        default:
-            header('location:../pages/signup.php?error=0');
-            break;
+    if ($confirmed === false) {
+        header('location:../pages/signup.php?error=1');
     }
+
+    signupCustomer($name, $surname, $address, $email, $phone, $hashedPw);
+
+    $selector = createSelector();
+    $token = createToken();
+
+    $url = "www.mamas-boys.co.za/handlers/verifyEmail.php?mid=1&selector=" . $selector . "&validator=" . $token;
+
+    $hashed_token = hashPassword($token);
+
+    deleteExistingToken($email, 0);
+    saveActivationToken($email, $selector, $hashed_token);
+
+    $mailSent = customerVerificationEmail($email, $name, $url);
+
+    if (!$mailSent)
+        header("location:../pages/signup.php?error=mail");
+    else
+        header('location:../pages/signup-success.php');
+
 } else {
     header('location:../pages/signup.php?error=2');
 }
