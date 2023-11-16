@@ -171,3 +171,5 @@ function deleteImageByProductId($productId)
         echo "Connection failed: " . $e->getMessage();
     }
 }
+
+?>

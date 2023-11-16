@@ -8,6 +8,8 @@ include './helpers/saveToken.php';
 include './helpers/create-selector.php';
 include './helpers/create-token.php';
 
+ob_start();
+
 $staffUrl = "../admin/staff.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
@@ -52,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
             deleteExistingToken($email, 0);
             saveActivationToken($email, $selector, $hashed_token);
 
-            // $mailSent = adminVerificationEmail($email, $name, $url);
+            $mailSent = adminVerificationEmail($email, $name, $url);
 
             if ($mailSent !== true) {
                 header("location:../admin/new-staff.php?error=mail");
@@ -91,19 +93,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
 
 function checkUserExist($email)
 {
+    ob_start();
     try {
         include "../config/dbh.inc.php";
 
         $query = "SELECT * FROM `staff`;";
         $stmt = $pdo->prepare($query);
-        $stmt->execute([$email]);
+        $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        print_r($result);
-        exit();
+        $counter = count($result);
 
-        foreach ($result as $item) {
-            if ($item['$email'] == $email) {
+        for ($i = 0; $i < $counter; $i++) {
+            if ($result[$i]["email"] == $email) {
                 header("location:../admin/staff.php?error=exist");
             }
         }
@@ -112,3 +114,5 @@ function checkUserExist($email)
         header("location:../admin/login.php?error=error");
     }
 }
+
+?>

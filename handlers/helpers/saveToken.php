@@ -43,3 +43,5 @@ function saveResetToken($email, $selector, $token, $expiry)
         exit();
     }
 }
+
+?>

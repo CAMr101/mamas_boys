@@ -32,3 +32,5 @@ function deleteExistingToken($email, $code)
         exit();
     }
 }
+
+?>

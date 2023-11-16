@@ -36,7 +36,6 @@ function verifyAdmin($selector, $token)
 
         if (password_verify($hashedToken, $result['token'])) {
             echo 'tokens match';
-            exit();
             $query = "UPDATE `staff` SET `verified`= 1 WHERE email=? ";
             $stmt = $pdo->prepare($query);
             $stmt->execute([$result['email']]);
@@ -87,17 +86,21 @@ function verifyCustomer($selector, $token)
         $stmt->execute([$selector]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $hasedToken = password_hash($token, PASSWORD_DEFAULT);
+        $hashedToken = hashPassword($token);
 
-        if ($result['token'] === $token) {
+        if (password_verify($hashedToken, $result['token'])) {
+            echo 'tokens match';
             $query = "UPDATE `customer` SET `verified`= 1 WHERE email=? ";
             $stmt = $pdo->prepare($query);
             $stmt->execute([$result['email']]);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            header('location:../pages/active.php');
+            header('location:../admin/email-verified.php');
         } else {
-            header('location:../pages/login.php?error=token');
+            echo 'not a match';
+            print_r($hashedToken);
+            exit();
+            // header('location:../admin/login.php?error=token');
         }
     } catch (PDOException $e) {
 
@@ -108,7 +111,7 @@ function verifyCustomer($selector, $token)
 
         if ($result["counter"] > 5) {
             deleteExistingToken($result["email"], 0);
-            header("location:../pages/login.php?error=counter");
+            header("location:../admin/login.php?error=counter");
         } else {
             $counter = $result["counter"] + 1;
 
@@ -123,6 +126,6 @@ function verifyCustomer($selector, $token)
 
         }
 
-        header('location:../pages/login.php?error=verify');
+        header('location:../admin/login.php?error=verify');
     }
 }

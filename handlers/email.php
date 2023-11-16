@@ -221,3 +221,5 @@ function customerVerificationEmail($email, $name, $url)
     }
 
 }
+
+?>
