@@ -1,4 +1,5 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -23,7 +24,7 @@ function sendAdminPasswordResetEmail($email, $name, $url)
     $mail->Port = 465;
 
     //Recipients
-    $mail->setFrom($_ENV["MAIL_NO_REPLY_USERNAME"], 'no-reply');
+    $mail->setFrom($_ENV["MAIL_NO_REPLY_USERNAME"], "Reset Password on Mama's Boy's");
     $mail->addAddress($email, $name);
     $mail->isHTML(true); //Set email format to HTML
 
@@ -46,7 +47,8 @@ function sendAdminPasswordResetEmail($email, $name, $url)
         header("location:../admin/forgot-password.php?error=notsent");
         exit();
     } else {
-        header("location:../admin/mail-sent.php?success=true");
+        // header("location:../admin/mail-sent.php?success=true");
+        echo "mail sent";
         exit();
     }
 
@@ -66,7 +68,7 @@ function sendPasswordResetEmail($email, $name, $url)
     $mail->Port = 465;
 
     //Recipients
-    $mail->setFrom($_ENV["MAIL_NO_REPLY_USERNAME"], $_ENV[]);
+    $mail->setFrom($_ENV["MAIL_NO_REPLY_USERNAME"], "Reset Password on Mama's Boy's");
     $mail->addAddress($email, $name);
     $mail->isHTML(true); //Set email format to HTML
 
@@ -107,7 +109,7 @@ function sendOrderConfirmationEmail($email, $name, $orderNum, $orderTotal)
     $mail->Port = 465;
 
     //Recipients
-    $mail->setFrom($_ENV["MAIL_ORDER_USERNAME"], 'orders');
+    $mail->setFrom($_ENV["MAIL_ORDER_USERNAME"], "Mama's Boy's Orders");
     $mail->addAddress($email, $name);
     $mail->isHTML(true); //Set email format to HTML
 
@@ -141,4 +143,81 @@ function sendOrderConfirmationEmail($email, $name, $orderNum, $orderTotal)
 
 }
 
+function adminVerificationEmail($email, $name, $url)
+{
+    //enables exceptions
+    $mail = new PHPMailer(true);
+    $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+    $mail->isSMTP();
+    $mail->Host = $_ENV["MAIL_HOSTNAME"];
+    $mail->SMTPAuth = true;
+    $mail->Username = $_ENV["MAIL_NO_REPLY_USERNAME"];
+    $mail->Password = $_ENV["MAIL_NO_REPLY_PASSWORD"];
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+    $mail->Port = 465;
 
+    //Recipients
+    $mail->setFrom($_ENV["MAIL_NO_REPLY_USERNAME"], "VERIFY EMAIL on Mama's Boy's");
+    $mail->addAddress($email, $name);
+    $mail->isHTML(true); //Set email format to HTML
+
+    $mail->Subject = 'Account Verification';
+
+    ob_start();
+    include '../templates/admin_email-verification.html';
+    $message = ob_get_contents();
+    ob_end_clean();
+
+    $message = str_replace("{{link}}", $url, $message);
+    $message = str_replace("{{name}}", $name, $message);
+
+    $mail->Body = $message;
+    $mail->AltBody = 'Your have registered with Mamas Boys, Here is your account verification link: ' . $url;
+
+    if (!$mail->send()) {
+        return false;
+    } else {
+        return true;
+    }
+
+}
+
+
+function customerVerificationEmail($email, $name, $url)
+{
+    //enables exceptions
+    $mail = new PHPMailer(true);
+    $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+    $mail->isSMTP();
+    $mail->Host = $_ENV["MAIL_HOSTNAME"];
+    $mail->SMTPAuth = true;
+    $mail->Username = $_ENV["MAIL_NO_REPLY_USERNAME"];
+    $mail->Password = $_ENV["MAIL_NO_REPLY_PASSWORD"];
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+    $mail->Port = 465;
+
+    //Recipients
+    $mail->setFrom($_ENV["MAIL_NO_REPLY_USERNAME"], "VERIFY EMAIL on Mama's Boy's");
+    $mail->addAddress($email, $name);
+    $mail->isHTML(true); //Set email format to HTML
+
+    $mail->Subject = 'Account Verification';
+
+    ob_start();
+    include '../templates/email-verification.html';
+    $message = ob_get_contents();
+    ob_end_clean();
+
+    $message = str_replace("{{link}}", $url, $message);
+    $message = str_replace("{{name}}", $name, $message);
+
+    $mail->Body = $message;
+    $mail->AltBody = 'Your have registered with Mamas Boys, Here is your account verification link: ' . $url;
+
+    if (!$mail->send()) {
+        return false;
+    } else {
+        return true;
+    }
+
+}

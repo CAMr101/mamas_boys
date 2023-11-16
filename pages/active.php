@@ -4,52 +4,21 @@ session_start();
 include "../components/header.php";
 include "../components/footer.php";
 
-if (isset($_REQUEST['login'])) {
-    $code = $_REQUEST['login'];
-
-    switch ($code) {
-        case "failed":
-            $message = "Wrong Password. Please try again.";
-            echo "<script>alert('$message');</script>";
-            break;
-        case "notFound":
-            $message = "User does not exist. Please create an account";
-            echo "<script>alert('$message');</script>";
-            break;
-        case "denied":
-            $message = "Access denied. Please login";
-            echo "<script>alert('$message');</script>";
-            break;
-        case "error":
-            $message = "Something went wrong. Please try again";
-            echo "<script>alert('$message');</script>";
-            break;
-        default:
-            break;
-    }
-}
-
 if (isset($_REQUEST['error'])) {
-    $code = $_REQUEST['error'];
+    $errorCode = $_REQUEST['error'];
 
-    switch ($code) {
-        case "verify":
-            $message = "Could not verify email. Please try again.";
+    switch ($errorCode) {
+        case 0:
+            $message = "Something went wrong. Please try again.";
             echo "<script>alert('$message');</script>";
             break;
-        case "counter":
-            $message = "You've exceeded your activation attempts. Please create an account";
-            echo "<script>alert('$message');</script>";
-            break;
-        case "token":
-            $message = "Verification failed. Please try again or create an account.";
-            echo "<script>alert('$message');</script>";
-            break;
-        case "error":
-            $message = "Something went wrong. Please try again";
+        case 1:
+            $message = "Password does not match.";
             echo "<script>alert('$message');</script>";
             break;
         default:
+            $message = "Something went wrong. Please try again.";
+            echo "<script>alert('$message');</script>";
             break;
     }
 }
@@ -100,6 +69,7 @@ if (isset($_REQUEST['error'])) {
     ?>
 
     <div class="user-modal-container">
+        <p class="form-message" style="color:#8BC34A; font-size:20px;">Email successfully verified.</p>
 
         <form action="../handlers/login.php?login=1" method="post" class="form">
             <h1>Login</h1>
@@ -133,7 +103,8 @@ if (isset($_REQUEST['error'])) {
             </p>
         </form>
 
-        <p class="form-bottom-message"><a href="forgot-password.php">Forgot your password?</a></p>
+        <p class="form-bottom-message"><a href="forgot-password.php" style="font-size:11px;">Forgot your password?</a>
+        </p>
     </div>
 
     <?php

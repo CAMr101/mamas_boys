@@ -24,7 +24,7 @@ body {
 
 .button{
     background-color: var(--black);
-    width: 10%;
+    min-width: 12.5%;
     margin: 1.75rem;
     border-radius: 0.5rem;
     color: var(--white);

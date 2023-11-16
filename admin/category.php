@@ -39,7 +39,7 @@ if ($image == null) {
         <div class="left">
             <h1>
                 <?php
-                echo ($category["name"]);
+                echo (ucfirst($category["name"]));
                 ?>
                 <a href="edit-category.php?id=<?php echo $categoryId; ?>">
                     <span class="material-symbols-outlined">
@@ -95,10 +95,10 @@ if ($image == null) {
                 </i>
                 <span class="info">
                     <h3>
-                        Image
+                        <img src="<?php echo ($image["location"]); ?>" alt="<?php echo ($image["name"]); ?>">
                     </h3>
                     <p>
-                        <img src="<?php echo ($image["location"]); ?>" alt="<?php echo ($image["name"]); ?>">
+                        Image
                     </p>
                 </span>
             </li>
@@ -116,8 +116,8 @@ if ($image == null) {
                         Delete
                     </h3>
                     <p>
-                        This will also delete all products within the
-                        <?php echo ($category["name"]); ?> category
+                        This will also delete all products within the "
+                        <?php echo (ucfirst($category["name"])); ?> " category
                     </p>
                 </span>
             </li>

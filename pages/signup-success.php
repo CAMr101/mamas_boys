@@ -35,9 +35,9 @@ if (!isset($_SESSION["customer_id"])) {
 
     <section id="thankYou" class="hidden">
         <h1>You Have Successfully Created an account.</h1>
-        <p>Its time to shop.&#x1F60B;</p>
+        <p>Please check you email to verify your account.</p>
         <button class="button">
-            <a href="products.php">Go to shop</a>
+            <a href="products.php">View shop &#x1F60B;</a>
         </button>
     </section>
 

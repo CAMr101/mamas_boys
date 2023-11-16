@@ -1,66 +1,24 @@
 <?php
 session_start();
 
-if (isset($_REQUEST['login'])) {
-    $code = $_REQUEST['login'];
-
-    switch ($code) {
-        case "login":
-            $message = "User Not Athorised. Please log in";
-            echo "<script>alert('$message');</script>";
-            break;
-        case "failed":
-            $message = "User does not exist. Please contact your employer";
-            echo "<script>alert('$message');</script>";
-            break;
-        case "incorrect":
-            $message = "Wrong password. Please try again";
-            echo "<script>alert('$message');</script>";
-            break;
-        case "error":
-            $message = "Something went wrong. please try again";
-            echo "<script>alert('$message');</script>";
-            break;
-        default:
-            $message = "Something went wrong. please try again";
-            echo "<script>alert('$message');</script>";
-            break;
-    }
-}
-
 if (isset($_REQUEST['error'])) {
-    $code = $_REQUEST["error"];
+    $code = $_REQUEST['error'];
 
     switch ($code) {
-        case "verify":
-            $message = "Failed to verify email. Please try again";
+        case "notfound":
+            $message = "User does not exist. Please enter a registered email.";
             echo "<script>alert('$message');</script>";
             break;
-        case "counter":
-            $message = "You've exceeded the email activation limit. Please contact your Admin or Employer";
+        case "notsent":
+            $message = "Mail not sent. Please try again.";
             echo "<script>alert('$message');</script>";
             break;
-        case "token":
-            $message = "Invalid token. Please contact your Admin or Employer.";
+        case "con":
+            $message = "Unable to process you request. Please try again.";
             echo "<script>alert('$message');</script>";
             break;
         default:
-            $message = "Something went wrong. please try again";
-            echo "<script>alert('$message');</script>";
-            break;
-    }
-}
-
-if (isset($_REQUEST['reset'])) {
-    $code = $_REQUEST["reset"];
-
-    switch ($code) {
-        case "success":
-            $message = "Password Successfully reset.";
-            echo "<script>alert('$message');</script>";
-            break;
-        case "error":
-            $message = "Request not allowed.";
+            $message = "Something went wrong . please try again";
             echo "<script>alert('$message');</script>";
             break;
     }
@@ -79,7 +37,7 @@ if (isset($_REQUEST['reset'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/admin-login.css">
-    <title>Login</title>
+    <title>Forgot Password</title>
 </head>
 
 <body>
@@ -100,6 +58,7 @@ if (isset($_REQUEST['reset'])) {
 
 
             <form action="../handlers/login.php?login=0" method="post">
+                <p> Email verified</p>
                 <h3>Admin Login</h3>
 
                 <label for="email">Email</label>

@@ -446,6 +446,10 @@ main .insights li .info p{
     color: var(--dark);
 }
 
+main .insights li .info h3 img{
+    max-width: 20%;
+}
+
 main .insights li .info form#updateOrderStatus input,
 main .insights li .info form#updateOrderStatus button{
     -webkit-appearance: none;

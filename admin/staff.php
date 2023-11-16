@@ -17,7 +17,27 @@ $staffMember = getStaff();
 
 if (isset($_REQUEST["success"])) {
     $code = $_REQUEST['success'];
+
     switch ($code) {
+        case 'success':
+            $mailMessage = "";
+            if (isset($_REQUEST["mail"])) {
+                $mailCode = $_REQUEST['mail'];
+
+                switch ($mailCode) {
+                    case 'sent':
+                        $mailMessage = "Verification email sent. ";
+                        break;
+                    case 'failed':
+                        $mailMessage = 'Verification email not sent. ';
+                        break;
+                    default:
+                        break;
+                }
+            }
+            $message = $mailMessage . "Successfully added staff member.";
+            echo "<script>alert('$message');</script>";
+            break;
         case 'delete':
             $message = "Successfully deleted user.";
             echo "<script>alert('$message');</script>";

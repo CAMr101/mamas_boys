@@ -153,34 +153,7 @@ let paymentMethod = "";
 const localHostUrl = "http://localhost/kota2"
 
 window.onload = () => {
-    if(cart){
-        // cart.forEach(e => {
-        //     products.forEach(product => {
-        //         if(e.id == product.id){
-
-        //             const total = e.quantity * product.price;
-        //             totalOrderPrice += total; 
-
-        //             orderSummaryItemsDomElement.insertAdjacentHTML("beforeend", 
-        //             `
-        //             <div class="item">
-        //                 <img src="`+ product.image +`" alt="">
-        //                 <div class="prod-info">
-        //                     <p>
-        //                         <span class="quantity">`+ e.quantity +` </span>
-        //                         <span class="name">x Masarati<span>
-        //                     </p>
-        //                     <p>
-        //                         R <span class="price">`+ total +`</span>
-        //                     </p>
-        //                 </div>
-        //             </div>
-        //             `
-        //             )}
-        //     });
-        // });
-    }
-
+    
     // totalOrderPriceDomElement.innerText = totalOrderPrice;
     removeClassInit(paymentMethods)
 

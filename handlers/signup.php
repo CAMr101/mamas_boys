@@ -1,5 +1,6 @@
 <?php
 include 'passwordHash.php';
+include './email.php';
 
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_REQUEST['method']) && isset($_POST)) {
     $method = $_GET['method'];
@@ -24,7 +25,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_REQUEST['method']) && isset(
 
             signupCustomer($name, $surname, $address, $email, $phone, $hashedPw);
 
-            header('location:../pages/signup-success.php');
+            $selector = createSelector();
+            $token = createToken();
+
+            $url = "www.mamas-boys.co.za/handlers/verifyEmail.php?mid=1&selector=" . $selector . "&validator=" . bin2hex($token);
+
+            deleteExistingToken($email, 0);
+            saveActivationToken($email, $selector, $token);
+            $mailSent = customerVerificationEmail($email, $name, $url);
+
+            if (!$mailSent)
+                header("location:../pages/signup.php?error=mail");
+            else
+                header('location:../pages/signup-success.php');
             break;
         default:
             header('location:../pages/signup.php?error=0');

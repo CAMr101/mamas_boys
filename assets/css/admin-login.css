@@ -435,7 +435,7 @@ form{
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255,255,255,0.1);
     box-shadow: 0 0 40px rgba(8,7,16,0.6);
-    padding: 50px 35px;
+    padding: 25px 35px 50px 35px;
 }
 
 form *{
@@ -445,6 +445,14 @@ form *{
     outline: none;
     border: none;
 }
+
+form p{
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 42px;
+  text-align: center;
+}
+
 form h3{
     font-size: 32px;
     font-weight: 500;

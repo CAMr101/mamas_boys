@@ -16,6 +16,10 @@ if (isset($_REQUEST['error'])) {
             $message = "Password does not match.";
             echo "<script>alert('$message');</script>";
             break;
+        case "mail":
+            $message = "Verification not sent. Please try again.";
+            echo "<script>alert('$message');</script>";
+            break;
         default:
             $message = "Something went wrong. Please try again.";
             echo "<script>alert('$message');</script>";

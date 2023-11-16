@@ -4,6 +4,7 @@ btn.addEventListener("click", function(event){
     verifyPassword(event);
 })
 
+
 function verifyPassword(e){
     var pw = document.getElementById("password").value; 
     var confirmPw = document.getElementById("confirmPassword").value
