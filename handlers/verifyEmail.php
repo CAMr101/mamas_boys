@@ -2,11 +2,12 @@
 
 include './helpers/deleteToken.php';
 include './helpers/create-token.php';
+include 'passwordHash.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_REQUEST['mid']) && isset($_REQUEST['selector']) && isset($_REQUEST['validator'])) {
     $code = $_REQUEST['mid'];
     $selector = $_REQUEST['selector'];
-    $token = hex2bin($_REQUEST['validator']);
+    $token = $_REQUEST['validator'];
 
     switch ($code) {
         case 0:
@@ -31,21 +32,9 @@ function verifyAdmin($selector, $token)
         $stmt->execute([$selector]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $t1 = createToken();
-        $t1 = bin2hex($t1);
+        $hashedToken = hashPassword($token);
 
-        $t2 = hex2bin($t1);
-
-
-        $hasedToken = password_hash($token, PASSWORD_DEFAULT);
-
-        print_r($t1);
-        print_r("....................................");
-        print_r($t2);
-        print_r("....................................");
-        // echo 'hashed';
-        exit();
-        if ($result['token'] === $hasedToken) {
+        if (password_verify($hashedToken, $result['token'])) {
             echo 'tokens match';
             exit();
             $query = "UPDATE `staff` SET `verified`= 1 WHERE email=? ";
@@ -55,7 +44,10 @@ function verifyAdmin($selector, $token)
 
             header('location:../admin/email-verified.php');
         } else {
-            header('location:../admin/login.php?error=token');
+            echo 'not a match';
+            print_r($hashedToken);
+            exit();
+            // header('location:../admin/login.php?error=token');
         }
     } catch (PDOException $e) {
 

@@ -47,6 +47,19 @@ if (isset($_REQUEST["success"])) {
     }
 }
 
+if (isset($_REQUEST["error"])) {
+    $code = $_REQUEST['error'];
+
+    switch ($code) {
+        case 'exist':
+            $message = "Staff member registered to this email already exists.";
+            echo "<script>alert('$message');</script>";
+            break;
+        default:
+            break;
+    }
+}
+
 ?>
 
 <!-- Linking the static Header Components to Page -->

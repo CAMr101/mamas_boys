@@ -17,6 +17,10 @@ if (isset($_REQUEST['error'])) {
             $message = "Verification mail could not be sent. Please try again";
             echo "<script>alert('$message');</script>";
             break;
+        case "exist":
+            $message = "User with the provided email already exists.";
+            echo "<script>alert('$message');</script>";
+            break;
         default:
             $message = "Something went wrong. please try again";
             echo "<script>alert('$message');</script>";

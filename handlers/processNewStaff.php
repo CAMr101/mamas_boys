@@ -18,8 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
     $password = $_POST['password'];
     $type = $_POST['type'];
     $sendVerificationEmail = $_POST['send-verification'];
-
     $validType = 0;
+
     foreach (StaffType::cases() as $enumType) {
 
         if ($enumType->name === $type) {
@@ -32,7 +32,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
     }
 
     try {
+
         include "../config/dbh.inc.php";
+
+        checkUserExist($email);
 
         $verified = 1;
 
@@ -42,39 +45,70 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
             $selector = createSelector();
             $token = createToken();
 
-            $url = "www.mamas-boys.co.za/handlers/verifyEmail.php?mid=0&selector=" . $selector . "&validator=" . bin2hex($token);
+            $url = "www.mamas-boys.co.za/handlers/verifyEmail.php?mid=0&selector=" . $selector . "&validator=" . $token;
+
+            $hashed_token = hashPassword($token);
 
             deleteExistingToken($email, 0);
-            saveActivationToken($email, $selector, $token);
+            saveActivationToken($email, $selector, $hashed_token);
 
-            $mailSent = adminVerificationEmail($email, $name, $url);
+            // $mailSent = adminVerificationEmail($email, $name, $url);
 
             if ($mailSent !== true) {
                 header("location:../admin/new-staff.php?error=mail");
             }
-
-            $hashed_password = hashPassword($password);
-
-            $query = "INSERT INTO staff (name, surname, email, phone, password,verified, type) VALUES (?,?,?,?,?,?,?);";
-            $stmt = $pdo->prepare($query);
-            $stmt->execute([$name, $surname, $email, $phone, $hashed_password, $verified, $type]);
-
-            $query = "SELECT id FROM staff WHERE password = ?;";
-            $stmt = $pdo->prepare($query);
-            $stmt->execute([$hashed_password]);
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            $staffId = $result[0]["id"];
-
-            $pdo = null;
-            $stmt = null;
-
-            die();
-
         }
+
+        $hashed_password = hashPassword($password);
+
+
+        $query = "INSERT INTO staff (name, surname, email, phone, password,verified, type) VALUES (?,?,?,?,?,?,?);";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$name, $surname, $email, $phone, $hashed_password, $verified, $type]);
+
+        $query = "SELECT id FROM staff WHERE password = ?;";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$hashed_password]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $staffId = $result[0]["id"];
+
+        $pdo = null;
+        $stmt = null;
+
+        if ($sendVerificationEmail == "on") {
+            header("location:../admin/staff.php?success=success&mail=sent");
+        } else {
+            header("location:../admin/staff.php?success=success");
+        }
+        die();
+
     } catch (PDOException $e) {
-        echo (0);
         die("Query Failed: " . $e->getMessage());
     }
 } else {
     header("location:$staffUrl");
+}
+
+function checkUserExist($email)
+{
+    try {
+        include "../config/dbh.inc.php";
+
+        $query = "SELECT * FROM `staff`;";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$email]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        print_r($result);
+        exit();
+
+        foreach ($result as $item) {
+            if ($item['$email'] == $email) {
+                header("location:../admin/staff.php?error=exist");
+            }
+        }
+
+    } catch (PDOException $e) {
+        header("location:../admin/login.php?error=error");
+    }
 }
