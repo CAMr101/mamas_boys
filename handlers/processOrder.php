@@ -51,8 +51,11 @@ function createNewOrder()
 
     if ($customerOrder["cId"] != "") {
         $cId = $customerOrder["cId"];
+        $registerd = true;
+
     } else {
         $cId = null;
+        $registerd = false;
     }
     $cName = $customerOrder["cName"];
     $cEmail = $customerOrder["cEmail"];
@@ -66,6 +69,7 @@ function createNewOrder()
 
     try {
         include "../config/dbh.inc.php";
+        include "../handlers/email.php";
 
         $query = "INSERT INTO shop_order (customer_id, name, email, phone, order_total, order_items, order_status, payment_method, paid) 
             VALUES (?,?,?,?,?,?,?,?,?);";
@@ -75,11 +79,12 @@ function createNewOrder()
         $query = "SELECT `id`, `name`, `email` FROM `shop_order` WHERE name=? AND email=? AND phone=?;";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$cName, $cEmail, $cPhone]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $pdo = null;
         $stmt = null;
 
+        sendOrderConfirmationEmail($cEmail, $cName, $result[0]["id"], $orderTotal);
         echo json_encode($result);
 
         die();

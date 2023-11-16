@@ -1,7 +1,5 @@
 <?php
 
-
-
 //inserting a new order into the DB
 if (isset($_POST)) {
     $data = file_get_contents("php://input");
@@ -16,9 +14,9 @@ if (isset($_POST)) {
     $paid = 0;
     $status = "NotStarted";
 
-
     try {
         include "../config/dbh.inc.php";
+
 
         $query = "INSERT INTO shop_order (name, email, phone, order_total, order_items, order_status, payment_method, paid) 
         VALUES (?,?,?,?,?,?,?,?);";
@@ -29,6 +27,8 @@ if (isset($_POST)) {
 
         $pdo = null;
         $stmt = null;
+
+
 
         echo (true);
 

@@ -93,4 +93,52 @@ function sendPasswordResetEmail($email, $name, $url)
 
 }
 
+function sendOrderConfirmationEmail($email, $name, $orderNum, $orderTotal)
+{
+    //enables exceptions
+    $mail = new PHPMailer(true);
+    $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+    $mail->isSMTP();
+    $mail->Host = $_ENV["MAIL_HOSTNAME"];
+    $mail->SMTPAuth = true;
+    $mail->Username = $_ENV["MAIL_ORDER_USERNAME"];
+    $mail->Password = $_ENV["MAIL_ORDER_PASSWORD"];
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+    $mail->Port = 465;
+
+    //Recipients
+    $mail->setFrom($_ENV["MAIL_ORDER_USERNAME"], 'orders');
+    $mail->addAddress($email, $name);
+    $mail->isHTML(true); //Set email format to HTML
+
+    $mail->Subject = 'Order Confirmation';
+
+    ob_start();
+    include '../templates/order-report.html';
+    $message = ob_get_contents();
+    ob_end_clean();
+
+    $text = "Your order has been received. An we've place our top chef on it. Hang on tight. <p>Once your order is complete, you will recieve a phone call to notify you of collection and reminder of payment due.</p> <p>Thank you for shopping with us. See you soon.</p>";
+
+    $message = str_replace("{{orderNumber}}", $orderNum, $message);
+    $message = str_replace("{{name}}", ucfirst($name), $message);
+    $message = str_replace("{{message}}", $text, $message);
+    $message = str_replace("{{totalOrder}}", $orderTotal, $message);
+
+    $mail->Body = $message;
+    $mail->AltBody = 'Hi, ' . ucfirst($name) . '! We have recieved your order(#' . $orderNum . '). And we\'ve placed our top chef on it. Order total: R ' . $orderTotal . '. Thank you for shopping with us.';
+
+    if (!$mail->send()) {
+        echo "Mail could not be sent";
+        echo "Mail error" . $mail->ErrorInfo;
+
+
+    } else {
+
+        // header("location:../pages/mail-sent.php?success=true");
+        echo "mail sent";
+    }
+
+}
+
 

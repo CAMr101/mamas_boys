@@ -273,7 +273,7 @@ function completeOrder(){
             },
             "body": JSON.stringify(orderInfo)
         }).then(function(response){
-            return response.json();
+            return response.text();
         }).then(function(data){
             console.log("Data from server");
             console.log(data);
