@@ -5,6 +5,24 @@ session_start();
 include "../components/header.php";
 include "../components/footer.php";
 include "../components/customer-meta-data.php";
+include "../handlers/processReviews.php";
+include "../handlers/processCustomer.php";
+
+if (isset($_SESSION["customer_id"])) {
+    $userId = $_SESSION["customer_id"];
+    $user = getCustomer($userId);
+
+    if ($user === null) {
+        $name = "";
+        $email = "";
+    } else {
+        $name = $user["name"];
+        $email = $user["email"];
+    }
+
+}
+
+$reviews = getReviews();
 
 ?>
 
@@ -28,6 +46,7 @@ include "../components/customer-meta-data.php";
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/style3.css">
     <link rel="stylesheet" href="../assets/css/addtocart.css">
+    <link rel="stylesheet" href="../assets/css/review.css">
 
     <style>
         /* Initially hide container2 */
@@ -40,6 +59,28 @@ include "../components/customer-meta-data.php";
 
 <body>
 
+    <style>
+        /* Add this to your existing styles or in a separate CSS file */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            padding: 8px 12px;
+            margin: 0 5px;
+            text-decoration: none;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .pagination a.active {
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
     <!------------------------------------------------------------------- Header Section --------------------------------------------------------------------------------->
 
     <?php
@@ -87,94 +128,10 @@ include "../components/customer-meta-data.php";
 
     <section class="reviews">
 
-        <h1 class="title">client reviews</h1>
+        <h1 class="title">
+            <a href="./reviews.php">See reviews</a>
+        </h1>
 
-        <div class="box-container">
-
-            <div class="box">
-                <img src="../assets/images/Glad2.webp" alt="">
-
-                <p>I gave my patients a bite, and told them that the patient that will heal faster will get a full one.
-                    Now
-                    they are all saying that they are fully healed.</p>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-                <h3>Masana Baloyi</h3>
-            </div>
-
-            <div class="box">
-                <img src="../assets/images/Khosa.jpg" alt="">
-                <p>Oh My Gosh! I didn't see this one coming. This is proper! Best kota I have ever eaten.</p>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-                <h3>Nsovo Khosa</h3>
-            </div>
-
-            <div class="box">
-                <img src="../assets/images/Bongi.jpg" alt="">
-                <p>All I can say is, I love it, I love it, I love it. Keep it up guys. I have 0 regrets. I am even
-                    planning
-                    on buying more.</p>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-                <h3>Bongani Libisi</h3>
-            </div>
-
-            <div class="box">
-                <img src="../assets/images/Mathev.jpg" alt="">
-                <p>Before even finishing my kota, I saw three hands asking for a bite, that's how inviting it is.</p>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-                <h3>Hlori Mathevula</h3>
-            </div>
-
-            <div class="box">
-                <img src="../assets/images/Maringa.jpg" alt="">
-                <p>All I can say is thank you guys. Continue doing well!</p>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-                <h3>Ntshembo Maringa</h3>
-            </div>
-
-            <div class="box">
-                <img src="../assets/images/Praise.jpg" alt="">
-                <p>The reveiws I'm seeing are very impressive. I'm definitely buying one.</p>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-                <h3>Hinteko Baloyi</h3>
-            </div>
-
-        </div>
 
     </section>
 
