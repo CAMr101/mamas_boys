@@ -57,7 +57,7 @@ if (isset($_REQUEST['error'])) {
             </div>
 
 
-            <form action="../handlers/login.php?login=0" method="post">
+            <form action="../handlers/reset-password.php?mid=0" method="post">
                 <p> Email verified</p>
                 <h3>Admin Login</h3>
 

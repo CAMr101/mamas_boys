@@ -93,6 +93,7 @@ if (isset($_REQUEST["error"])) {
                         <th>Email</th>
                         <th>Telephone</th>
                         <th>Type</th>
+                        <th>Verified</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -132,6 +133,30 @@ if (isset($_REQUEST["error"])) {
                                     <a href="staff-member.php?id=<?php echo $staff['id']; ?>">
                                         <?php echo $staff['type']; ?>
                                     </a>
+                                </td>
+                                <td>
+                                    <span class="status <?php
+                                    switch ($staff['verified']) {
+                                        case 0:
+                                            echo 'notStarted';
+                                            break;
+                                        case 1:
+                                            echo 'completed';
+                                            break;
+                                    }
+                                    ?>">
+                                        <?php
+                                        switch ($staff['verified']) {
+                                            case 0:
+                                                echo 'Pending';
+                                                break;
+                                            case 1:
+                                                echo 'Verified';
+                                                break;
+                                                ;
+                                        }
+                                        ?>
+                                    </span>
                                 </td>
                             </tr>
 

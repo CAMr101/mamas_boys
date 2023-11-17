@@ -12,8 +12,20 @@ if (isset($_REQUEST['error'])) {
             $message = "User does not exist. Please enter a registered email.";
             echo "<script>alert('$message');</script>";
             break;
+        case "token":
+            $message = "Invalid token used. Please try again.";
+            echo "<script>alert('$message');</script>";
+            break;
+        case "counter":
+            $message = "Token exceeded attempt limit. Please try again.";
+            echo "<script>alert('$message');</script>";
+            break;
         case "notsent":
             $message = "Mail not sent. Please try again.";
+            echo "<script>alert('$message');</script>";
+            break;
+        case "expired":
+            $message = "Token has expired. Please try again.";
             echo "<script>alert('$message');</script>";
             break;
         case "con":
@@ -85,7 +97,7 @@ if (isset($_REQUEST['error'])) {
             </p>
 
             <p class="fieldset">
-                <input class="full-width has-padding" type="submit" value="Reset password">
+                <input class="full-width has-padding" type="submit" name="reset-request-submit" value="Reset password">
             </p>
         </form>
 

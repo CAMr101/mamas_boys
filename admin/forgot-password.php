@@ -57,7 +57,7 @@ if (isset($_REQUEST['error'])) {
             </div>
 
 
-            <form action="../handlers/forgot-password.php" method="post">
+            <form action="../handlers/forgot-password.php?mid=0" method="post">
                 <h3>Reset Password</h3>
 
                 <label for="email">Email</label>
@@ -66,7 +66,7 @@ if (isset($_REQUEST['error'])) {
                 <p class="form-message"></br> You will receive a
                     link to create a new password.</p>
 
-                <button type="submit" name="admin-request-submit">Reset Password</button>
+                <button type="submit" name="admin-request-submit" value="admin-reset">Reset Password</button>
                 <div class="forgot-password">
                     <a href="login.php">
                         Login?

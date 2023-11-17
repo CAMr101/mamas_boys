@@ -20,6 +20,10 @@ if (isset($_REQUEST['login'])) {
             $message = "Access denied. Please login";
             echo "<script>alert('$message');</script>";
             break;
+        case "reset":
+            $message = "Password successfully reset. Please login";
+            echo "<script>alert('$message');</script>";
+            break;
         case "error":
             $message = "Something went wrong. Please try again";
             echo "<script>alert('$message');</script>";
@@ -49,11 +53,17 @@ if (isset($_REQUEST['error'])) {
             $message = "Email not verified. Please check your email to verify your email.";
             echo "<script>alert('$message');</script>";
             break;
+        case "invalid":
+            $message = "Invalid request. Please try again.";
+            echo "<script>alert('$message');</script>";
+            break;
         case "error":
             $message = "Something went wrong. Please try again";
             echo "<script>alert('$message');</script>";
             break;
         default:
+            $message = "Something went wrong. Please try again";
+            echo "<script>alert('$message');</script>";
             break;
     }
 }

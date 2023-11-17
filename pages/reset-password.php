@@ -7,6 +7,29 @@ include "../components/footer.php";
 $selector = null;
 $validator = null;
 
+if (isset($_REQUEST['error'])) {
+    $code = $_REQUEST['error'];
+
+    switch ($code) {
+        case "notsent":
+            $message = "Mail not sent. Please try again.";
+            echo "<script>alert('$message');</script>";
+            break;
+        case "expired":
+            $message = "Token has expired. Please try again.";
+            echo "<script>alert('$message');</script>";
+            break;
+        case "error":
+            $message = "Something went wrong. Please try again.";
+            echo "<script>alert('$message');</script>";
+            break;
+        default:
+            $message = "Something went wrong. Please try again.";
+            echo "<script>alert('$message');</script>";
+            break;
+    }
+}
+
 
 if (!isset($_REQUEST["selector"]) && !isset($_REQUEST["validator"])) {
     // header("location:../login.php");
@@ -77,8 +100,8 @@ if (!isset($_REQUEST["selector"]) && !isset($_REQUEST["validator"])) {
             ?>
 
             <p class="fieldset">
-                <label class="image-replace email" for="new-password">New Password</label>
-                <input class="full-width has-padding has-border" name="new-password" id="new-password" type="email"
+                <label class="image-replace password" for="new-password">New Password</label>
+                <input class="full-width has-padding has-border" name="new-password" id="new-password" type="password"
                     placeholder="New Password" required>
             </p>
 

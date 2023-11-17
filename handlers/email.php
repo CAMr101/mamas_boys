@@ -66,7 +66,7 @@ function sendPasswordResetEmail($email, $name, $url)
     $mail->addAddress($email, $name);
     $mail->isHTML(true); //Set email format to HTML
 
-    $mail->Subject = 'Password Reset for Mamas Boys Admin User Account';
+    $mail->Subject = 'Password Reset for Mamas Boys Account';
 
     ob_start();
     include '../templates/reset-password.html';
