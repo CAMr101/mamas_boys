@@ -39,7 +39,7 @@ function authenticate($email, $password)
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($result) {
-            switch ($$result["verified"]) {
+            switch ($result["verified"]) {
                 case 0:
                     header('location:../admin/login.php?error=active');
                     break;
