@@ -21,8 +21,8 @@ if (isset($_REQUEST['error'])) {
             $message = "Unable to process you request. Please try again.";
             echo "<script>alert('$message');</script>";
             break;
-        case "coresubmitn":
-            $message = "Please resubmit your password reset request.";
+        case "resubmitn":
+            $message = "Token does not match please try again.";
             echo "<script>alert('$message');</script>";
             break;
         default:
@@ -37,7 +37,7 @@ $validator = null;
 
 
 if (!isset($_REQUEST["selector"]) && !isset($_REQUEST["validator"])) {
-    // header("location:./login.php");
+    header("location:./login.php");
 } else {
     $selector = $_REQUEST["selector"];
     $validator = $_REQUEST["validator"];
@@ -81,7 +81,7 @@ if (!isset($_REQUEST["selector"]) && !isset($_REQUEST["validator"])) {
             </div>
 
 
-            <form action="../handlers/reset-password.php?" method="post">
+            <form action="../handlers/reset-password.php?mid=0" method="post">
                 <h3>Reset Password</h3>
                 <?php
                 if ($selector !== null && $validator !== null) {

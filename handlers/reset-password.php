@@ -1,9 +1,11 @@
 <?php
 
 include './passwordHash.php';
+include './helpers/deleteToken.php';
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && $_POST["reset-password"] === "reset-password") {
 
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_REQUEST['mid'])) {
     $code = $_REQUEST['mid'];
     $pw = $_POST["new-password"];
     $confirmPw = $_POST["confirm-new-password"];
@@ -20,13 +22,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $_POST["reset-password"] === "reset
             header("location:../admin/reset-password.php?error=mismatch");
         }
 
+
         $currentDate = date("U");
-        $tokenTodelete = validateToken($selector, $currentDate, $validator, $code, $hashedPw);
-        deleteToken($tokenTodelete, $code);
+
+        switch ($code) {
+            case 0:
+                $tokenEmail = validateAdminToken($selector, $currentDate, $validator, $hashedPw);
+                deleteExistingToken($tokenEmail, 1);
+                break;
+            case 1:
+                $tokenEmail = validateCustomerToken($selector, $currentDate, $validator, $hashedPw);
+                deleteExistingToken($tokenEmail, 1);
+                break;
+            default:
+                header("location:../index.php?error=error");
+                break;
+        }
     }
 }
 
-function validateToken($selector, $currentDate, $validator, $code, $hashedPw)
+function validateAdminToken($selector, $currentDate, $validator, $hashedPw)
 {
     include "../config/dbh.inc.php";
 
@@ -37,69 +52,54 @@ function validateToken($selector, $currentDate, $validator, $code, $hashedPw)
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (empty($result)) {
-            switch ($code) {
-                case 0:
-                    header("location:../admin/reset-password.php?error=expired");
-                    break;
-                case 1:
-                    header("location:../pages/reset-password.php?error=expired");
-                    break;
-            }
+            header("location:../admin/reset-password.php?error=expired");
         } else {
-            $tokenBin = hex2bin($validator);
-            $tokenCheck = password_verify($tokenBin, $result["pwd_token"]);
+            $hashedToken = hashPassword($token);
 
-            if ($tokenCheck === false) {
-                switch ($code) {
-                    case 0:
-                        header("location:../admin/reset-password.php?error=resubmit");
-                        break;
-                    case 1:
-                        header("location:../pages/reset-password.php?error=resubmit");
-                        break;
-                }
-            } else if ($tokenCheck === true) {
+            if (password_verify($hashedToken, $result["pwd_token"])) {
                 $tokenEmail = $result["pwd_email"];
 
-                switch ($code) {
-                    case 0:
-                        $query = "SELECT * FROM `staff` WHERE email = ?";
-                        break;
-                    case 1:
-                        $query = "SELECT * FROM `customer` WHERE email = ?";
-                        break;
-                }
-
+                $query = "SELECT * FROM `staff` WHERE email = ?";
                 $stmt = $pdo->prepare($query);
                 $stmt->execute([$tokenEmail]);
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
                 if (empty($result)) {
-                    switch ($code) {
-                        case 0:
-                            header("location:../admin/reset-password.php?error=notfound");
-                            break;
-                        case 1:
-                            header("location:../pages/reset-password.php?error=notfound");
-                            break;
-                    }
+                    header("location:../admin/reset-password.php?error=notfound");
                 } else {
-                    switch ($code) {
-                        case 0:
-                            $query = "UPDATE `staff` SET `password`=? WHERE email = ?;";
-                            break;
-                        case 1:
-                            $query = "UPDATE `staff` SET `password`=? WHERE email = ?;";
-                            break;
-                    }
-
+                    print_r("about to update password");
+                    exit();
+                    $query = "UPDATE `staff` SET `password`=? WHERE email = ?;";
                     $stmt = $pdo->prepare($query);
                     $stmt->execute([$hashedPw, $tokenEmail]);
 
                     return $tokenEmail;
 
                 }
+            } else {
+                $query = "SELECT * FROM `pwd_reset` WHERE pwd_selector=?";
+                $stmt = $pdo->prepare($query);
+                $stmt->execute([$selector]);
 
+                if ($result["counter"] > 5) {
+                    deleteExistingToken($result["pwd_email"], 0);
+                    header("location:../admin/login.php?error=counter");
+                } else {
+                    $counter = $result["pwd_counter"] + 1;
+
+                    try {
+                        $query = "UPDATE `pwd_reset` SET `pwd_counter`= ? WHERE pwd_email=? ";
+                        $stmt = $pdo->prepare($query);
+                        $stmt->execute([$counter, $result['email']]);
+
+                    } catch (PDOException $e) {
+                        header('location:../admin/login.php?error=error');
+                    }
+
+                }
+                header("location:../admin/reset-password.php?error=resubmit");
+
+                die();
             }
         }
 
@@ -109,35 +109,68 @@ function validateToken($selector, $currentDate, $validator, $code, $hashedPw)
     }
 }
 
-
-function deleteToken($tokenEmail, $code)
+function validateCustomerToken($selector, $currentDate, $validator, $hashedPw)
 {
     include "../config/dbh.inc.php";
 
     try {
-        $query = "DELETE FROM pwd_reset WHERE pwd_email =?;";
+        $query = "SELECT * FROM `pwd_reset` WHERE pwd_selector=? AND pwd_expiry > ?";
         $stmt = $pdo->prepare($query);
-        $stmt->execute([$tokenEmail]);
+        $stmt->execute([$selector, $currentDate]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $pdo = null;
-        $stmt = null;
-        switch ($code) {
-            case 0:
-                header("location:../admin/login.php?reset=success");
-                break;
-            case 1:
-                header("location:../pages/login.php?reset=success");
-                break;
+        if (empty($result)) {
+            header("location:../admin/reset-password.php?error=expired");
+        } else {
+            $hashedToken = hashPassword($token);
+
+            if (password_verify($hashedToken, $result["pwd_token"])) {
+                $tokenEmail = $result["pwd_email"];
+
+                $query = "SELECT * FROM `staff` WHERE email = ?";
+                $stmt = $pdo->prepare($query);
+                $stmt->execute([$tokenEmail]);
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                if (empty($result)) {
+                    header("location:../admin/reset-password.php?error=notfound");
+                } else {
+                    $query = "UPDATE `staff` SET `password`=? WHERE email = ?;";
+                    $stmt = $pdo->prepare($query);
+                    $stmt->execute([$hashedPw, $tokenEmail]);
+
+                    return $tokenEmail;
+
+                }
+            } else {
+                $query = "SELECT * FROM `pwd_reset` WHERE pwd_selector=?";
+                $stmt = $pdo->prepare($query);
+                $stmt->execute([$selector]);
+
+                if ($result["counter"] > 5) {
+                    deleteExistingToken($result["pwd_email"], 0);
+                    header("location:../admin/login.php?error=counter");
+                } else {
+                    $counter = $result["pwd_counter"] + 1;
+
+                    try {
+                        $query = "UPDATE `pwd_reset` SET `pwd_counter`= ? WHERE pwd_email=? ";
+                        $stmt = $pdo->prepare($query);
+                        $stmt->execute([$counter, $result['email']]);
+
+                    } catch (PDOException $e) {
+                        header('location:../admin/login.php?error=error');
+                    }
+
+                }
+                header("location:../admin/reset-password.php?error=resubmit");
+
+                die();
+            }
         }
 
     } catch (PDOException $e) {
-        switch ($code) {
-            case 0:
-                header("location:../admin/forgot-password.php?error=error");
-                break;
-            case 1:
-                header("location:../pages/forgot-password.php?error=error");
-                break;
-        }
+        header("location:../admin/reset-password.php?error=error");
+        exit();
     }
 }

@@ -24,7 +24,7 @@ function sendAdminPasswordResetEmail($email, $name, $url)
     $mail->Port = 465;
 
     //Recipients
-    $mail->setFrom($_ENV["MAIL_NO_REPLY_USERNAME"], "Reset Password on Mama's Boy's");
+    $mail->setFrom($_ENV["MAIL_NO_REPLY_USERNAME"], "Mama's Boy's");
     $mail->addAddress($email, $name);
     $mail->isHTML(true); //Set email format to HTML
 
@@ -41,15 +41,9 @@ function sendAdminPasswordResetEmail($email, $name, $url)
     $mail->AltBody = 'Your password reset link: ' . $url;
 
     if (!$mail->send()) {
-        echo "Mail could not be sent";
-        echo "Maile error" . $mail->ErrorInfo;
-
-        header("location:../admin/forgot-password.php?error=notsent");
-        exit();
+        return false;
     } else {
-        // header("location:../admin/mail-sent.php?success=true");
-        echo "mail sent";
-        exit();
+        return true;
     }
 
 }
@@ -68,7 +62,7 @@ function sendPasswordResetEmail($email, $name, $url)
     $mail->Port = 465;
 
     //Recipients
-    $mail->setFrom($_ENV["MAIL_NO_REPLY_USERNAME"], "Reset Password on Mama's Boy's");
+    $mail->setFrom($_ENV["MAIL_NO_REPLY_USERNAME"], "Mama's Boy's");
     $mail->addAddress($email, $name);
     $mail->isHTML(true); //Set email format to HTML
 
@@ -85,14 +79,10 @@ function sendPasswordResetEmail($email, $name, $url)
     $mail->AltBody = 'Your password reset link: ' . $url;
 
     if (!$mail->send()) {
-        echo "Mail could not be sent";
-        echo "Maile error" . $mail->ErrorInfo;
-
-        header("location:../pages/forgot-password.php?error=notsent");
+        return false;
     } else {
-        header("location:../pages/mail-sent.php?success=true");
+        return true;
     }
-
 }
 
 function sendOrderConfirmationEmail($email, $name, $orderNum, $orderTotal)
@@ -157,7 +147,7 @@ function adminVerificationEmail($email, $name, $url)
     $mail->Port = 465;
 
     //Recipients
-    $mail->setFrom($_ENV["MAIL_NO_REPLY_USERNAME"], "VERIFY EMAIL on Mama's Boy's");
+    $mail->setFrom($_ENV["MAIL_NO_REPLY_USERNAME"], "Mama's Boy's");
     $mail->addAddress($email, $name);
     $mail->isHTML(true); //Set email format to HTML
 
@@ -197,7 +187,7 @@ function customerVerificationEmail($email, $name, $url)
     $mail->Port = 465;
 
     //Recipients
-    $mail->setFrom($_ENV["MAIL_NO_REPLY_USERNAME"], "VERIFY EMAIL on Mama's Boy's");
+    $mail->setFrom($_ENV["MAIL_NO_REPLY_USERNAME"], "Mama's Boy's");
     $mail->addAddress($email, $name);
     $mail->isHTML(true); //Set email format to HTML
 

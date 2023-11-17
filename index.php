@@ -107,6 +107,19 @@ if (isset($_REQUEST['login'])) {
    }
 }
 
+if (isset($_REQUEST['error'])) {
+   $code = $_REQUEST['error'];
+
+   switch ($code) {
+      case 'error':
+         $message = "Something went wrong. ";
+         echo "<script>alert('$message');</script>";
+         break;
+      default:
+         break;
+   }
+}
+
 if (isset($_REQUEST['logout'])) {
    $code = $_REQUEST['logout'];
 
