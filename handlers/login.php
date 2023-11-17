@@ -39,23 +39,30 @@ function authenticate($email, $password)
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($result) {
-            if ($result['password'] === $hPw) {
-                require_once "../config/config_session.inc.php";
+            switch ($$result["verified"]) {
+                case 0:
+                    header('location:../admin/login.php?error=active');
+                    break;
+                case 1:
+                    if ($result['password'] === $hPw) {
+                        require_once "../config/config_session.inc.php";
 
-                $newSessionId = session_create_id();
-                $sessionId = $newSessionId . "_" . $result["id"];
+                        $newSessionId = session_create_id();
+                        $sessionId = $newSessionId . "_" . $result["id"];
 
-                session_destroy();
-                session_id($sessionId);
-                session_start();
+                        session_destroy();
+                        session_id($sessionId);
+                        session_start();
 
-                $_SESSION["user_id"] = $result["id"];
-                $_SESSION["user_name"] = $result["name"];
-                $_SESSION['last_regeneration'] = time();
+                        $_SESSION["user_id"] = $result["id"];
+                        $_SESSION["user_name"] = $result["name"];
+                        $_SESSION['last_regeneration'] = time();
 
-                header("location:../admin/admin.php?login=success");
-            } else {
-                header("location:../admin/login.php?login=incorrect");
+                        header("location:../admin/admin.php?login=success");
+                    } else {
+                        header("location:../admin/login.php?login=incorrect");
+                    }
+                    break;
             }
 
 
@@ -90,28 +97,36 @@ function authenticateCustomer($email, $password)
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($result) {
-            if ($result["password"] === $hPw) {
-                require_once "../config/config_session.inc.php";
+            switch ($$result["verified"]) {
+                case 0:
+                    header('location:../pages/login.php?error=active');
+                    break;
+                case 1:
+                    if ($result["password"] === $hPw) {
+                        require_once "../config/config_session.inc.php";
 
-                $newSessionId = session_create_id();
-                $sessionId = $newSessionId . "_" . $result["id"];
+                        $newSessionId = session_create_id();
+                        $sessionId = $newSessionId . "_" . $result["id"];
 
-                session_destroy();
-                session_id($sessionId);
-                session_start();
+                        session_destroy();
+                        session_id($sessionId);
+                        session_start();
 
-                $_SESSION["customer_id"] = $result["id"];
-                $_SESSION["customer_name"] = $result["name"];
-                $_SESSION['last_regeneration'] = time();
+                        $_SESSION["customer_id"] = $result["id"];
+                        $_SESSION["customer_name"] = $result["name"];
+                        $_SESSION['last_regeneration'] = time();
 
-                header("location:../index.php?login=success");
-            } else {
-                header("location:../pages/login.php?login=failed");
+                        header("location:../index.php?login=success");
+                    } else {
+                        header("location:../pages/login.php?login=failed");
+                    }
+                    break;
             }
 
 
         } else {
-            header("location:../pages/login.php?login=notFound");
+            $_SESSION["error_login"] = "Authenticatin Failed";
+            header("location:../admin/login.php?login=failed");
         }
 
         $pdo = null;

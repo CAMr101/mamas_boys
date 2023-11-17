@@ -44,6 +44,10 @@ if (isset($_REQUEST['error'])) {
             $message = "Invalid token. Please contact your Admin or Employer.";
             echo "<script>alert('$message');</script>";
             break;
+        case "active":
+            $message = "Email not verified. Please check your email to verify your email.";
+            echo "<script>alert('$message');</script>";
+            break;
         default:
             $message = "Something went wrong. please try again";
             echo "<script>alert('$message');</script>";

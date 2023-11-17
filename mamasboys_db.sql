@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2023 at 07:44 PM
+-- Generation Time: Nov 17, 2023 at 10:00 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `mamasboy_db`
+-- Database: `mamasboys_db`
 --
 
 -- --------------------------------------------------------
@@ -68,7 +68,12 @@ CREATE TABLE `category` (
 INSERT INTO `category` (`id`, `name`, `description`, `image_id`) VALUES
 (0, 'Kota', '0', NULL),
 (1, 'Chips', '0', NULL),
-(2, 'Extras', '0', NULL);
+(2, 'Extras', '0', NULL),
+(11, 'new category', 'Some Description', 19),
+(12, 'new category', 'Some Description', NULL),
+(13, 'neo', 'dfghjkl', 22),
+(14, 'neo', 'dfghjkl', NULL),
+(15, 'neo', 'dfghjkl', NULL);
 
 -- --------------------------------------------------------
 
@@ -85,6 +90,7 @@ CREATE TABLE `customer` (
   `phone` varchar(11) NOT NULL,
   `password` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `verified` int(1) NOT NULL,
   `cart_id` int(11) DEFAULT NULL,
   `card_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -93,12 +99,35 @@ CREATE TABLE `customer` (
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`id`, `name`, `surname`, `address`, `email`, `phone`, `password`, `created_at`, `cart_id`, `card_id`) VALUES
-(1, 'junior', NULL, '515 this address is wherer it goes down', 'neo@email.com', '01239634865', 'cf0b854f5a17fdad773d462438d4d7328722b817d40a74ecb8d9ad79f98aa251', '2023-11-10 09:11:38', NULL, NULL),
-(2, 'junior', NULL, '515 this address is wherer it goes down', 'neo@email.com', '01239634865', 'cf0b854f5a17fdad773d462438d4d7328722b817d40a74ecb8d9ad79f98aa251', '2023-11-10 09:12:53', NULL, NULL),
-(3, 'Oratile', 'akakak', '515 this address is wherer it goes down', 'neo@email.com', '01239634865', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '2023-11-10 09:13:18', NULL, NULL),
-(4, 'Oratile', 'akakak', '515 this address is wherer it goes down', 'neo@email.com', '01239634865', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '2023-11-10 09:14:22', NULL, NULL),
-(5, 'jeje', 'tom', '123 address street', 'cameron@gmail.com', '0123456789', 'cf0b854f5a17fdad773d462438d4d7328722b817d40a74ecb8d9ad79f98aa251', '2023-11-14 13:41:00', NULL, NULL);
+INSERT INTO `customer` (`id`, `name`, `surname`, `address`, `email`, `phone`, `password`, `created_at`, `verified`, `cart_id`, `card_id`) VALUES
+(1, 'junior', NULL, '515 this address is wherer it goes down', 'neo@email.com', '01239634865', 'cf0b854f5a17fdad773d462438d4d7328722b817d40a74ecb8d9ad79f98aa251', '2023-11-10 09:11:38', 0, NULL, NULL),
+(2, 'junior', NULL, '515 this address is wherer it goes down', 'neo@email.com', '01239634865', 'cf0b854f5a17fdad773d462438d4d7328722b817d40a74ecb8d9ad79f98aa251', '2023-11-10 09:12:53', 0, NULL, NULL),
+(3, 'Oratile', 'akakak', '515 this address is wherer it goes down', 'neo@email.com', '01239634865', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '2023-11-10 09:13:18', 0, NULL, NULL),
+(4, 'Oratile', 'akakak', '515 this address is wherer it goes down', 'neo@email.com', '01239634865', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '2023-11-10 09:14:22', 0, NULL, NULL),
+(5, 'jeje', 'tom', '123 address street', 'cameron@gmail.com', '0123456789', 'cf0b854f5a17fdad773d462438d4d7328722b817d40a74ecb8d9ad79f98aa251', '2023-11-14 13:41:00', 0, NULL, NULL),
+(6, 'etu', 'eee', '256 Fake Address', 'neo@email.com', '0123456789', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '2023-11-14 19:52:15', 0, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_staff_activation`
+--
+
+CREATE TABLE `customer_staff_activation` (
+  `id` int(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `selector` text NOT NULL,
+  `token` longtext NOT NULL,
+  `counter` int(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `customer_staff_activation`
+--
+
+INSERT INTO `customer_staff_activation` (`id`, `email`, `selector`, `token`, `counter`) VALUES
+(25, 'books@email.com', '61dad5a79632678d', '$2y$10$r70paUSkFfsow5T4DFohZ.cD3jipCGjlaMozYKWl5/xi0YnLmpAw.', 0),
+(37, 'neocamtom@gmail.com', '5ca8d973063f1538', '$2y$10$FC.u/rp/2kHj7Lo5.dzNcO8R1RxaNCR3v5HMS8R4PaPlMHkAqC.SG', 0);
 
 -- --------------------------------------------------------
 
@@ -119,7 +148,11 @@ CREATE TABLE `images` (
 --
 
 INSERT INTO `images` (`id`, `name`, `location`, `product_id`, `category_id`) VALUES
-(17, 'image-name', '../assets/images/category/Mama_s_Boy_DB.png', NULL, 0);
+(19, 'kota palony.jpg', '../assets/images/category/kota_palony.jpg', NULL, 11),
+(20, 'kota palony.jpg', '../assets/images/category/kota_palony.jpg', NULL, 11),
+(22, 'kota3.jpg', '../assets/images/category/kota3.jpg', NULL, 13),
+(23, 'kota3.jpg', '../assets/images/category/kota3.jpg', NULL, 13),
+(24, 'kota3.jpg', '../assets/images/category/kota3.jpg', NULL, 13);
 
 -- --------------------------------------------------------
 
@@ -186,14 +219,52 @@ INSERT INTO `product` (`id`, `name`, `price`, `description`, `category_id`, `ima
 (21, 'Burger', 15, '', 2, NULL),
 (22, 'Fish Finger', 12, '', 2, NULL),
 (23, 'Bacon', 13, '', 2, NULL),
-(24, 'Polony', 5, '', 2, NULL),
-(34, 'Books', 44, 'fjhfhjfh', 0, NULL),
-(35, 'Books', 44, 'fjhfhjfh', 0, NULL),
-(36, 'Books', 44, 'fjhfhjfh', 0, NULL),
-(37, 'Books', 44, 'fjhfhjfh', 0, NULL),
-(38, 'Books', 44, 'fjhfhjfh', 0, NULL),
-(39, 'Books', 44, 'fjhfhjfh', 0, NULL),
-(40, 'Books', 44, 'fjhfhjfh', 0, NULL);
+(24, 'Polony', 5, '', 2, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pwd_reset`
+--
+
+CREATE TABLE `pwd_reset` (
+  `reset_id` int(11) NOT NULL,
+  `pwd_email` varchar(255) NOT NULL,
+  `pwd_selector` text NOT NULL,
+  `pwd_token` longtext NOT NULL,
+  `pwd_expiry` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pwd_reset`
+--
+
+INSERT INTO `pwd_reset` (`reset_id`, `pwd_email`, `pwd_selector`, `pwd_token`, `pwd_expiry`) VALUES
+(5, 'books@email.com', '2a8e85501480463d', '$2y$10$OnIvR.mbyjl4PlNiRs5wVe6UR3DR/3Skc8FuP5Swaqg/CbTJLPEk6', '1700025618'),
+(13, 'neocamtom@gmail.com', '99bd33f618f5848a', '$2y$10$q91Qah5zTUXmi82QKETbyODzqb4PvEkZpnGfNP/W4IS9FuIhfhlye', '1700028864');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reviews`
+--
+
+CREATE TABLE `reviews` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `review` text NOT NULL,
+  `rating` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `reviews`
+--
+
+INSERT INTO `reviews` (`id`, `name`, `email`, `review`, `rating`, `created_at`) VALUES
+(1, 'neo', 'books@email.com', 'this is my review', 2, '2023-11-17 07:59:06'),
+(2, 'neo', 'books@email.com', 'this is my review', 2, '2023-11-17 07:59:50');
 
 -- --------------------------------------------------------
 
@@ -235,7 +306,10 @@ INSERT INTO `shop_order` (`id`, `customer_id`, `name`, `email`, `phone`, `order_
 (14, NULL, 'tom', 'neo@email.com', '01234567896', 46, '[{\"id\":5,\"quantity\":2}]', 'NotStarted', 'card', 0, '2023-11-14 01:08:16', '2023-11-13 23:08:16', NULL),
 (15, NULL, 'tom', 'neo@email.com', '01234567896', 90, '[{\"id\":9,\"quantity\":1},{\"id\":10,\"quantity\":1}]', 'Started', 'cash', 0, '2023-11-14 01:17:03', '2023-11-13 23:24:40', NULL),
 (16, NULL, 'jeje', 'cameron@gmail.com', '0123456789', 72, '[{\"id\":3,\"quantity\":1},{\"id\":5,\"quantity\":1},{\"id\":6,\"quantity\":1}]', 'NotStarted', 'card', 0, '2023-11-14 16:15:31', '2023-11-14 14:15:31', NULL),
-(18, 5, 'jeje', 'cameron@gmail.com', '0123456789', 72, '[{\"id\":3,\"quantity\":1},{\"id\":5,\"quantity\":1},{\"id\":6,\"quantity\":1}]', 'Started', 'cash', 0, '2023-11-14 16:19:52', '2023-11-14 14:24:55', NULL);
+(18, 5, 'jeje', 'cameron@gmail.com', '0123456789', 72, '[{\"id\":3,\"quantity\":1},{\"id\":5,\"quantity\":1},{\"id\":6,\"quantity\":1}]', 'Started', 'cash', 0, '2023-11-14 16:19:52', '2023-11-14 14:24:55', NULL),
+(21, NULL, 'neo', 'neocamtom@gmail.com', '0672837571', 27, '[{\"id\":6,\"quantity\":1}]', 'NotStarted', 'cash', 0, '2023-11-15 09:08:34', '2023-11-15 07:08:34', NULL),
+(22, NULL, 'neo', 'neocamtom@gmail.com', '0672837571', 27, '[{\"id\":6,\"quantity\":1}]', 'NotStarted', 'cash', 0, '2023-11-15 09:10:13', '2023-11-15 07:10:13', NULL),
+(23, NULL, 'tom', 'neocamtom@gmail.com', '7896541230', 27, '[{\"id\":6,\"quantity\":1}]', 'NotStarted', 'card', 0, '2023-11-15 09:14:45', '2023-11-15 07:14:45', NULL);
 
 -- --------------------------------------------------------
 
@@ -251,6 +325,7 @@ CREATE TABLE `staff` (
   `phone` varchar(11) NOT NULL,
   `password` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `verified` int(1) NOT NULL DEFAULT 1,
   `type` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -258,11 +333,10 @@ CREATE TABLE `staff` (
 -- Dumping data for table `staff`
 --
 
-INSERT INTO `staff` (`id`, `name`, `surname`, `email`, `phone`, `password`, `created_at`, `type`) VALUES
-(4, 'neo', 'tom', 'neo@email.com', '0761234567', 'cf0b854f5a17fdad773d462438d4d7328722b817d40a74ecb8d9ad79f98aa251', '2023-11-09 12:42:06', 'admin'),
-(8, 'Books', 'surname20', 'books@email.com', '0127894563', 'cf0b854f5a17fdad773d462438d4d7328722b817d40a74ecb8d9ad79f98aa251', '2023-11-10 09:33:15', 'kitchen'),
-(9, 'Techie Geeks', 'TG', 'techie.geeks@email.com', '012789541', '94c46f1e99a3c7cab332e3498b766c52f155d7ec120e48b3e2666f4b9f924f66', '2023-11-14 14:49:29', 'admin'),
-(10, 'Bongani', 'Libisi', 'bongani.libisi@email.com', '0123456789', 'cf2ee54de8b2ddd62ded84cd774a42300544a241bd386ebdd93cafa431b9fab9', '2023-11-14 14:51:18', 'kitchen');
+INSERT INTO `staff` (`id`, `name`, `surname`, `email`, `phone`, `password`, `created_at`, `verified`, `type`) VALUES
+(9, 'Techie Geeks', 'TG', 'techie.geeks@email.com', '012789541', '94c46f1e99a3c7cab332e3498b766c52f155d7ec120e48b3e2666f4b9f924f66', '2023-11-14 14:49:29', 1, 'admin'),
+(10, 'Bongani', 'Libisi', 'bongani.libisi@email.com', '0123456789', 'cf2ee54de8b2ddd62ded84cd774a42300544a241bd386ebdd93cafa431b9fab9', '2023-11-14 14:51:18', 1, 'kitchen'),
+(44, 'neo', 'tom', 'neocamtom@gmail.com', '0761234567', 'cf0b854f5a17fdad773d462438d4d7328722b817d40a74ecb8d9ad79f98aa251', '2023-11-17 08:21:17', 1, 'Admin');
 
 --
 -- Indexes for dumped tables
@@ -298,6 +372,12 @@ ALTER TABLE `customer`
   ADD KEY `customer_fk_cardPaymentDetailsId` (`card_id`);
 
 --
+-- Indexes for table `customer_staff_activation`
+--
+ALTER TABLE `customer_staff_activation`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `images`
 --
 ALTER TABLE `images`
@@ -318,6 +398,18 @@ ALTER TABLE `product`
   ADD PRIMARY KEY (`id`),
   ADD KEY `product_fk_categoryid` (`category_id`),
   ADD KEY `product_fk_imageId` (`image_id`);
+
+--
+-- Indexes for table `pwd_reset`
+--
+ALTER TABLE `pwd_reset`
+  ADD PRIMARY KEY (`reset_id`);
+
+--
+-- Indexes for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `shop_order`
@@ -353,19 +445,25 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `customer_staff_activation`
+--
+ALTER TABLE `customer_staff_activation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `messages`
@@ -377,19 +475,31 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+
+--
+-- AUTO_INCREMENT for table `pwd_reset`
+--
+ALTER TABLE `pwd_reset`
+  MODIFY `reset_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `reviews`
+--
+ALTER TABLE `reviews`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `shop_order`
 --
 ALTER TABLE `shop_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `staff`
 --
 ALTER TABLE `staff`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- Constraints for dumped tables

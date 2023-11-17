@@ -45,6 +45,10 @@ if (isset($_REQUEST['error'])) {
             $message = "Verification failed. Please try again or create an account.";
             echo "<script>alert('$message');</script>";
             break;
+        case "active":
+            $message = "Email not verified. Please check your email to verify your email.";
+            echo "<script>alert('$message');</script>";
+            break;
         case "error":
             $message = "Something went wrong. Please try again";
             echo "<script>alert('$message');</script>";

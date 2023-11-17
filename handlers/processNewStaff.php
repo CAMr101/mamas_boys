@@ -46,6 +46,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
 
         $verified = 1;
 
+        $hashed_password = hashPassword($password);
+
+
+        $query = "INSERT INTO staff (name, surname, email, phone, password,verified, type) VALUES (?,?,?,?,?,?,?);";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$name, $surname, $email, $phone, $hashed_password, $verified, $type]);
+
         if ($sendVerificationEmail == "on") {
 
             $verified = 0;
@@ -65,19 +72,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
                 header("location:../admin/new-staff.php?error=mail");
             }
         }
-
-        $hashed_password = hashPassword($password);
-
-
-        $query = "INSERT INTO staff (name, surname, email, phone, password,verified, type) VALUES (?,?,?,?,?,?,?);";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute([$name, $surname, $email, $phone, $hashed_password, $verified, $type]);
-
-        $query = "SELECT id FROM staff WHERE password = ?;";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute([$hashed_password]);
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $staffId = $result[0]["id"];
 
         $pdo = null;
         $stmt = null;

@@ -1,4 +1,5 @@
 <?php
+include './processCustomer.php';
 include 'passwordHash.php';
 include './email.php';
 
@@ -12,6 +13,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_REQUEST['method']) && isset(
     $phone = $_POST['signup-phone'];
     $password = $_POST['signup-password'];
     $confirm_password = $_POST['signup-password-confirm'];
+
+    $user = getUserByEmail($email);
+
+    if (!empty($user)) {
+        header("location:../pages/signup.php?error=exist");
+    }
 
     $hashedPw = hashPassword($password);
     $confirmHasedPw = hashPassword($confirm_password);

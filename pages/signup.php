@@ -20,6 +20,10 @@ if (isset($_REQUEST['error'])) {
             $message = "Verification not sent. Please try again.";
             echo "<script>alert('$message');</script>";
             break;
+        case "exist":
+            $message = "User with this email already exists. Please try another or login.";
+            echo "<script>alert('$message');</script>";
+            break;
         default:
             $message = "Something went wrong. Please try again.";
             echo "<script>alert('$message');</script>";
