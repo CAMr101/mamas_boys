@@ -548,6 +548,13 @@ main .bottom-data .orders table td{
     padding: 16px 0;
 }
 
+main .bottom-data .orders table .buttons div .btn-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-self: center;
+}
+
 main .bottom-data .orders table tr td:first-child{
     display: flex;
     align-items: center;

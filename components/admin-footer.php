@@ -1,8 +1,7 @@
 <?php
 function createFooter()
 {
-    return '
-            ';
+    return '';
 }
 
 

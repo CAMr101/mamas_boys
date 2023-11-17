@@ -29,7 +29,7 @@ $categories = getAllCategories();
         <div class="left">
             <h1>New Product</h1>
             <ul class="breadcrumb">
-                <li><a href="shop.php">
+                <li><a href="products.php">
                         Product
                     </a></li>
                 /
@@ -84,7 +84,14 @@ $categories = getAllCategories();
                                 <label for="category">Category</label>
                             </td>
                             <td>
-                                <input list="categories" name="category">
+                                <select name="category">
+                                    <option value=""> Choose Catgeory</option>
+                                    <?php foreach ($categories as $category) { ?>
+                                        <option value="<?php echo ($category["id"]) ?>">
+                                            <?php echo ($category["name"]) ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
                             </td>
                         </tr>
 

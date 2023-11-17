@@ -51,12 +51,28 @@
                     Orders
                 </a>
             </li>
-            <li class="side-menu-item">
+            <!-- <li class="side-menu-item">
                 <a href="shop.php">
                     <span class="material-symbols-outlined">
                         store
                     </span>
                     Shop
+                </a>
+            </li> -->
+            <li class="side-menu-item">
+                <a href="categories.php">
+                    <span class="material-symbols-outlined">
+                        folder
+                    </span>
+                    Categories
+                </a>
+            </li>
+            <li class="side-menu-item">
+                <a href="products.php">
+                    <span class="material-symbols-outlined">
+                        store
+                    </span>
+                    Products
                 </a>
             </li>
             <li class="side-menu-item">

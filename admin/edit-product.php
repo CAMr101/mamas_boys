@@ -113,29 +113,33 @@ $categories = getAllCategories();
                     <tbody>
                         <tr>
                             <td>
-                                <label for="name">Name</label>
+                                <label for="name" class="form-label">Name</label>
                             </td>
                             <td>
-                                <input type="text" name="name">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <label for="price">Price</label>
-                            </td>
-                            <td>
-                                <input type="number" name="price">
+                                <input type="text" class="form-control" name="name"
+                                    value="<?php echo ($product["name"]); ?>">
                             </td>
                         </tr>
 
                         <tr>
                             <td>
-                                <label for="ingredients">Ingredients</label>
+                                <label for="price" class="form-label">Price</label>
                             </td>
                             <td>
-                                <textarea name="ingredients" id="description" cols="60" rows="5"
-                                    form="update-product"></textarea>
+                                <input type="number" name="price" class="form-control"
+                                    value="<?php echo ($product["price"]); ?>">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="ingredients" class="form-label">Ingredients</label>
+                            </td>
+                            <td>
+                                <textarea name="ingredients" class="form-control" id="description" cols="60" rows="5"
+                                    form="update-product"><?php
+                                    echo ($product["description"]);
+                                    ?></textarea>
                             </td>
                         </tr>
 
@@ -144,13 +148,21 @@ $categories = getAllCategories();
                                 <label for="category">Category</label>
                             </td>
                             <td>
-                                <input list="categories" name="category">
+                                <!-- <input list="categories" name="category"> -->
+                                <select name="category">
+                                    <option value=""> Choose Catgeory</option>
+                                    <?php foreach ($categories as $category) { ?>
+                                        <option value="<?php echo ($category["id"]) ?>">
+                                            <?php echo ($category["name"]) ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
                             </td>
                         </tr>
 
                         <tr>
                             <td>
-                                <label for="image">Image</label>
+                                <label for="image" class="form-control" type="file" id="formFile">Image</label>
                             </td>
                             <td>
                                 <input type="file" name="image">
@@ -168,7 +180,7 @@ $categories = getAllCategories();
                 <input type="hidden" name="id" value="<?php
                 echo ($productId);
                 ?>">
-                <button>Update Product</button>
+                <button class="btn btn-primary">Update Product</button>
             </form>
 
 

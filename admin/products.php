@@ -21,7 +21,14 @@ if (!isset($_SESSION["user_id"])) {
 <main class="main-content">
     <div class="header">
         <div class="left">
-            <h1>All Products</h1>
+            <h1>All Products
+                <a href="new-product.php">
+                    <span class="material-symbols-outlined">
+                        add
+                    </span>
+                </a>
+            </h1>
+
         </div>
     </div>
 
