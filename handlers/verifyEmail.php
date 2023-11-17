@@ -104,6 +104,21 @@ function verifyCustomer($selector, $token)
 
             header('location:../pages/active.php');
         } else {
+            if ($result["counter"] > 5) {
+                deleteExistingToken($result["email"], 0);
+                header("location:../pages/login.php?error=counter");
+            } else {
+                $counter = $result["counter"] + 1;
+
+                try {
+                    $query = "UPDATE `customer_staff_activation` SET `counter`= ? WHERE email=? ";
+                    $stmt = $pdo->prepare($query);
+                    $stmt->execute([$counter, $result['email']]);
+                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                } catch (PDOException $e) {
+                    header('location:../pages/login.php?error=error');
+                }
+            }
             header('location:../pages/login.php?error=token');
         }
     } catch (PDOException $e) {
@@ -112,23 +127,6 @@ function verifyCustomer($selector, $token)
         $stmt = $pdo->prepare($query);
         $stmt->execute([$selector]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($result["counter"] > 5) {
-            deleteExistingToken($result["email"], 0);
-            header("location:../pages/login.php?error=counter");
-        } else {
-            $counter = $result["counter"] + 1;
-
-            try {
-                $query = "UPDATE `customer_staff_activation` SET `counter`= ? WHERE email=? ";
-                $stmt = $pdo->prepare($query);
-                $stmt->execute([$counter, $result['email']]);
-                $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            } catch (PDOException $e) {
-                header('location:../pages/login.php?error=error');
-            }
-
-        }
 
         header('location:../pages/login.php?error=verify');
     }

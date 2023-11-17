@@ -97,7 +97,7 @@ function authenticateCustomer($email, $password)
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($result) {
-            switch ($$result["verified"]) {
+            switch ($result["verified"]) {
                 case 0:
                     header('location:../pages/login.php?error=active');
                     break;

@@ -187,7 +187,7 @@ function customerVerificationEmail($email, $name, $url)
 {
     //enables exceptions
     $mail = new PHPMailer(true);
-    $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+    // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
     $mail->isSMTP();
     $mail->Host = $_ENV["MAIL_HOSTNAME"];
     $mail->SMTPAuth = true;
@@ -209,7 +209,7 @@ function customerVerificationEmail($email, $name, $url)
     ob_end_clean();
 
     $message = str_replace("{{link}}", $url, $message);
-    $message = str_replace("{{name}}", $name, $message);
+    $message = str_replace("{{name}}", ucfirst($name), $message);
 
     $mail->Body = $message;
     $mail->AltBody = 'Your have registered with Mamas Boys, Here is your account verification link: ' . $url;

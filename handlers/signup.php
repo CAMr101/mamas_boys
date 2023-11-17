@@ -2,6 +2,10 @@
 include './processCustomer.php';
 include 'passwordHash.php';
 include './email.php';
+include './helpers/create-selector.php';
+include './helpers/create-token.php';
+include './helpers/deleteToken.php';
+include './helpers/saveToken.php';
 
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_REQUEST['method']) && isset($_POST)) {
     $method = $_GET['method'];
