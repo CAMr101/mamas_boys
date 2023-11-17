@@ -7,6 +7,7 @@ include './helpers/deleteToken.php';
 include './helpers/saveToken.php';
 include './helpers/create-selector.php';
 include './helpers/create-token.php';
+include './processStaff.php';
 
 ob_start();
 
@@ -37,7 +38,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
 
         include "../config/dbh.inc.php";
 
-        checkUserExist($email);
+        $user = getStaffByEmail($email);
+
+        if (!empty($user)) {
+            header("location:../admin/staff.php?error=exist");
+        }
 
         $verified = 1;
 
@@ -91,28 +96,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
     header("location:$staffUrl");
 }
 
-function checkUserExist($email)
-{
-    ob_start();
-    try {
-        include "../config/dbh.inc.php";
+// function checkUserExist($email)
+// {
+//     ob_start();
+//     try {
+//         include "../config/dbh.inc.php";
 
-        $query = "SELECT * FROM `staff`;";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//         $query = "SELECT * FROM `staff`;";
+//         $stmt = $pdo->prepare($query);
+//         $stmt->execute();
+//         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $counter = count($result);
+//         $counter = count($result);
 
-        for ($i = 0; $i < $counter; $i++) {
-            if ($result[$i]["email"] == $email) {
-                header("location:../admin/staff.php?error=exist");
-            }
-        }
+//         for ($i = 0; $i < $counter; $i++) {
+//             if ($result[$i]["email"] == $email) {
+//                 header("location:../admin/staff.php?error=exist");
+//             }
+//         }
 
-    } catch (PDOException $e) {
-        header("location:../admin/login.php?error=error");
-    }
-}
+//     } catch (PDOException $e) {
+//         header("location:../admin/login.php?error=error");
+//     }
+// }
 
 ?>

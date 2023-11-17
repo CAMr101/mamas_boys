@@ -41,6 +41,8 @@ function verifyAdmin($selector, $token)
             $stmt->execute([$result['email']]);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
+            deleteToken($selector, 0);
+
             header('location:../admin/email-verified.php');
         } else {
             header('location:../admin/login.php?error=token');
@@ -98,10 +100,7 @@ function verifyCustomer($selector, $token)
             $stmt->execute([$result['email']]);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $query = "DELETE FROM `customer_staff_activation` WHERE selector=?";
-            $stmt = $pdo->prepare($query);
-            $stmt->execute([$selector]);
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            deleteToken($selector, 1);
 
             header('location:../pages/active.php');
         } else {
@@ -132,5 +131,29 @@ function verifyCustomer($selector, $token)
         }
 
         header('location:../pages/login.php?error=verify');
+    }
+}
+
+function deleteToken($selector, $code)
+{
+    include "../config/dbh.inc.php";
+
+    try {
+        $query = "DELETE FROM customer_staff_activation WHERE selector =?;";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$tokenEmail]);
+
+        $pdo = null;
+        $stmt = null;
+
+    } catch (PDOException $e) {
+        switch ($code) {
+            case 0:
+                header("location:../admin/forgot-password.php?error=error");
+                break;
+            case 1:
+                header("location:../pages/forgot-password.php?error=error");
+                break;
+        }
     }
 }

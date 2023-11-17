@@ -9,12 +9,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $_POST["reset-password"] === "reset
     $confirmPw = $_POST["confirm-new-password"];
     $selector = $_POST["selector"];
     $validator = $_POST["validator"];
-    print_r($_POST);
 
     if (empty($pw) || empty($confirmPw)) {
         header("location:../admin/reset-password.php?error=empty");
     } else {
-        echo "in";
         $hashedPw = hashPassword($pw);
         $confirmHasedPw = hashPassword($confirmPw);
 

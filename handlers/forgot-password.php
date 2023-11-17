@@ -15,17 +15,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["admin-request-submit"]
     $token = createToken();
     $expiry = date("U") + 600;
 
-    $url = "www.mamas-boys.co.za/admin/reset-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
+    $url = "www.mamas-boys.co.za/admin/reset-password.php?selector=" . $selector . "&validator=" . $token;
     $user = getStaffByEmail($email);
-
-    include "../config/dbh.inc.php";
 
     if (empty($user)) {
         header("location:../admin/forgot-password.php?error=notfound");
     } else {
-        deleteExistingToken($email);
-        saveTokenIntoDb($email, $selector, $token, $expiry);
-        sendAdminPasswordResetEmail($email, $user["name"], $url);
+        $hashed_token = hashPassword($token);
+        deleteExistingToken($email, 0);
+        saveActivationToken($email, $selector, $hashed_token);
     }
 } else {
     header("location:../admin/login.php?reset=error");
