@@ -198,6 +198,8 @@ if (isset($_COOKIE['usercart'])) {
     echo createFooter();
     ?>
 
+    <script src="https://js.stripe.com/v3/"></script>
+
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/cart-page.js"></script>
 </body>
