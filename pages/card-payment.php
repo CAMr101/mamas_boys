@@ -63,7 +63,7 @@ $orderAmountInCents = $orderTotal * 100;
 <body>
     <?php echo createHeader(); ?>
     <div class="main-div">
-        <form action="http://localhost/mamas_boys-main/handlers/charge.php" method="post" id="payment-form">
+        <form action="../handlers/charge.php" method="post" id="payment-form">
             <div class="payment-details" id="payment-details">
                 <input type="hidden" name="orderAmountInCents" value="<?php echo $orderAmountInCents; ?>">
                 <h6>Payment Details</h6>
@@ -87,6 +87,18 @@ $orderAmountInCents = $orderTotal * 100;
     <script>
         // Create a Stripe client.
         var stripe = Stripe('pk_test_51ODNYCLv9rtmG82rwR00okaSvRwGPqkZthBpGkOfS7y8a4MiJ4JBHjUiO4wcJBLRmFkX7YszuKIK3jmzbdYaG26K00lZrFqK90');
+
+        const appearance = {
+            theme: 'flat',
+            variables: { colorPrimaryText: '#262626' }
+        };
+
+        const options = {
+            layout: {
+                type: 'tabs',
+                defaultCollapsed: false,
+            }
+        };
 
         // Create an instance of Elements.
         var elements = stripe.elements();

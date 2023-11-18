@@ -24,7 +24,8 @@ try {
     ]);
 
     // Handle successful payment (e.g., update order status, redirect to thank you page)
-    echo 'Payment successful! Thank you for your purchase.';
+    // echo 'Payment successful! Thank you for your purchase.';
+    header('location:../pages/order-success.php');
 } catch (\Stripe\Exception\CardException $e) {
     // Handle card errors (e.g., insufficient funds, card declined)
     echo 'Error: ' . $e->getError()->message;
