@@ -184,10 +184,19 @@ $reviews = getReviews();
                     <option value="5">5 Stars</option>
                 </select>
 
-                <input type="submit" name="submit_review" value="Submit Review" class="btn">
+                <input type="submit" name="submit_review" value="Submit Review" class="btn"
+                    onclick="displaySuccessMessage()">
             </form>
         </div>
     </section>
+
+
+
+    <script>
+        function displaySuccessMessage() {
+            alert('You have successfully added a review!');
+        }
+    </script>
 
     <!-------------------------------------------------------------------- Footer Section ---------------------------------------------------------------------------------->
     <?php

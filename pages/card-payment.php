@@ -58,6 +58,49 @@ $orderAmountInCents = $orderTotal * 100;
     <link rel="stylesheet" href="../assets/css/root.css">
     <link rel="stylesheet" href="../assets/css/checkout-page.css">
     <title>Checkout</title>
+
+    <style>
+        .main-div {
+            max-width: 500px;
+            margin: 10rem auto;
+            padding: 20px;
+            min-height: 300px;
+        }
+
+        .payment-details {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-row {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        #card-element {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 
 <body>
@@ -66,12 +109,12 @@ $orderAmountInCents = $orderTotal * 100;
         <form action="../handlers/charge.php" method="post" id="payment-form">
             <div class="payment-details" id="payment-details">
                 <input type="hidden" name="orderAmountInCents" value="<?php echo $orderAmountInCents; ?>">
-                <h6>Payment Details</h6>
+                <h1>Payment Details</h1>
                 <div class="form-row">
-                    <label for="card-element">
+                    <label style="font-weight: 400;" for="card-element">
                         Credit or debit card
                     </label>
-                    <div id="card-element">
+                    <div style="margin: 1.75rem 0;" id="card-element">
                     </div>
                     <div id="card-errors" role="alert"></div>
                 </div>
@@ -80,6 +123,10 @@ $orderAmountInCents = $orderTotal * 100;
             </div>
         </form>
     </div>
+
+    <?php
+    echo createFooter();
+    ?>
 
     <!-- Your existing scripts here -->
 

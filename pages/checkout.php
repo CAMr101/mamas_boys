@@ -44,6 +44,58 @@ if (isset($cart)) {
     <link rel="stylesheet" href="../assets/css/root.css">
     <link rel="stylesheet" href="../assets/css/checkout-page.css">
     <title>Checkout</title>
+    <style>
+        /* Mobile-friendly styles */
+        @media only screen and (max-width: 600px) {
+            .order {
+                width: 100%;
+                /* Ensure the image takes the full width */
+                margin-bottom: 10px;
+            }
+
+            /* Adjust the styling for mobile devices */
+            .summary,
+            .contact-form,
+            .complete {
+                width: 100%;
+                box-sizing: border-box;
+                margin-bottom: 15px;
+            }
+
+            .item {
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+                margin-bottom: 10px;
+            }
+
+            .prod-info {
+                flex: 1;
+                padding-left: 10px;
+            }
+
+            .complete-order {
+                text-align: center;
+            }
+
+            .contact-info,
+            .save-button {
+                width: 100%;
+            }
+
+            .method {
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+            }
+
+            .payment-details {
+                margin-top: 10px;
+            }
+
+            /* Add more styles as needed */
+        }
+    </style>
 </head>
 
 <body>

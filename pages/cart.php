@@ -39,6 +39,81 @@ if (isset($_COOKIE['usercart'])) {
     <link rel="stylesheet" href="../assets/css/root.css">
     <link rel="stylesheet" href="../assets/css/cart-page.css">
     <title>My Cart</title>
+    <style>
+        /* Add your mobile-specific styles here */
+        @media only screen and (max-width: 600px) {
+            .cart-container {
+                flex-direction: column;
+                display: flex;
+                justify-content: space-evenly;
+            }
+
+            .cart-item {
+                margin-bottom: 20px;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .cart-item .prod-image img {
+                width: 100%;
+                margin-bottom: 10px;
+                display: flex;
+                justify-content: space-evenly;
+            }
+
+            .details .prod .prod-name {
+                display: flex;
+                justify-content: space-evenly;
+            }
+
+            .details {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .details p {
+                margin: 5px 0;
+            }
+
+            .buttons {
+                margin-top: 5px;
+                display: flex;
+                justify-content: space-evenly;
+            }
+
+            .quantity,
+            .unit-price,
+            .total-price {
+                margin-top: 12px;
+                width: 100%;
+                display: flex;
+                justify-content: space-evenly;
+            }
+
+            .cart-summary {
+                margin-top: 20px;
+            }
+
+            .cart-summary .heading {
+                color: black;
+            }
+
+            .cart-summary .heading .sub-total {
+                color: black;
+            }
+
+            .sub-total,
+            .grand-total {
+                display: flex;
+                justify-content: space-evenly;
+                color: black;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
