@@ -252,12 +252,12 @@ $orderItems = json_decode($order['order_items'], true);
                         $productId = $item['id'];
                         $product = getProduct($productId);
 
-                        if ($product !== null) {
+                        if (isset($product)) {
                             ?>
                             <tr>
                                 <td>
                                     <a href="product.php?id=<?php echo $product['id']; ?>">
-                                        <?php echo $product['name']; ?>
+                                        <?php echo $product['name'] ?? "Product does not exist"; ?>
                                     </a>
                                 </td>
                                 <td>
@@ -267,7 +267,7 @@ $orderItems = json_decode($order['order_items'], true);
                                 </td>
                                 <td>
                                     <a href="product.php?id=<?php echo $product['id']; ?>">
-                                        <?php echo $product['description']; ?>
+                                        <?php echo $product['description'] ?? "N/A"; ?>
                                     </a>
                                 </td>
 

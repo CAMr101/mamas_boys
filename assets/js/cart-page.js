@@ -5,6 +5,7 @@ let totalDomElements = document.getElementsByClassName('summed-price');
 var subTotalDomElement = document.getElementById("subtotal-amount");
 var orderTotalDomElement = document.getElementById("total-amount");
 let subTotal = 0;
+const url = `http://localhost/kota2/handlers/processProducts.php?prod=true`;
 
 const priceArr = document.querySelectorAll("#unit-price");
 const quantityArr = document.querySelectorAll("#prod-quantity");
@@ -12,7 +13,7 @@ const summedPrice = document.querySelectorAll("#total-prod-price");
 let count = document.getElementById("count");
 
 window.onload = function(){
-
+    getProductList(url);
     for(let x = 0; x<quantityArr.length; x++){
         let price = parseInt(priceArr[x].innerText);
         let quantity = parseInt(quantityArr[x].innerText);
@@ -34,16 +35,23 @@ function loadCart(cartArray){
 
                 const total = e.quantity * product.price;
 
+                if(product.image === ""){
+                    var altName ="'" + product.name + "'" + " image not found";
+                }
+                else{
+                    var altName = product.name;
+                }
+
                 cartItemsContainer.insertAdjacentHTML("beforeend", 
                 `
                 <div class="cart-item">
                     <div class="prod-image">
-                        <img src="`+ product.image+`" alt="Kota 1">
+                        <img src="`+ product.image+`" alt="`+ altName+`">
                     </div>
                 
                     <div class="details">
                         <div class="prod">
-                            <p class="prod-name">`+ product.title +`</p>
+                            <p class="prod-name">`+ product.name +`</p>
                             <p class="prod-ingredient">
                             `+ product.description +`
                             </p>
@@ -100,7 +108,8 @@ function decreaseQuantity(id){
 
     saveCart(cart);
     var newCart = JSON.parse(localStorage.getItem("usercart"));
-    loadCart(newCart)
+    // getProductList(url);
+    loadCart(newCart);
     updateSummary();
     
     count.textContent = newCart.length;
@@ -115,10 +124,26 @@ function increaseQuantity(id){
 
     saveCart(cart);
     var newCart = JSON.parse(localStorage.getItem("usercart"));
+    // getProductList(url);
     loadCart(newCart)
     updateSummary();
 
     count.textContent = newCart.length;
+}
+
+async function getProductList(url){
+    
+    const response = await fetch(url)
+    .then((response)=>{
+        return response.json();
+    })
+    .then((data)=>{
+        products = data;
+        console.log(products);
+    })
+    .catch(function(error){
+        console.log(error);
+    })
 }
 
 function updateSummary(){
@@ -157,7 +182,7 @@ function deleteCookie(name){
 }
 
 
-const products = [
+var products = [
     {
         id: 0,
         image: 'Website pictures/kota.jpg',

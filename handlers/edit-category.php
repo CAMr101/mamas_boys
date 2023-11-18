@@ -15,17 +15,15 @@ if ($pathParams == null) {
 }
 
 $pathParams = explode('=', $pathParams);
-$productId = $pathParams[1];
+$categoryId = $pathParams[1];
 
-$product = getProduct($productId);
-$image = getImageByCategoryId($product["id"]);
+$category = getCategory($categoryId);
+$image = getImageByCategoryId($category["id"]);
 
 if ($image == null) {
     $image["name"] = "Image not found";
     $image["location"] = "";
 }
-
-$categories = getAllCategories();
 
 ?>
 
@@ -39,16 +37,18 @@ $categories = getAllCategories();
     <div class="header">
         <div class="left">
             <h1>Edit
-                <?php echo ($product["name"]); ?>
+                <?php echo ($category["name"]); ?>
             </h1>
             <ul class="breadcrumb">
                 <li>
-                    <a href="products.php">
-                        Product
+                    <a href="category.php?id=<?php echo $category['id']; ?>">
+                        Category
                     </a>
                 </li>
                 /
-                <li><a href="new-category.html" class="active">Edit</a></li>
+                <li>
+                    <a href="new-category.html" class="active">Edit</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -65,7 +65,7 @@ $categories = getAllCategories();
                 <div class="text">
                     <p>
                         <?php
-                        echo ($product["description"]);
+                        echo ($category["description"]);
                         ?>
                     </p>
                 </div>
@@ -87,7 +87,7 @@ $categories = getAllCategories();
         </div>
 
         <div class="card-container">
-            <a href="../handlers/processCategory.php?delete=<?php echo ($productId); ?>" onclick="confirmDelete(1)">
+            <a href="../handlers/processCategory.php?delete=<?php echo ($categoryId); ?>" onclick="confirmDelete(1)">
                 <div class="header delete">
                     <span class="material-symbols-outlined">
                         delete
@@ -101,71 +101,39 @@ $categories = getAllCategories();
     <div class="bottom-data">
         <div class="orders">
 
-            <form action="../handlers/processProducts.php?update=<?php echo ($productId); ?>" method="post"
-                enctype="multipart/form-data" id="update-product">
-                <datalist id="categories">
-                    <?php foreach ($categories as $category) { ?>
-                        <option value="<?php echo ($category["name"]) ?>"></option>
-                    <?php } ?>
-                </datalist>
+            <form action="../handlers/processUpdateCategory.php" method="post" enctype="multipart/form-data"
+                id="new-category">
                 <!-- <input type="hidden" name="MAX_FILE_SIZE" value=""> -->
                 <table>
+
                     <tbody>
                         <tr>
                             <td>
-                                <label for="name" class="form-label">Name</label>
+                                <label for="name">Name</label>
                             </td>
                             <td>
-                                <input type="text" class="form-control" name="name"
-                                    value="<?php echo ($product["name"]); ?>">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <label for="price" class="form-label">Price</label>
-                            </td>
-                            <td>
-                                <input type="number" name="price" class="form-control"
-                                    value="<?php echo ($product["price"]); ?>">
+                                <input type="text" class="form-control" name="name" value="<?php  echo ($category["name"]); ?>">
                             </td>
                         </tr>
 
                         <tr>
                             <td>
-                                <label for="ingredients" class="form-label">Ingredients</label>
+                                <label for="description">Description</label>
                             </td>
                             <td>
-                                <textarea name="ingredients" class="form-control" id="description" cols="60" rows="5"
-                                    form="update-product"><?php
-                                    echo ($product["description"]);
-                                    ?></textarea>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <label for="category">Category</label>
-                            </td>
-                            <td>
-                                <!-- <input list="categories" name="category"> -->
-                                <select name="category">
-                                    <option value=""> Choose Catgeory</option>
-                                    <?php foreach ($categories as $category) { ?>
-                                        <option value="<?php echo ($category["id"]) ?>">
-                                            <?php echo ($category["name"]) ?>
-                                        </option>
-                                    <?php } ?>
-                                </select>
+                                <textarea name="description" class="form-control" id="description" cols="60" rows="5"
+                                    form="new-category"><?php
+                        echo ($category["description"]);
+                        ?></textarea>
                             </td>
                         </tr>
 
                         <tr>
                             <td>
-                                <label for="image" class="form-control" type="file" id="formFile">Image</label>
+                                <label for="image">Image</label>
                             </td>
                             <td>
-                                <input type="file" name="image">
+                                <input type="file" class="form-control" type="file" id="formFile" name="image">
                             </td>
                         </tr>
 
@@ -177,10 +145,8 @@ $categories = getAllCategories();
                     </tbody>
                 </table>
 
-                <input type="hidden" name="id" value="<?php
-                echo ($productId);
-                ?>">
-                <button class="btn btn-primary">Update Product</button>
+                <input type="hidden" name="id" value="<?php echo ($category["id"]); ?>">
+                <button  class="btn btn-primary" >Save Changes</button>
             </form>
 
 

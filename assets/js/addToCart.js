@@ -190,10 +190,26 @@ window.onload = function (){
 }
 
 
-function addtocart(id){
-    // cart.push({...categories[id]});
-    createCartObj(parseInt(id));
-    alert("Successfully added to cart\n");
+let isProductAdded = {}; 
+
+function addtocart(id) {
+
+  if (isProductAdded[id]) {
+    
+    const userResponse = confirm("This product is already in your cart. Do you still want to add it?");
+
+    if (!userResponse) {
+      alert("Product not added to cart.");
+      return;
+    }
+  }
+
+  createCartObj(parseInt(id));
+
+  // Update the product status
+  isProductAdded[id] = true;
+
+  alert("Product successfully added to cart!");
 }
 
 function createCartObj(id){

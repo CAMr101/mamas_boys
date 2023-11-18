@@ -60,17 +60,17 @@ if (!isset($_SESSION["user_id"])) {
                                     </a>
                                 </td>
                                 <td>
-
-                                    <?php echo $category['name']; ?>
-
+                                    <a href="category.php?id=<?php echo $category['id']; ?>">
+                                        <?php echo $category['name']; ?>
+                                    </a>
                                 </td>
                                 <td>
-
-                                    <?php echo $category['description']; ?>
-
+                                    <a href="category.php?id=<?php echo $category['id']; ?>">
+                                        <?php echo $category['description']; ?>
+                                    </a>
                                 </td>
 
-                                <td id="buttons">
+                                <td>
                                     <div class="btn-group" role="group" aria-label="Second group">
                                         <a href="edit-category.php?id=<?php echo $category['id']; ?>"
                                             class="btn btn-sm btn-outline-primary">
@@ -81,7 +81,8 @@ if (!isset($_SESSION["user_id"])) {
                                         <form action="../handlers/deleteCategory.php" method="post"
                                             enctype="multipart/form-data">
                                             <input name="id" value="<?php echo $category['id']; ?>" type="hidden">
-                                            <button type="submit" class="btn btn-sm btn-outline-danger">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger"
+                                                onclick="showDeleteMessage()">
                                                 <span class="material-symbols-outlined">
                                                     delete
                                                 </span>
@@ -91,6 +92,13 @@ if (!isset($_SESSION["user_id"])) {
 
                                 </td>
                             </tr>
+
+                            <script>
+                                function showDeleteMessage() {
+                                    alert("You have deleted the Category");
+                                }
+
+                            </script>
 
                         <?php }
                     } else {

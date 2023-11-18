@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2023 at 10:00 AM
+-- Generation Time: Nov 18, 2023 at 01:52 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -100,12 +100,9 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`id`, `name`, `surname`, `address`, `email`, `phone`, `password`, `created_at`, `verified`, `cart_id`, `card_id`) VALUES
-(1, 'junior', NULL, '515 this address is wherer it goes down', 'neo@email.com', '01239634865', 'cf0b854f5a17fdad773d462438d4d7328722b817d40a74ecb8d9ad79f98aa251', '2023-11-10 09:11:38', 0, NULL, NULL),
-(2, 'junior', NULL, '515 this address is wherer it goes down', 'neo@email.com', '01239634865', 'cf0b854f5a17fdad773d462438d4d7328722b817d40a74ecb8d9ad79f98aa251', '2023-11-10 09:12:53', 0, NULL, NULL),
-(3, 'Oratile', 'akakak', '515 this address is wherer it goes down', 'neo@email.com', '01239634865', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '2023-11-10 09:13:18', 0, NULL, NULL),
-(4, 'Oratile', 'akakak', '515 this address is wherer it goes down', 'neo@email.com', '01239634865', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '2023-11-10 09:14:22', 0, NULL, NULL),
-(5, 'jeje', 'tom', '123 address street', 'cameron@gmail.com', '0123456789', 'cf0b854f5a17fdad773d462438d4d7328722b817d40a74ecb8d9ad79f98aa251', '2023-11-14 13:41:00', 0, NULL, NULL),
-(6, 'etu', 'eee', '256 Fake Address', 'neo@email.com', '0123456789', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '2023-11-14 19:52:15', 0, NULL, NULL);
+(1, 'junior', NULL, '515 this address is wherer it goes down', 'neo@email.com', '01239634865', 'cf0b854f5a17fdad773d462438d4d7328722b817d40a74ecb8d9ad79f98aa251', '2023-11-17 09:32:08', 1, NULL, NULL),
+(2, 'junior', NULL, '515 this address is wherer it goes down', 'neo@email.com', '01239634865', 'cf0b854f5a17fdad773d462438d4d7328722b817d40a74ecb8d9ad79f98aa251', '2023-11-17 09:32:02', 1, NULL, NULL),
+(11, 'neo', 'tom', '123 address street', 'neocamtom@gmail.com', '0123456789', '326f882a02d0192e91bf321100cfef69080779d69b56742eb4e53371cce79b12', '2023-11-17 18:13:29', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -126,8 +123,7 @@ CREATE TABLE `customer_staff_activation` (
 --
 
 INSERT INTO `customer_staff_activation` (`id`, `email`, `selector`, `token`, `counter`) VALUES
-(25, 'books@email.com', '61dad5a79632678d', '$2y$10$r70paUSkFfsow5T4DFohZ.cD3jipCGjlaMozYKWl5/xi0YnLmpAw.', 0),
-(37, 'neocamtom@gmail.com', '5ca8d973063f1538', '$2y$10$FC.u/rp/2kHj7Lo5.dzNcO8R1RxaNCR3v5HMS8R4PaPlMHkAqC.SG', 0);
+(25, 'books@email.com', '61dad5a79632678d', '$2y$10$r70paUSkFfsow5T4DFohZ.cD3jipCGjlaMozYKWl5/xi0YnLmpAw.', 0);
 
 -- --------------------------------------------------------
 
@@ -148,11 +144,11 @@ CREATE TABLE `images` (
 --
 
 INSERT INTO `images` (`id`, `name`, `location`, `product_id`, `category_id`) VALUES
-(19, 'kota palony.jpg', '../assets/images/category/kota_palony.jpg', NULL, 11),
-(20, 'kota palony.jpg', '../assets/images/category/kota_palony.jpg', NULL, 11),
-(22, 'kota3.jpg', '../assets/images/category/kota3.jpg', NULL, 13),
-(23, 'kota3.jpg', '../assets/images/category/kota3.jpg', NULL, 13),
-(24, 'kota3.jpg', '../assets/images/category/kota3.jpg', NULL, 13);
+(19, 'eggs.jpg', '../assets/images/category/eggs.jpg', NULL, 11),
+(20, 'eggs.jpg', '../assets/images/category/eggs.jpg', NULL, 11),
+(22, 'Khosa.jpg', '../assets/images/category/Khosa.jpg', NULL, 13),
+(23, 'Khosa.jpg', '../assets/images/category/Khosa.jpg', NULL, 13),
+(24, 'Khosa.jpg', '../assets/images/category/Khosa.jpg', NULL, 13);
 
 -- --------------------------------------------------------
 
@@ -189,6 +185,7 @@ CREATE TABLE `product` (
   `name` varchar(255) NOT NULL,
   `price` decimal(10,0) NOT NULL,
   `description` varchar(255) NOT NULL,
+  `stock_limit` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `image_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -197,29 +194,28 @@ CREATE TABLE `product` (
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`id`, `name`, `price`, `description`, `category_id`, `image_id`) VALUES
-(3, 'Porche', 22, 'Bread, Atchar, Polony, Chips & Vienna', 0, NULL),
-(4, 'Porche', 22, 'Bread, Atchar, Polony, Chips & Vienna', 0, NULL),
-(5, 'Mahindra', 23, 'Bread, Atchar, Polony, Chips & Cheese', 0, NULL),
-(6, 'Mustang', 27, 'Bread, Atchar, Polony, Chips & Eggs', 0, NULL),
-(7, 'Rolce Royce', 30, 'Bread, Atchar, Polony, Chips & Russian', 0, NULL),
-(8, 'Mini Cooper', 35, 'Bread, Atchar, Polony, Chips, Russian & Vienna', 0, NULL),
-(9, 'Polo', 40, 'Bread, Atchar, Polony, Chips, Russian, Vienna & Cheese', 0, NULL),
-(10, 'Bently', 50, 'Bread, Atchar, Polony, Chips, Russian, Vienna, Cheese & Burger', 0, NULL),
-(11, 'Staria', 60, 'Bread, Atchar, Polony, Chips, Russian, Vienna, Cheese, Burger & Egg', 0, NULL),
-(12, 'Lambogini', 70, 'Bread, Atchar, Polony, Chips, Russian, Vienna, Cheese, Burger, Egg & Fish Finger', 0, NULL),
-(13, 'Toyota', 80, 'Bread, Atchar, Polony, Chips, Russian, Vienna, Cheese, Burger, Egg, Fish Finger & Bacon', 0, NULL),
-(14, 'Small', 40, '', 1, NULL),
-(15, 'Medium', 55, '', 1, NULL),
-(16, 'Large', 70, '', 1, NULL),
-(17, 'Egg', 12, '', 2, NULL),
-(18, 'Russian', 15, '', 2, NULL),
-(19, 'Vienna', 10, '', 2, NULL),
-(20, 'Cheese', 10, '', 2, NULL),
-(21, 'Burger', 15, '', 2, NULL),
-(22, 'Fish Finger', 12, '', 2, NULL),
-(23, 'Bacon', 13, '', 2, NULL),
-(24, 'Polony', 5, '', 2, NULL);
+INSERT INTO `product` (`id`, `name`, `price`, `description`, `stock_limit`, `category_id`, `image_id`) VALUES
+(4, 'Porche', 22, 'Bread, Atchar, Polony, Chips & Vienna', 0, 0, NULL),
+(5, 'Mahindra', 23, 'Bread, Atchar, Polony, Chips & Cheese', 0, 0, NULL),
+(6, 'Mustang', 27, 'Bread, Atchar, Polony, Chips & Eggs', 0, 0, NULL),
+(7, 'Rolce Royce', 30, 'Bread, Atchar, Polony, Chips & Russian', 0, 0, NULL),
+(8, 'Mini Cooper', 35, 'Bread, Atchar, Polony, Chips, Russian & Vienna', 0, 0, NULL),
+(9, 'Polo', 40, 'Bread, Atchar, Polony, Chips, Russian, Vienna & Cheese', 0, 0, NULL),
+(10, 'Bently', 50, 'Bread, Atchar, Polony, Chips, Russian, Vienna, Cheese & Burger', 0, 0, NULL),
+(11, 'Staria', 60, 'Bread, Atchar, Polony, Chips, Russian, Vienna, Cheese, Burger & Egg', 0, 0, NULL),
+(12, 'Lambogini', 70, 'Bread, Atchar, Polony, Chips, Russian, Vienna, Cheese, Burger, Egg & Fish Finger', 0, 0, NULL),
+(13, 'Toyota', 80, 'Bread, Atchar, Polony, Chips, Russian, Vienna, Cheese, Burger, Egg, Fish Finger & Bacon', 0, 0, NULL),
+(14, 'Small', 40, '', 0, 1, NULL),
+(15, 'Medium', 55, '', 0, 1, NULL),
+(16, 'Large', 70, '', 0, 1, NULL),
+(17, 'Egg', 12, '', 0, 2, NULL),
+(18, 'Russian', 15, '', 0, 2, NULL),
+(19, 'Vienna', 10, '', 0, 2, NULL),
+(20, 'Cheese', 10, '', 0, 2, NULL),
+(21, 'Burger', 15, '', 0, 2, NULL),
+(22, 'Fish Finger', 12, '', 0, 2, NULL),
+(23, 'Bacon', 13, '', 0, 2, NULL),
+(24, 'Polony', 5, '', 0, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -232,6 +228,7 @@ CREATE TABLE `pwd_reset` (
   `pwd_email` varchar(255) NOT NULL,
   `pwd_selector` text NOT NULL,
   `pwd_token` longtext NOT NULL,
+  `pwd_counter` int(1) NOT NULL DEFAULT 0,
   `pwd_expiry` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -239,9 +236,8 @@ CREATE TABLE `pwd_reset` (
 -- Dumping data for table `pwd_reset`
 --
 
-INSERT INTO `pwd_reset` (`reset_id`, `pwd_email`, `pwd_selector`, `pwd_token`, `pwd_expiry`) VALUES
-(5, 'books@email.com', '2a8e85501480463d', '$2y$10$OnIvR.mbyjl4PlNiRs5wVe6UR3DR/3Skc8FuP5Swaqg/CbTJLPEk6', '1700025618'),
-(13, 'neocamtom@gmail.com', '99bd33f618f5848a', '$2y$10$q91Qah5zTUXmi82QKETbyODzqb4PvEkZpnGfNP/W4IS9FuIhfhlye', '1700028864');
+INSERT INTO `pwd_reset` (`reset_id`, `pwd_email`, `pwd_selector`, `pwd_token`, `pwd_counter`, `pwd_expiry`) VALUES
+(5, 'books@email.com', '2a8e85501480463d', '$2y$10$OnIvR.mbyjl4PlNiRs5wVe6UR3DR/3Skc8FuP5Swaqg/CbTJLPEk6', 0, '1700025618');
 
 -- --------------------------------------------------------
 
@@ -306,10 +302,10 @@ INSERT INTO `shop_order` (`id`, `customer_id`, `name`, `email`, `phone`, `order_
 (14, NULL, 'tom', 'neo@email.com', '01234567896', 46, '[{\"id\":5,\"quantity\":2}]', 'NotStarted', 'card', 0, '2023-11-14 01:08:16', '2023-11-13 23:08:16', NULL),
 (15, NULL, 'tom', 'neo@email.com', '01234567896', 90, '[{\"id\":9,\"quantity\":1},{\"id\":10,\"quantity\":1}]', 'Started', 'cash', 0, '2023-11-14 01:17:03', '2023-11-13 23:24:40', NULL),
 (16, NULL, 'jeje', 'cameron@gmail.com', '0123456789', 72, '[{\"id\":3,\"quantity\":1},{\"id\":5,\"quantity\":1},{\"id\":6,\"quantity\":1}]', 'NotStarted', 'card', 0, '2023-11-14 16:15:31', '2023-11-14 14:15:31', NULL),
-(18, 5, 'jeje', 'cameron@gmail.com', '0123456789', 72, '[{\"id\":3,\"quantity\":1},{\"id\":5,\"quantity\":1},{\"id\":6,\"quantity\":1}]', 'Started', 'cash', 0, '2023-11-14 16:19:52', '2023-11-14 14:24:55', NULL),
+(18, NULL, 'jeje', 'cameron@gmail.com', '0123456789', 72, '[{\"id\":3,\"quantity\":1},{\"id\":5,\"quantity\":1},{\"id\":6,\"quantity\":1}]', 'Started', 'cash', 0, '2023-11-14 16:19:52', '2023-11-14 14:24:55', NULL),
 (21, NULL, 'neo', 'neocamtom@gmail.com', '0672837571', 27, '[{\"id\":6,\"quantity\":1}]', 'NotStarted', 'cash', 0, '2023-11-15 09:08:34', '2023-11-15 07:08:34', NULL),
 (22, NULL, 'neo', 'neocamtom@gmail.com', '0672837571', 27, '[{\"id\":6,\"quantity\":1}]', 'NotStarted', 'cash', 0, '2023-11-15 09:10:13', '2023-11-15 07:10:13', NULL),
-(23, NULL, 'tom', 'neocamtom@gmail.com', '7896541230', 27, '[{\"id\":6,\"quantity\":1}]', 'NotStarted', 'card', 0, '2023-11-15 09:14:45', '2023-11-15 07:14:45', NULL);
+(23, NULL, 'tom', 'neocamtom@gmail.com', '7896541230', 27, '[{\"id\":6,\"quantity\":1}]', 'Completed', 'card', 0, '2023-11-15 09:14:45', '2023-11-17 20:42:48', NULL);
 
 -- --------------------------------------------------------
 
@@ -336,7 +332,7 @@ CREATE TABLE `staff` (
 INSERT INTO `staff` (`id`, `name`, `surname`, `email`, `phone`, `password`, `created_at`, `verified`, `type`) VALUES
 (9, 'Techie Geeks', 'TG', 'techie.geeks@email.com', '012789541', '94c46f1e99a3c7cab332e3498b766c52f155d7ec120e48b3e2666f4b9f924f66', '2023-11-14 14:49:29', 1, 'admin'),
 (10, 'Bongani', 'Libisi', 'bongani.libisi@email.com', '0123456789', 'cf2ee54de8b2ddd62ded84cd774a42300544a241bd386ebdd93cafa431b9fab9', '2023-11-14 14:51:18', 1, 'kitchen'),
-(44, 'neo', 'tom', 'neocamtom@gmail.com', '0761234567', 'cf0b854f5a17fdad773d462438d4d7328722b817d40a74ecb8d9ad79f98aa251', '2023-11-17 08:21:17', 1, 'Admin');
+(44, 'neo', 'tom', 'neocamtom@gmail.com', '0761234567', '6c8b9f20e598f611bb74fe87d404458633775cf0fd87092b98f45f23d730e21d', '2023-11-17 08:21:17', 1, 'Admin');
 
 --
 -- Indexes for dumped tables
@@ -451,13 +447,13 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `customer_staff_activation`
 --
 ALTER TABLE `customer_staff_activation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `images`
@@ -481,7 +477,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `pwd_reset`
 --
 ALTER TABLE `pwd_reset`
-  MODIFY `reset_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `reset_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `reviews`

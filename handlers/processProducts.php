@@ -1,4 +1,6 @@
 <?php
+
+
 if (isset($_REQUEST['delete'])) {
     $productId = $_GET['delete'];
 
@@ -10,6 +12,22 @@ if (isset($_REQUEST['update'])) {
 
     updateProduct($categoryId);
     echo '11';
+}
+
+if (isset($_REQUEST['prod'])) {
+    $products = getAllProducts();
+
+    for ($i = 0; $i < count($products); $i++) {
+
+        if (!isset($products[$i]['image_id'])) {
+            $products[$i]["image"] = "";
+        } else {
+            include "./processImage.php";
+            $location = getImageById($products[$i]['image_id']);
+            $products[$i]["image"] = $location;
+        }
+    }
+    echo json_encode($products);
 }
 
 function getAllProducts()
@@ -47,13 +65,14 @@ function getProduct($id)
         $query = "SELECT * FROM product WHERE id=?";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$id]);
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $product = $result[0];
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
 
         $pdo = null;
         $stmt = null;
 
-        return $product;
+        // $product = $result[0];
+        return $result;
 
     } catch (PDOException $e) {
         echo "Connection failed: " . $e->getMessage();

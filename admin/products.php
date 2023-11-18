@@ -21,14 +21,13 @@ if (!isset($_SESSION["user_id"])) {
 <main class="main-content">
     <div class="header">
         <div class="left">
-            <h1>All Products
+            <h1>Products
                 <a href="new-product.php">
                     <span class="material-symbols-outlined">
                         add
                     </span>
                 </a>
             </h1>
-
         </div>
     </div>
 
@@ -36,7 +35,7 @@ if (!isset($_SESSION["user_id"])) {
         <div class="orders">
             <div class="header">
                 <i class='bx bx-receipt'></i>
-                <h3>Products</h3>
+                <h3>List of Products</h3>
             </div>
             <table>
                 <thead>
@@ -46,9 +45,10 @@ if (!isset($_SESSION["user_id"])) {
                         <th>Description</th>
                         <th>Price</th>
                         <th>Category</th>
+                        <th>Options</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class=" ">
                     <!-- <tr>
                             <td>001</td>
                             <td>Mustang</td>
@@ -91,7 +91,43 @@ if (!isset($_SESSION["user_id"])) {
                                     </a>
                                 </td>
 
+                                <td>
+
+
+                                    <div class="btn-group" role="group" aria-label="Second group">
+                                        <a href="edit-product.php?id=<?php echo $product['id']; ?>"
+                                            class="btn btn-sm btn-outline-primary">
+                                            <span class="material-symbols-outlined">
+                                                edit
+                                            </span>
+                                        </a>
+                                        <form action="../handlers/deleteProduct.php" method="post"
+                                            enctype="multipart/form-data">
+                                            <input name="id" value="<?php echo $product['id']; ?>" type="hidden">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger"
+                                                onclick="showDeleteMessage()">
+                                                <span class="material-symbols-outlined">
+                                                    delete
+                                                </span>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+
                             </tr>
+
+
+                            <!-- ... Your existing PHP and HTML code ... -->
+
+                            <script>
+                                function showDeleteMessage() {
+                                    alert("You have deleted the product");
+                                }
+
+                            </script>
+
+
+
                         <?php }
                     } else {
 

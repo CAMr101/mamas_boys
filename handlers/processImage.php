@@ -1,5 +1,23 @@
 <?php
 
+function getImageById($id)
+{
+    include "../config/dbh.inc.php";
+
+    try {
+        $query = "SELECT location FROM images WHERE id = ?;";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$id]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+
+
+    } catch (PDOException $e) {
+        echo "Connection failed: " . $e->getMessage();
+    }
+}
+
 function saveCategoryImage($name, $location, $catId)
 {
     include "../config/dbh.inc.php";

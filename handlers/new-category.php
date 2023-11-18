@@ -79,15 +79,9 @@ if ($user['type'] != 'admin') {
                     </tbody>
                 </table>
 
-                <button class="btn btn-primary" id="createCategoryBtn">Create Category</button>
+                <button class="btn btn-primary" >Create Category</button>
             </form>
 
-            <script>
-                document.getElementById('createCategoryBtn').addEventListener('click', function () {
-
-                    alert('Successfully added category');
-                });
-            </script>
 
         </div>
 

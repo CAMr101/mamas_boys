@@ -25,6 +25,9 @@
     <link rel="stylesheet" href="../assets/css/admin.new.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <!-- <link rel="stylesheet" href=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">  -->
+
 </head>
 
 <body>
@@ -59,6 +62,7 @@
                     Shop
                 </a>
             </li> -->
+            <!-- Adding an independent Category Tab -->
             <li class="side-menu-item">
                 <a href="categories.php">
                     <span class="material-symbols-outlined">
@@ -67,10 +71,11 @@
                     Categories
                 </a>
             </li>
+            <!-- Adding an independent Products Tab -->
             <li class="side-menu-item">
                 <a href="products.php">
                     <span class="material-symbols-outlined">
-                        store
+                        shop
                     </span>
                     Products
                 </a>

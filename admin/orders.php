@@ -77,7 +77,10 @@ $orders = getOrders();
 
                                         foreach ($order_items as $item) {
                                             $name = getProductName($item['id']);
-                                            echo $name['name'];
+                                            if (empty($name))
+                                                echo "N/A";
+                                            else
+                                                echo $name['name'];
                                             echo "<br>";
                                         } ?>
                                     </a>
