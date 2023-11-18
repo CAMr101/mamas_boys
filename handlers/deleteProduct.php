@@ -7,7 +7,7 @@ $categoryUrl = "../admin/category.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $categoryId = $_POST['id'];
-   
+
     try {
         include "../config/dbh.inc.php";
 
@@ -15,8 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = $pdo->prepare($query);
         $stmt->execute([$categoryId]);
 
-      
-        header('Location: ' . $baseUrl . '/mamas_boys/admin/products.php');
+
+        header('Location:../admin/products.php');
 
         die();
 
@@ -25,6 +25,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Query Failed: " . $e->getMessage());
     }
 } else {
-    // header("location:../admin/shop.php");
-    header('Location: ' . $baseUrl . '/mamas_boys/admin/products.php');
+    header('Location:../admin/products.php');
 }
