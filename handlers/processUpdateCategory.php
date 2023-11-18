@@ -63,7 +63,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-
     try {
         include "../config/dbh.inc.php";
 
@@ -71,18 +70,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             updateCategoryImageLocation($categoryId, $destination, $image["name"]);
         }
 
+
+
         $query = "UPDATE `category` SET `name`=?, `description`=? WHERE id = ?;";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$name, $description, $categoryId]);
+
+
 
         $query = "SELECT * FROM category WHERE id = ?;";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$categoryId]);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $categoryId = $result[0];
+        $categoryId = $result[0]['id'];
 
         $pdo = null;
         $stmt = null;
+
 
         header("location:$categoryUrl?id=$categoryId");
 

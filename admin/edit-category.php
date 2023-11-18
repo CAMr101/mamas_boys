@@ -146,7 +146,7 @@ if ($image == null) {
                 <input type="hidden" name="id" value="<?php
                 echo ($categoryId);
                 ?>">
-                <button>Create Category</button>
+                <button>Update Category</button>
             </form>
 
 

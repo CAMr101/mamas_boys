@@ -249,6 +249,11 @@ if (isset($_REQUEST["success"])) {
 </main>
 
 <script src="../assets/js/admin_confirmDelete.js"></script>
+<!-- <script>
+    function showDeleteMessage() {
+        alert("This staff account has been deleted");
+    }
+</script> -->
 
 </body>
 

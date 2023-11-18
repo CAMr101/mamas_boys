@@ -7,7 +7,7 @@ $categoryUrl = "../admin/category.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $categoryId = $_POST['id'];
-   
+
     try {
         include "../config/dbh.inc.php";
 
@@ -15,8 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = $pdo->prepare($query);
         $stmt->execute([$categoryId]);
 
-      
-        header('Location: ' . $baseUrl . '/mamas_boys/admin/categories.php');
+
+        header('Location: ' . $baseUrl . '../admin/categories.php');
 
         die();
 
@@ -26,5 +26,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 } else {
     // header("location:../admin/shop.php");
-    header('Location: ' . $baseUrl . '/mamas_boys/admin/categories.php');
+    header('Location: ' . $baseUrl . '../admin/categories.php');
 }

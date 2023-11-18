@@ -140,7 +140,8 @@ if ($image == null) {
 
         <div class="card-container">
 
-            <a class="deleteBtn" href="../handlers/processProducts.php?delete=<?php echo ($productId); ?>">
+            <a onclick="showDeleteMessage()" class="deleteBtn"
+                href="../handlers/processProducts.php?delete=<?php echo ($productId); ?>">
                 <div class="header delete">
                     <span class="material-symbols-outlined">
                         delete
@@ -154,6 +155,11 @@ if ($image == null) {
 </main>
 
 <script src="../assets/js/confirmDelete.js"></script>
+<script>
+    function showDeleteMessage() {
+        alert("You have deleted the product");
+    }
+</script>
 
 </body>
 

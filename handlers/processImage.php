@@ -147,8 +147,6 @@ function updateCategoryImageLocation($id, $location, $name)
         $pdo = null;
         $stmt = null;
 
-        die();
-
     } catch (PDOException $e) {
         echo "Connection failed: " . $e->getMessage();
     }

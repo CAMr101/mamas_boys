@@ -45,6 +45,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
         }
 
         $verified = 1;
+        if ($sendVerificationEmail == "on")
+            $verified = 0;
+
 
         $hashed_password = hashPassword($password);
 

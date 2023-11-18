@@ -66,7 +66,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $query = "INSERT INTO category (name, description) 
         VALUES (?,?);";
-
         $stmt = $pdo->prepare($query);
         $stmt->execute([$name, $description]);
 
@@ -91,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $pdo = null;
         $stmt = null;
 
-        header("location:$$categoryUrl?id=$categoryId");
+        header("location:$categoryUrl?id=$categoryId");
 
         die();
 

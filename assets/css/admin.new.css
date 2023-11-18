@@ -447,7 +447,7 @@ main .insights li .info p{
 }
 
 main .insights li .info h3 img{
-    max-width: 20%;
+    max-width: 20% !important;
 }
 
 main .insights li .info form#updateOrderStatus input,

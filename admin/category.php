@@ -49,7 +49,7 @@ if ($image == null) {
             </h1>
             <ul class="breadcrumb">
                 <li>
-                    <a href="shop.php">
+                    <a href="categories.php">
                         Category
                     </a>
                 </li>
