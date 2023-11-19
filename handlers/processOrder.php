@@ -95,7 +95,7 @@ function createNewOrder()
         $stmt = $pdo->prepare($query);
         $stmt->execute([$cId, $cName, $cEmail, $cPhone, $orderTotal, $orderItems, $status, $paymentMethod, $paid]);
 
-        $query = "SELECT `id`, `name`, `email`, `payment_method`, `order_total` FROM `shop_order` WHERE name=? AND email=? AND phone=?;";
+        $query = "SELECT * FROM `shop_order` WHERE name=? AND email=? AND phone=?;";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$cName, $cEmail, $cPhone]);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -105,7 +105,10 @@ function createNewOrder()
         $pdo = null;
         $stmt = null;
 
-        // sendOrderConfirmationEmail($cEmail, $cName, $result[0]["id"], $orderTotal);
+        if ($paymentMethod === "cash") {
+            sendOrderConfirmationEmail($order);
+        }
+
         echo json_encode($order);
 
         die();

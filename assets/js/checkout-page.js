@@ -124,8 +124,6 @@ function completeOrder() {
         }).then(function (data) {
             const order = data;
 
-            console.log(order.id);
-
             if (order.payment_method == "cash") {
                 localStorage.removeItem("usercart");
                 deleteCookie("usercart");

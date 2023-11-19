@@ -1,5 +1,6 @@
 <?php
 require_once "../handlers/processImage.php";
+require_once "../handlers/processProducts.php";
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
