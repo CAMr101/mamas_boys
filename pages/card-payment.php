@@ -67,6 +67,12 @@ $orderAmountInCents = $orderTotal * 100;
             min-height: 300px;
         }
 
+        #order-details {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
         .payment-details {
             background-color: #f9f9f9;
             padding: 20px;
@@ -109,6 +115,12 @@ $orderAmountInCents = $orderTotal * 100;
         <form action="../handlers/charge.php" method="post" id="payment-form">
             <div class="payment-details" id="payment-details">
                 <input type="hidden" name="orderAmountInCents" value="<?php echo $orderAmountInCents; ?>">
+                <span id="order-details">
+                    <h1>Order Total:</h1>
+                    <h1>R
+                        <?php echo $orderTotal; ?>
+                    </h1>
+                </span>
                 <h1>Payment Details</h1>
                 <div class="form-row">
                     <label style="font-weight: 400;" for="card-element">
@@ -177,6 +189,8 @@ $orderAmountInCents = $orderTotal * 100;
                     var errorElement = document.getElementById('card-errors');
                     errorElement.textContent = result.error.message;
                 } else {
+                    localStorage.removeItem("usercart");
+                    deleteCookie("usercart");
                     // Send the token to your server.
                     stripeTokenHandler(result.token);
                 }

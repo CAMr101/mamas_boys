@@ -498,7 +498,9 @@ main .insights li .info h3 img{
 }
 
 main .insights li .info form#updateOrderStatus input,
-main .insights li .info form#updateOrderStatus button{
+main .insights li .info form#updateOrderStatus button,
+main .insights li .info form#update_paid input,
+main .insights li .info form#update_paid button{
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -509,7 +511,8 @@ main .insights li .info form#updateOrderStatus button{
     box-sizing: border-box;
 }
 
-main .insights li .info form#updateOrderStatus input{
+main .insights li .info form#updateOrderStatus input,
+main .insights li .info form#update_paid input{
   background-color: white;
   border-radius: 0.25rem;
   display: block;
@@ -518,7 +521,8 @@ main .insights li .info form#updateOrderStatus input{
   /* padding: 0.5rem 0.75rem; */
 }
 
-main .insights li .info form#updateOrderStatus button:hover{
+main .insights li .info form#updateOrderStatus button:hover,
+main .insights li .info form#update_paid button:hover{
     color: var(--primary);
     cursor: pointer;
 }
