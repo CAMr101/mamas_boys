@@ -5,6 +5,7 @@ let totalDomElements = document.getElementsByClassName('summed-price');
 var subTotalDomElement = document.getElementById("subtotal-amount");
 var orderTotalDomElement = document.getElementById("total-amount");
 let subTotal = 0;
+var products;
 const url = `http://localhost/kota2/handlers/processProducts.php?prod=true`;
 
 const priceArr = document.querySelectorAll("#unit-price");
@@ -25,6 +26,20 @@ window.onload = function(){
     subTotalDomElement.innerText = subTotal;
     orderTotalDomElement.innerText = subTotalDomElement.innerText;
 };
+
+async function getProductList(url) {
+
+    const response = await fetch(url)
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            products = data;
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+}
 
 function loadCart(cartArray){
     cartItemsContainer.innerHTML ="";
@@ -180,145 +195,3 @@ function setCookie(name, values, days){
 function deleteCookie(name){
     document.cookie = name + "= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
 }
-
-
-var products = [
-    {
-        id: 0,
-        image: 'Website pictures/kota.jpg',
-        title: 'Porche',
-        description: 'Bread, Atchar, Polony, Chips & Vienna',
-        price: 22,
-    },
-    {
-        id: 1,
-        image: 'Website pictures/kota.jpg',
-        title: 'Mahindra',
-        description:  'Bread, Atchar, Polony, Chips & Cheese',
-        price: 23,
-    },
-    {
-        id: 2,
-        image: 'Website pictures/kota 40.jpg',
-        title: 'Mustang',
-        description:  'Bread, Atchar, Polony, Chips & Eggs',
-        price: 27,
-    },
-    {
-        id: 3,
-        image: 'Website pictures/kota 41.jpg',
-        title: 'Rolce Royce',
-        description:  'Bread, Atchar, Polony, Chips & Russian',
-        price: 30,
-    },
-    {
-        id: 4,
-        image: 'Website pictures/gg-1.jpg',
-        title: 'Mini Cooper',
-        description: 'Bread, Atchar, Polony, Chips, Russian & Vienna',
-        price: 35,
-    },
-    {
-        id: 5,
-        image: 'Website pictures/gg-1.jpg',
-        title: 'Polo',
-        description: 'Bread, Atchar, Polony, Chips, Russian, Vienna & Cheese',
-        price: 40,
-    },
-    {
-        id: 6,
-        image: 'Website pictures/gg-1.jpg',
-        title: 'Bently',
-        description: 'Bread, Atchar, Polony, Chips, Russian, Vienna, Cheese & Burger',
-        price: 50,
-    },
-    {
-        id: 7,
-        image: 'Website pictures/gg-1.jpg',
-        title: 'Staria',
-        description: 'Bread, Atchar, Polony, Chips, Russian, Vienna, Cheese, Burger & Egg',
-        price: 60,
-    },
-    {
-        id: 8,
-        image: 'Website pictures/gg-1.jpg',
-        title: 'Lambogini',
-        description: 'Bread, Atchar, Polony, Chips, Russian, Vienna, Cheese, Burger, Egg & Fish Finger',
-        price: 70,
-    },
-    {
-        id: 9,
-        image: 'Website pictures/gg-1.jpg',
-        title: 'Toyota',
-        description: 'Bread, Atchar, Polony, Chips, Russian, Vienna, Cheese, Burger, Egg, Fish Finger & Bacon ', 
-        price: 80, 
-    },
-
-    {
-        id: 10,
-        image: 'Website pictures/gg-1.jpg',
-        title: 'Small',
-        price: 40,
-    },
-    {
-        id: 11,
-        image: 'Website pictures/gg-1.jpg',
-        title: 'Medium',
-        price: 55,
-    },
-    {
-        id: 12,
-        image: 'Website pictures/gg-1.jpg',
-        title: 'Large',
-        price: 70,
-    },
-
-    {
-        id: 13,
-        image: 'Website pictures/egg.jpg',
-        title: 'Egg',
-        price: 12,
-    },
-    {
-        id: 14,
-        image: 'Website pictures/eggs.jpg',
-        title: 'Russian',
-        price: 15,
-    },
-    {
-        id: 15,
-        image: 'Website pictures/gg-1.jpg',
-        title: 'Vienna',
-        price: 10,
-    },
-    {
-        id: 16,
-        image: 'Website pictures/cheese.png',
-        title: 'Cheese',
-        price: 10,
-    },
-    {
-        id: 17,
-        image: 'Website pictures/Burger.webp',
-        title: 'Burger',
-        price: 15,
-    },
-    {
-        id: 18,
-        image: 'Website pictures/fish finger.jpg',
-        title: 'Fish Finger',
-        price: 12,
-    },
-    {
-        id: 19,
-        image: 'Website pictures/bacon.jpeg',
-        title: 'Bacon',
-        price: 13,
-    },
-    {
-        id: 20,
-        image: 'Website pictures/french.jpg',
-        title: 'Polony',
-        price: 5,
-    }
-];
