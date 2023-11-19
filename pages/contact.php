@@ -85,7 +85,7 @@ include "../components/footer.php";
                         </div>
 
                         <div class="sectionMessage">
-                            <div class="inputBox">
+                            <div class="inputBox" onclick="displaySuccessMessage()">
                                 <input type="submit" value="Send">
                             </div>
                         </div>
@@ -141,6 +141,12 @@ include "../components/footer.php";
 
     <!--link to fontawesome icons-->
     <script src="https://kit.fontawesome.com/1cc9d41456.js" crossorigin="anonymous"></script>
+
+    <script>
+        function displaySuccessMessage() {
+            alert('Contact message successfully sent!');
+        }
+    </script>
 
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/script.js"></script>

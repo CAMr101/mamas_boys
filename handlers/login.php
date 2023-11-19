@@ -126,7 +126,7 @@ function authenticateCustomer($email, $password)
 
         } else {
             $_SESSION["error_login"] = "Authenticatin Failed";
-            header("location:../admin/login.php?login=failed");
+            header("location:../pages/login.php?login=failed");
         }
 
         $pdo = null;

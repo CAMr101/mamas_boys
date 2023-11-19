@@ -1,9 +1,6 @@
 <?php
 require "../vendor/autoload.php";
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST)) {
         $firstName = $_POST["firstName"];
@@ -29,39 +26,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $pdo = null;
             $stmt = null;
 
-            header("location:../Contact.php?sent=success");
+            header("location:../pages/contact.php?sent=success");
 
         } catch (PDOException $e) {
             echo "Connection failed: " . $e->getMessage();
         }
 
     } else {
-        header("location:../Contact.php?error=null");
+        header("location:../pages/contact.php?error=null");
     }
 
-}
-
-function sendMail($firstName, $lastName, $email, $phoneNumber, $message)
-{
-
-
-    $mail = new PHPMailer(true);
-
-    $mail->isSMTP();
-    $mail->SMTPAuth = true;
-
-    $mail->Host = "smtp.gmail.com.";
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port = 587;
-
-    $mail->Username = '';
-    $mail->Password = '';
-
-    $mail->setFrom($email, $firstName);
-    $mail->addAddress("neocamtom@gmail.com", "Neo");
-
-    $mail->Subject = "Contact Us";
-    $mail->Body = $message;
-
-    $mail->send();
 }

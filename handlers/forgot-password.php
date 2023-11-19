@@ -81,7 +81,6 @@ function recoverCustomerPw()
 
             $url = "www.mamas-boys.co.za/pages/reset-password.php?selector=" . $selector . "&validator=" . $token;
 
-
             $mailSent = sendPasswordResetEmail($email, $selector, $url);
 
             if (!$mailSent) {

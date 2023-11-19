@@ -38,32 +38,47 @@ if (isset($_COOKIE['usercart'])) {
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/root.css">
     <link rel="stylesheet" href="../assets/css/cart-page.css">
-    <title>My Cart</title>
     <style>
         /* Add your mobile-specific styles here */
         @media only screen and (max-width: 600px) {
+
             .cart-container {
                 flex-direction: column;
                 display: flex;
                 justify-content: space-evenly;
+                margin: 0;
+            }
+
+            .cart-summary {
+                color: black;
+                margin: 0;
             }
 
             .cart-item {
-                margin-bottom: 20px;
+                margin-bottom: 2%;
                 display: flex;
                 flex-direction: column;
+                font-size: 5%;
+                margin: 0;
             }
 
             .cart-item .prod-image img {
+                margin: 0;
                 width: 100%;
-                margin-bottom: 10px;
+                box-sizing: border-box;
+                margin-bottom: 2%;
                 display: flex;
                 justify-content: space-evenly;
+                padding: 15px;
             }
 
             .details .prod .prod-name {
                 display: flex;
+                width: 100%;
                 justify-content: space-evenly;
+                margin: 0;
+                padding: 15px;
+                /* Add padding for better spacing */
             }
 
             .details {
@@ -72,7 +87,7 @@ if (isset($_COOKIE['usercart'])) {
             }
 
             .details p {
-                margin: 5px 0;
+                margin: 5px 10px 7px;
             }
 
             .buttons {
@@ -84,36 +99,40 @@ if (isset($_COOKIE['usercart'])) {
             .quantity,
             .unit-price,
             .total-price {
-                margin-top: 12px;
+                margin: 0;
                 width: 100%;
                 display: flex;
+                margin-right: 10px;
                 justify-content: space-evenly;
             }
 
             .cart-summary {
                 margin-top: 20px;
-            }
-
-            .cart-summary .heading {
-                color: black;
-            }
-
-            .cart-summary .heading .sub-total {
-                color: black;
+                box-sizing: content-box;
+                width: 100%;
+                padding: 20px;
             }
 
             .sub-total,
             .grand-total {
                 display: flex;
                 justify-content: space-evenly;
-                color: black;
             }
 
             .btn {
                 width: 100%;
+                background-color: aqua;
+                color: black;
             }
+
+            .btn:hover {
+                background-color: aquamarine;
+                color: grey;
+            }
+
         }
     </style>
+    <title>My Cart</title>
 </head>
 
 <body>

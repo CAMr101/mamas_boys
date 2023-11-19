@@ -189,7 +189,7 @@ function sendOrderConfirmationEmail($order)
   $message = ob_get_contents();
   ob_end_clean();
 
-  $text = "Your order has been received. And we've place our top chef on it. Hang on tight. <p>Once your order is complete, you will recieve a phone call to notify you of collection and reminder of payment due.</p> <p>Thank you for shopping with us. See you soon.</p>";
+  $text = "Your order has been received. And we've placed our top chef on it. Hang on tight. <p> Your order will take 30min to complete. If delayed, you will receive an SMS to notify you of the new pickup time.</p> <p>Thank you for shopping with us. See you soon.</p>";
 
   $message = str_replace("{{orderNum}}", $order["id"], $message);
   $message = str_replace("{{date}}", $order["created_at"], $message);
