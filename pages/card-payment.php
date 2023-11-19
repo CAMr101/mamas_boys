@@ -17,6 +17,10 @@ if (isset($_SESSION["customer_id"])) {
     $user = getCustomer($userId);
 }
 
+if (isset($_REQUEST['id'])) {
+    $orderId = $_REQUEST['id'];
+}
+
 $cart = json_decode($_COOKIE['usercart'], true);
 $products = [];
 $counter = 0;
@@ -57,7 +61,7 @@ $orderAmountInCents = $orderTotal * 100;
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/root.css">
     <link rel="stylesheet" href="../assets/css/checkout-page.css">
-    <title>Checkout</title>
+    <title>Payment</title>
 
     <style>
         .main-div {
@@ -112,9 +116,10 @@ $orderAmountInCents = $orderTotal * 100;
 <body>
     <?php echo createHeader(); ?>
     <div class="main-div">
-        <form action="../handlers/charge.php" method="post" id="payment-form">
+        <form action="../handlers/charge.php?" method="post" id="payment-form">
             <div class="payment-details" id="payment-details">
                 <input type="hidden" name="orderAmountInCents" value="<?php echo $orderAmountInCents; ?>">
+                <input type="hidden" name="id" value="<?php echo $_REQUEST['id']; ?>">
                 <span id="order-details">
                     <h1>Order Total:</h1>
                     <h1>R

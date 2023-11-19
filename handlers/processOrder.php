@@ -95,16 +95,18 @@ function createNewOrder()
         $stmt = $pdo->prepare($query);
         $stmt->execute([$cId, $cName, $cEmail, $cPhone, $orderTotal, $orderItems, $status, $paymentMethod, $paid]);
 
-        $query = "SELECT `id`, `name`, `email`, `payment_method` FROM `shop_order` WHERE name=? AND email=? AND phone=?;";
+        $query = "SELECT `id`, `name`, `email`, `payment_method`, `order_total` FROM `shop_order` WHERE name=? AND email=? AND phone=?;";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$cName, $cEmail, $cPhone]);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $order = $result[count($result) - 1];
 
         $pdo = null;
         $stmt = null;
 
         // sendOrderConfirmationEmail($cEmail, $cName, $result[0]["id"], $orderTotal);
-        echo json_encode($result);
+        echo json_encode($order);
 
         die();
 
@@ -123,8 +125,8 @@ function getOrder($id)
         $query = "SELECT * FROM shop_order WHERE id=?;";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$id]);
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $order = $result[0];
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $order = $result;
 
         $pdo = null;
         $stmt = null;
@@ -218,6 +220,24 @@ function updatePaymentValue($id, $paid)
         $stmt = null;
 
         header("location:../admin/order.php?id=$id&success=update");
+
+    } catch (PDOException $e) {
+        echo "Connection failed: " . $e->getMessage();
+    }
+}
+
+function updateOrderAfterPayment($id)
+{
+    include "../config/dbh.inc.php";
+
+    try {
+
+        $query = "UPDATE `shop_order` SET `paid`=1 WHERE id=?;";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$id]);
+
+        $pdo = null;
+        $stmt = null;
 
     } catch (PDOException $e) {
         echo "Connection failed: " . $e->getMessage();

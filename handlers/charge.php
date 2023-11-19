@@ -6,6 +6,8 @@ require_once "../components/footer.php";
 require_once "../handlers/processProducts.php";
 require_once "../handlers/processImage.php";
 require_once "../handlers/processCustomer.php";
+require_once "../handlers/processOrder.php";
+require_once "../handlers/email.php";
 
 require_once __DIR__ . '/../vendor/autoload.php';
 \Stripe\Stripe::setApiKey('sk_test_51ODNYCLv9rtmG82r6OvQ7vtwiqbdoKepx8RtlNunVDvsXopH4qbzROPzr7a2mfFHJrISmnthxrGBoV4QZsB51nuc00bXI6Qybb');
@@ -14,6 +16,9 @@ require_once __DIR__ . '/../vendor/autoload.php';
 // Get the payment token ID submitted by the form:
 $token = $_POST['stripeToken'];
 $orderAmountInCents = $_POST['orderAmountInCents'];
+if (isset($_POST['id'])) {
+    $order = getOrder($_POST['id']);
+}
 // Charge the user's card:
 try {
     $charge = \Stripe\Charge::create([
@@ -25,6 +30,11 @@ try {
 
     // Handle successful payment (e.g., update order status, redirect to thank you page)
     // echo 'Payment successful! Thank you for your purchase.';
+    updateOrderAfterPayment($order['id']);
+    $mailSent = sendOrderConfirmationEmail($order);
+    if ($mailSent === false) {
+        header('location:../index.php?error=mail');
+    }
     header('location:../pages/order-success.php');
 } catch (\Stripe\Exception\CardException $e) {
     // Handle card errors (e.g., insufficient funds, card declined)
