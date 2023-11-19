@@ -8,6 +8,25 @@ if (isset($_REQUEST['uos']) && isset($_POST)) {
     updateOrderStatus($orderId, $status);
 }
 
+//update paid: Yes or No
+if (isset($_REQUEST['uop']) && isset($_POST)) {
+
+    $orderId = $_GET['uop'];
+    $paid = $_POST['made_payment'];
+
+    switch ($paid) {
+        case "No":
+            updatePaymentValue($orderId, 0);
+            break;
+        case "Yes":
+            updatePaymentValue($orderId, 1);
+            break;
+        default:
+            header("location:../admin/order.php?id=$orderId&error=update");
+            break;
+    }
+}
+
 //New Order
 if (isset($_POST) && isset($_REQUEST['cd'])) {
     $code = $_GET['cd'];
@@ -179,6 +198,26 @@ function updateOrderStatus($id, $status)
         $stmt = null;
 
         header("location:../admin/order.php?id=$id");
+
+    } catch (PDOException $e) {
+        echo "Connection failed: " . $e->getMessage();
+    }
+}
+
+function updatePaymentValue($id, $paid)
+{
+    include "../config/dbh.inc.php";
+
+    try {
+
+        $query = "UPDATE `shop_order` SET `paid`=?  WHERE id=?;";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$paid, $id]);
+
+        $pdo = null;
+        $stmt = null;
+
+        header("location:../admin/order.php?id=$id&success=update");
 
     } catch (PDOException $e) {
         echo "Connection failed: " . $e->getMessage();

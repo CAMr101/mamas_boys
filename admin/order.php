@@ -14,6 +14,36 @@ if ($pathParams == null) {
     header("location:shop.php");
 }
 
+if (isset($_REQUEST['error'])) {
+    $code = $_REQUEST["error"];
+
+    switch ($code) {
+        case "update":
+            $message = "Failed to update order. Please try again";
+            echo "<script>alert('$message');</script>";
+            break;
+        default:
+            $message = "Something went wrong. please try again";
+            echo "<script>alert('$message');</script>";
+            break;
+    }
+}
+
+if (isset($_REQUEST['success'])) {
+    $code = $_REQUEST["success"];
+
+    switch ($code) {
+        case "update":
+            $message = "Order successfully updated.";
+            echo "<script>alert('$message');</script>";
+            break;
+        default:
+            $message = "Something went wrong. please try again";
+            echo "<script>alert('$message');</script>";
+            break;
+    }
+}
+
 $pathParams = explode('=', $pathParams);
 $orderId = $pathParams[1];
 
@@ -183,6 +213,10 @@ $orderItems = json_decode($order['order_items'], true);
                     </span>
                 </i>
                 <span class="info">
+                    <datalist id="made_payment">
+                        <option value="Yes"></option>
+                        <option value="No"></option>
+                    </datalist>
                     <h3>
                         <?php
                         $result = "";
@@ -194,7 +228,11 @@ $orderItems = json_decode($order['order_items'], true);
                         ?>
                     </h3>
                     <p>
-                        Paid
+                    <form action="../handlers/processOrder.php?uop=<?php echo ($order["id"]); ?>" method="post"
+                        id="update_paid">
+                        <input form="update_paid" list="made_payment" name="made_payment" value="">
+                        <button type="submit">Save</button>
+                    </form>
                     </p>
                 </span>
             </li>
