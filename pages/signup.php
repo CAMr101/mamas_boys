@@ -104,12 +104,6 @@ if (isset($_REQUEST['error'])) {
             </p>
 
             <p class="fieldset">
-                <label class="image-replace address" for="signup-address">Addres</label>
-                <input class="full-width has-padding has-border" name="signup-address" id="signup-address" type="text"
-                    placeholder="Address" required>
-            </p>
-
-            <p class="fieldset">
                 <label class="image-replace phone-number" for="signup-phone">Phone Number</label>
                 <input class="full-width has-padding has-border" name="signup-phone" id="signup-phone" type="tel"
                     placeholder="Phone Number" required>
@@ -149,19 +143,19 @@ if (isset($_REQUEST['error'])) {
         <!-- <div id="reset-password">
             <p class="form-message">Lost your password? Please enter your email address.</br> You will receive a
                 link to create a new password.</p>
-
+ 
             <form class="form">
                 <p class="fieldset">
                     <label class="image-replace email" for="reset-email">E-mail</label>
                     <input class="full-width has-padding has-border" id="reset-email" type="email" placeholder="E-mail">
                     <span class="error-message">An account with this email does not exist!</span>
                 </p>
-
+ 
                 <p class="fieldset">
                     <input class="full-width has-padding" type="submit" value="Reset password">
                 </p>
             </form>
-
+ 
             <p class="form-bottom-message"><a href="#0">Back to log-in</a></p>
         </div> -->
 
@@ -171,6 +165,36 @@ if (isset($_REQUEST['error'])) {
     <?php
     echo createFooter();
     ?>
+
+    <!-- Add this script block in the head section of your HTML document -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("register-form").addEventListener("submit", function (event) {
+                var password = document.getElementById("signup-password").value;
+                var confirmPassword = document.getElementById("signup-password-confirm").value;
+
+                // Validate password complexity
+                if (!isPasswordValid(password)) {
+                    event.preventDefault(); // Prevent form submission
+                    alert("Password must contain at least one number, one uppercase letter, and one special character.");
+                    return;
+                }
+
+                // Check if passwords match
+                if (password !== confirmPassword) {
+                    event.preventDefault(); // Prevent form submission
+                    alert("Passwords do not match.");
+                    return;
+                }
+            });
+
+            function isPasswordValid(password) {
+                // Password must contain at least one number, one uppercase letter, and one special character
+                var passwordRegex = /^(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[0-9a-zA-Z!@#$%^&*()_+]{8,}$/;
+                return passwordRegex.test(password);
+            }
+        });
+    </script>
 
 
     <!-- partial -->

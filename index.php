@@ -146,7 +146,63 @@ if (isset($_REQUEST['success'])) {
    }
 }
 
+function getImageByProductId($prodId)
+{
+   include "./config/dbh.inc.php";
+
+   try {
+      $pdo = new PDO($dsn, $dbusername, $dbpassword);
+      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+      $query = "SELECT name, location FROM images WHERE product_id = ?;";
+      $stmt = $pdo->prepare($query);
+      $stmt->execute([$prodId]);
+      $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+      $pdo = null;
+      $stmt = null;
+
+      if (empty($result)) {
+         return null;
+      } else {
+         $image = $result[0];
+         return $image;
+      }
+
+   } catch (PDOException $e) {
+      echo "Connection failed: " . $e->getMessage();
+   }
+}
+
+function getHighlights()
+{
+   include "./config/dbh.inc.php";
+
+   try {
+
+      $query = "SELECT * FROM product where is_highlight = 1";
+      $stmt = $pdo->prepare($query);
+      $stmt->execute();
+      $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+      $pdo = null;
+      $stmt = null;
+
+      if (empty($result)) {
+         return null;
+      } else {
+         return $result;
+      }
+
+   } catch (PDOException $e) {
+      echo "Connection failed: " . $e->getMessage();
+   }
+}
+
 $categories = getAllCategories();
+$highlights = getHighlights();
 
 function getAllCategories()
 {
@@ -276,11 +332,39 @@ function getImageByCategoryId($catId)
       </div>
       <br>
 
-      <h1 class="title">Best Seller</h1>
+      <h1 class="title">Highlights</h1>
       <br>
       <div class="box-container">
 
-         <div class="box">
+         <?php
+         foreach ($highlights as $product) {
+            $image = getImageByProductId($product['id']); ?>
+            <div class="box">
+               <img class="prod-img" src="<?php
+               if ($image)
+                  echo ($image['location']);
+               ?>" alt="<?php
+               if ($image) {
+                  echo ($image['name']);
+               } else {
+                  echo "'" . $product['name'] . "' " . "Image not found";
+               } ?>">
+               <h2>
+                  <?php echo ($product['name']); ?>
+               </h2>
+               <h3>R
+                  <?php echo ($product['price']); ?>
+               </h3>
+               <button class="btn add-to-cart-btn" data-name="<?php echo ($product['name']); ?>"
+                  data-price="<?php echo ($product['price']); ?>" onclick="addtocart(<?php echo ($product['id']); ?>)">ADD
+                  TO CART</button>
+            </div>
+            <?php
+         }
+         ?>
+
+
+         <!-- <div class="box">
             <img src="assets/images/bacon.jpeg" alt="">
             <h3>R13</h3>
             <button class="btn add-to-cart-btn" data-name="Bacon" data-price="13" onclick="addtocart(19)">ADD TO
@@ -307,7 +391,7 @@ function getImageByCategoryId($catId)
             <button class="btn add-to-cart-btn" data-name="small chips 2" data-price="55" onclick="addtocart(10)">ADD
                TO
                CART</button>
-         </div>
+         </div> -->
 
       </div>
    </section>

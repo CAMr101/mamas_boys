@@ -81,6 +81,14 @@
                 </a>
             </li>
             <li class="side-menu-item">
+                <a href="highlight.php">
+                    <span class="material-symbols-outlined">
+                        hotel_class
+                    </span>
+                    Highlights
+                </a>
+            </li>
+            <li class="side-menu-item">
                 <a href="reports.php">
                     <span class="material-symbols-outlined">
                         description
